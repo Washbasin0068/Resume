@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vu Huu Do - Full Stack Developer Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.4;
+            padding: 20px;
+        }
+
+        .resume-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            display: flex;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 31%;
+            background-color: #f4f6f8;
+            padding: 20px 15px;
+            border-right: 1px solid #e1e4e8;
+        }
+
+        .profile-img-container {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #005080;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .name-title-container {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .name-title-container h1 {
+            font-size: 19px;
+            font-weight: 700;
+            color: #111827;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+
+        .name-title-container .job-badge {
+            font-size: 11px;
+            font-weight: 600;
+            color: #005080;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border-top: 2px solid #005080;
+            border-bottom: 2px solid #005080;
+            padding: 3px 0;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .sidebar-section {
+            margin-bottom: 16px;
+        }
+
+        .sidebar-section h2 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e293b;
+            text-transform: uppercase;
+            border-bottom: 1.5px solid #1e293b;
+            padding-bottom: 3px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-list {
+            list-style: none;
+            font-size: 11.5px;
+        }
+
+        .contact-list li {
+            margin-bottom: 7px;
+            display: flex;
+            align-items: flex-start;
+            word-break: break-word;
+        }
+
+        .contact-list i {
+            width: 16px;
+            color: #005080;
+            margin-right: 6px;
+            margin-top: 2px;
+            font-size: 12px;
+        }
+
+        .contact-list a {
+            color: #005080;
+            text-decoration: none;
+        }
+
+        .contact-list a:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar-text {
+            font-size: 11.5px;
+            color: #4b5563;
+            text-align: left;
+        }
+
+        .education-item {
+            font-size: 11.5px;
+            margin-bottom: 6px;
+        }
+
+        .education-item strong {
+            color: #111827;
+            display: block;
+        }
+
+        .education-item i {
+            color: #6b7280;
+        }
+
+        .lang-list, .skills-sidebar-list {
+            list-style: none;
+            font-size: 11.5px;
+        }
+
+        .lang-list li, .skills-sidebar-list li {
+            margin-bottom: 4px;
+            color: #374151;
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            width: 69%;
+            padding: 20px 20px;
+        }
+
+        .main-section {
+            margin-bottom: 16px;
+        }
+
+        .main-section h2 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e293b;
+            text-transform: uppercase;
+            border-bottom: 2px solid #1e293b;
+            padding-bottom: 3px;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .experience-header, .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .experience-title, .project-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .company-name, .project-link {
+            font-size: 12px;
+            font-weight: 700;
+            color: #1e293b;
+            text-transform: uppercase;
+        }
+
+        .project-link a {
+            color: #005080;
+            text-decoration: none;
+            text-transform: none;
+        }
+
+        .job-date {
+            font-size: 11px;
+            font-style: italic;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+
+        ul.bullet-list {
+            padding-left: 16px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+
+        ul.bullet-list li {
+            margin-bottom: 4px;
+            color: #374151;
+            text-align: left;
+        }
+
+        /* Skills Table / Grid */
+        .skills-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .skill-row {
+            display: flex;
+            font-size: 11.5px;
+        }
+
+        .skill-category {
+            width: 28%;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .skill-details {
+            width: 72%;
+            color: #374151;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .resume-container {
+                box-shadow: none;
+                max-width: 100%;
+                width: 100%;
+            }
+            @page {
+                margin: 0.5cm 0.8cm;
+                size: A4 portrait;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="resume-container">
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
+        <div class="profile-img-container">
+            <img src="Avatar.png" alt="Vu Huu Do" class="profile-img">
+        </div>
+
+        <div class="name-title-container">
+            <h1>VU HUU DO</h1>
+            <div class="job-badge">FULL STACK DEVELOPER</div>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="sidebar-section">
+            <h2>CONTACT</h2>
+            <ul class="contact-list">
+                <li>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>16/7 Chan Hung Street, Ward 6, Tan Binh District, Ho Chi Minh City</span>
+                </li>
+                <li>
+                    <i class="fas fa-phone"></i>
+                    <span>+84 347 299 934</span>
+                </li>
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <span><a href="mailto:vuhuudo2004@gmail.com">vuhuudo2004@gmail.com</a></span>
+                </li>
+                <li>
+                    <i class="fab fa-github"></i>
+                    <span><a href="https://github.com/vuhuudo" target="_blank">github.com/vuhuudo</a></span>
+                </li>
+                <li>
+                    <i class="fab fa-linkedin"></i>
+                    <span><a href="https://www.linkedin.com/in/v%C5%A9-h%E1%BB%AFu-%C4%91%C3%B4-b899bb360/" target="_blank">LinkedIn Profile</a></span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- SUMMARY -->
+        <div class="sidebar-section">
+            <h2>SUMMARY</h2>
+            <p class="sidebar-text">
+                Full Stack Developer & Artificial Intelligence graduate with 2 years of practical experience at Hoan Cau Group. Core expertise in web development, database server management, system digitization, and workflow automation combining Python and Gemini API. Proficient in full-stack architecture, Linux/Docker/WSL environments, and deploying scalable enterprise management platforms.
+            </p>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="sidebar-section">
+            <h2>EDUCATION</h2>
+            <div class="education-item">
+                <strong>Bachelor of Artificial Intelligence</strong>
+                <div>Van Lang University</div>
+                <i>2023 - 2026</i>
+            </div>
+        </div>
+
+        <!-- LANGUAGES -->
+        <div class="sidebar-section">
+            <h2>LANGUAGES</h2>
+            <ul class="lang-list">
+                <li><strong>Vietnamese:</strong> Native / Bilingual</li>
+                <li><strong>English:</strong> Elementary</li>
+            </ul>
+        </div>
+
+        <!-- SOFT SKILLS -->
+        <div class="sidebar-section">
+            <h2>SOFT SKILLS</h2>
+            <ul class="skills-sidebar-list">
+                <li>• Easily Adaptable</li>
+                <li>• Teamwork & Collaboration</li>
+                <li>• Self-Learning</li>
+                <li>• Technical Problem-Solving</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- RIGHT MAIN CONTENT -->
+    <div class="main-content">
+        <!-- PROFESSIONAL EXPERIENCE -->
+        <div class="main-section">
+            <h2>PROFESSIONAL EXPERIENCE</h2>
+            <div>
+                <div class="experience-header">
+                    <span class="experience-title">Web and Database Developer</span>
+                    <span class="company-name">HOAN CAU GROUP</span>
+                </div>
+                <div class="job-date">June 2025 - August 2026 (1 year 3 months) | Ho Chi Minh City, Vietnam</div>
+                <ul class="bullet-list">
+                    <li><strong>Full Stack & Web Development:</strong> Developed internal web applications and management platforms to support enterprise operations.</li>
+                    <li><strong>Digital Transformation & System Digitization:</strong> Spearheaded the digitization of internal operations across regional branches, deploying Base.vn to standardize workflows and corporate communications.</li>
+                    <li><strong>Server & Database DevOps:</strong> Built and configured database servers from the ground up. Executed DevOps duties including server maintenance, Docker containerization, and working in Linux/WSL environments.</li>
+                    <li><strong>AI & Automation Integration:</strong> Engineered custom Python automation scripts running in WSL integrated with Gemini API to optimize internal data processing pipelines.</li>
+                    <li><strong>Executive Milestone Tracking:</strong> Tracked key project milestones and presented progress summaries directly to the Board of Directors.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="main-section">
+            <h2>PROJECTS</h2>
+            <div>
+                <div class="project-header">
+                    <span class="project-title">Enterprise Workflow Automation System</span>
+                    <span class="company-name">HOAN CAU GROUP</span>
+                </div>
+                <ul class="bullet-list">
+                    <li>Built AI-driven automation pipelines combining Python, WSL, and Gemini API for automated data extraction and workflow optimization.</li>
+                    <li>Reduced repetitive manual data tasks by streamlining executive tracking processes.</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="project-header">
+                    <span class="project-title">Enterprise Operations Digitization (Base.vn)</span>
+                    <span class="company-name">Hoan Cau Group</span>
+                </div>
+                <ul class="bullet-list">
+                    <li>Led cross-branch digitization initiative using Base.vn platform to standardize internal communication workflows.</li>
+                    <li>Established centralized monitoring tools and milestone reporting for executive stakeholders.</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="project-header">
+                    <span class="project-title">Database & DevOps Server Infrastructure</span>
+                    <span class="company-name">Hoan Cau Group</span>
+                </div>
+                <ul class="bullet-list">
+                    <li>Designed and configured high-performance database servers from scratch.</li>
+                    <li>Implemented Docker containerization for scalable deployment across Linux and WSL environments.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="main-section">
+            <h2>TECHNICAL SKILLS</h2>
+            <div class="skills-grid">
+                <div class="skill-row">
+                    <div class="skill-category">Frontend:</div>
+                    <div class="skill-details">HTML5, CSS3, JavaScript/TypeScript, Responsive Web Design, Web Interfaces</div>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-category">Backend & APIs:</div>
+                    <div class="skill-details">Python (Advanced), RESTful APIs, Node.js/Express, Gemini API Integration</div>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-category">Databases:</div>
+                    <div class="skill-details">PostgreSQL, MySQL, Database Server Configuration, Data Processing (Pandas, NumPy)</div>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-category">DevOps & Server:</div>
+                    <div class="skill-details">Docker, Linux, WSL, Server Administration, Git, System Automation</div>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-category">Specializations:</div>
+                    <div class="skill-details">Digital Transformation, System Digitization, Workflow Automation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

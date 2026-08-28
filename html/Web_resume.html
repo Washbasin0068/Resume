@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vu Huu Do - Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Calibri', 'Arial', sans-serif;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            color: #005080;
+            border-bottom: 1px solid #005080;
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.05em;
+            color: #444;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 6px 0;
+        }
+
+        .job-title {
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0;
+        }
+
+        .job-period {
+            font-style: italic;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-item {
+            display: inline-flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .contact-item i {
+            margin-right: 6px;
+            color: #005080;
+        }
+
+        .tech-skills {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .tech-category {
+            width: 50%;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            padding-right: 15px;
+        }
+
+        .avatar-container {
+            margin-bottom: 12px;
+        }
+
+        .avatar-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #005080;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                font-size: 11pt;
+            }
+
+            h2 {
+                font-size: 13pt;
+            }
+
+            @page {
+                margin: 1.5cm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="avatar-container">
+            <img src="Avatar.png" alt="Vũ Hữu Đô" class="avatar-img">
+        </div>
+        <h1>VU HUU DO</h1>
+        <div class="subtitle">Digital Transformation Specialist | Web & Database Developer | AI Graduate</div>
+        <div class="contact-info">
+            <span class="contact-item"><i class="fas fa-map-marker-alt"></i>16/7 Chan Hung Street, Ward 6, Tan Binh
+                District, HCM City</span>
+            <span class="contact-item"><i class="fas fa-phone"></i>0347299934</span>
+            <span class="contact-item"><i class="fas fa-envelope"></i><a
+                    href="mailto:vuhuudo2004@gmail.com">vuhuudo2004@gmail.com</a></span>
+        </div>
+        <div class="contact-info">
+            <span class="contact-item"><i class="fab fa-linkedin"></i><a
+                    href="https://www.linkedin.com/in/v%C5%A9-h%E1%BB%AFu-%C4%91%C3%B4-b899bb360/"
+                    target="_blank">LinkedIn</a></span>
+            <span class="contact-item"><i class="fab fa-github"></i><a href="https://github.com/vuhuudo"
+                    target="_blank">GitHub</a></span>
+        </div>
+    </header>
+
+    <!-- Summary Section -->
+    <h2>SUMMARY</h2>
+    <p>
+        A recent Artificial Intelligence graduate with 2 years of practical experience at Hoan Cau Group. While
+        officially holding the title of Web and Database Developer, my core expertise lies in leading Digital
+        Transformation initiatives, system digitization, and workflow automation. Proficient in Python, database
+        management, and server environments (Linux, Docker, WSL), with hands-on experience integrating AI (such as
+        Gemini API) into enterprise operations. Strong analytical skills and a proven track record of deploying
+        large-scale business software and internal management platforms.
+    </p>
+
+    <!-- Experience Section -->
+    <h2>PROFESSIONAL EXPERIENCE</h2>
+    <div>
+        <p class="job-title">
+            <span><strong>Web and Database Developer</strong></span>
+            <span><strong>HOAN CAU GROUP</strong></span>
+        </p>
+        <p class="job-period">June 2025 - August 2026 (1 year 3 months) | Ho Chi Minh City, Vietnam</p>
+        <ul>
+            <li><strong>Digital Transformation & System Digitization:</strong> Spearheaded the digitization of internal
+                operations across regional branches, successfully deploying Base.vn to standardize workflows and
+                significantly enhance corporate communications.</li>
+            <li><strong>Project Management:</strong> Summarized and tracked the progress of key enterprise-wide
+                projects, reporting directly to the Board of Directors to ensure milestones were met.</li>
+            <li><strong>Server & Database Management:</strong> Built and configured database servers from the ground up.
+                Handled DevOps responsibilities including server maintenance, Docker containerization, and working
+                within Linux/WSL environments.</li>
+            <li><strong>AI & Automation:</strong> Developed Python scripts running in WSL combined with the Gemini API
+                to automate internal workflows and optimize data processing.</li>
+        </ul>
+    </div>
+
+    <!-- Projects Section -->
+    <h2>KEY PROJECTS & INITIATIVES</h2>
+    <div>
+        <p class="job-title">
+            <span><strong>Enterprise Workflow Automation (Gemini API & WSL)</strong></span>
+            <span><a href="https://github.com/vuhuudo" target="_blank"><i class="fab fa-github"></i> GitHub</a></span>
+        </p>
+        <ul>
+            <li>Developed Python scripts running in WSL combined with Gemini API to automate internal workflows and
+                optimize data processing.</li>
+            <li>Reduced manual repetitive data processing tasks for enterprise management teams.</li>
+        </ul>
+    </div>
+
+    <div>
+        <p class="job-title">
+            <span><strong>Enterprise Operations Digitization (Base.vn Integration)</strong></span>
+            <span><strong>Hoan Cau Group</strong></span>
+        </p>
+        <ul>
+            <li>Spearheaded the digitization of internal operations across regional branches using Base.vn platform.
+            </li>
+            <li>Standardized branch communication workflows and tracked project milestones for reporting directly to the
+                Board of Directors.</li>
+        </ul>
+    </div>
+
+    <div>
+        <p class="job-title">
+            <span><strong>Database & DevOps Server Infrastructure</strong></span>
+            <span><strong>Hoan Cau Group</strong></span>
+        </p>
+        <ul>
+            <li>Configured database servers from the ground up and managed ongoing maintenance.</li>
+            <li>Deployed Docker containers across Linux/WSL environments to streamline internal software deployment.
+            </li>
+        </ul>
+    </div>
+
+    <!-- Skills Section -->
+    <h2>SKILLS & COMPETENCIES</h2>
+    <div class="tech-skills">
+        <div class="tech-category">
+            <p><strong>Technical & AI Skills:</strong></p>
+            <ul>
+                <li>Python Development</li>
+                <li>AI Integration (Gemini API)</li>
+                <li>Workflow Automation Scripting</li>
+                <li>Data Processing & Analysis</li>
+            </ul>
+        </div>
+
+        <div class="tech-category">
+            <p><strong>Infrastructure & Systems:</strong></p>
+            <ul>
+                <li>Database Server Configuration</li>
+                <li>Linux & WSL Environments</li>
+                <li>Docker Containerization</li>
+                <li>DevOps Maintenance</li>
+            </ul>
+        </div>
+
+        <div class="tech-category">
+            <p><strong>Digital Transformation:</strong></p>
+            <ul>
+                <li>System Digitization & Automation</li>
+                <li>Base.vn Platform Deployment</li>
+                <li>Workflow Standardization</li>
+                <li>Executive Project Reporting</li>
+            </ul>
+        </div>
+
+        <div class="tech-category">
+            <p><strong>Soft Skills & Languages:</strong></p>
+            <ul>
+                <li>Easily Adaptable & Self-Learning</li>
+                <li>Teamwork & Project Tracking</li>
+                <li>English (Elementary)</li>
+                <li>Vietnamese (Native / Bilingual)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Education Section -->
+    <h2>EDUCATION</h2>
+    <p>
+        <strong>Bachelor of Artificial Intelligence</strong> (2023 - 2026)<br>
+        <strong>Van Lang University</strong><br>
+        <i>Specialization: Artificial Intelligence & Machine Learning</i>
+    </p>
+
+</body>
+
+</html>
