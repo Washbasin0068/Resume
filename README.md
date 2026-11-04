@@ -56,6 +56,20 @@ uv run build_cvs.py    # chỉ build lại CV theo role
 
 Hoặc in thủ công: mở file HTML bằng Chrome/Chromium → Print → Save as PDF (khổ A4, margins theo CSS `@media print`).
 
+## TUI tạo CV theo role
+
+```bash
+uv run cvtui.py                                   # mở TUI: nhập role (+ dán JD) -> Ctrl+G
+uv run cvtui.py --role "DevOps Engineer" --jd jd.txt --lang EN,VI   # không TUI
+uv run cvtui.py --check                           # tự kiểm tra
+```
+
+Mỗi lần ra 2 loại, đều 1 trang A4, lưu ở `out/<role>/` (không commit):
+- `*_Human.pdf` — 2 cột, có ảnh, nộp cho người đọc.
+- `*_ATS.pdf` — 1 cột, chữ thuần, nộp cho máy đọc.
+
+Nội dung chọn từ `profile.json` (ngân hàng nội dung) theo độ khớp với role/JD. Kỹ năng JD đòi mà profile chưa có chỉ được **báo thiếu**, không tự thêm vào CV. Muốn thêm kinh nghiệm/kỹ năng: sửa `profile.json` (viết chung chung, không nêu thông tin nội bộ).
+
 ## Ghi chú
 
 - **Nội dung CV theo role nằm trong `build_cvs.py`** (mục `ROLES`) — sửa ở đó rồi chạy `uv run build_cvs.py`; script sẽ **ghi đè** HTML/PDF trong `roles/`. Muốn thêm role mới: copy một mục trong `ROLES`, đổi `id`/`file`/nội dung.

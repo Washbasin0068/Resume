@@ -407,7 +407,7 @@ CONTACT_VI = [
 ]
 
 ATS_HTML = r"""<!DOCTYPE html>
-<html lang="en">
+<html lang="{{LANG}}">
 <head>
 <meta charset="UTF-8">
 <title>{{NAME}} — {{TITLE}} — CV</title>
@@ -442,19 +442,19 @@ ATS_HTML = r"""<!DOCTYPE html>
     <div class="title">{{TITLE}}</div>
     <div class="contact">{{CONTACT}}</div>
   </header>
-  <h2>Summary</h2>
+  <h2>{{H_SUMMARY}}</h2>
   <p>{{SUMMARY}}</p>
-  <h2>Core Skills</h2>
+  <h2>{{H_SKILLS}}</h2>
   <div class="skills">{{SKILLS}}</div>
-  <h2>Professional Experience</h2>
+  <h2>{{H_EXP}}</h2>
   <div>
     <p class="role">{{JOB}}</p>
     <p class="meta">{{JOB_META}}</p>
     <ul>{{BULLETS}}</ul>
   </div>
-  <h2>Selected Projects</h2>
+  <h2>{{H_PROJ}}</h2>
   {{PROJECTS}}
-  <h2>Education &amp; Languages</h2>
+  <h2>{{H_EDU}}</h2>
   <p>{{EDUCATION}} &nbsp;·&nbsp; {{LANGUAGES}}</p>
 </div>
 </body>
@@ -462,7 +462,7 @@ ATS_HTML = r"""<!DOCTYPE html>
 """
 
 VISUAL_HTML = r"""<!DOCTYPE html>
-<html lang="vi">
+<html lang="{{LANG}}">
 <head>
 <meta charset="UTF-8">
 <title>{{NAME}} - {{TITLE}} - CV</title>
@@ -530,40 +530,40 @@ VISUAL_HTML = r"""<!DOCTYPE html>
       <div class="job-badge">{{BADGE}}</div>
     </div>
     <div class="sidebar-section">
-      <h2>LIÊN HỆ</h2>
+      <h2>{{H_CONTACT}}</h2>
       <ul class="contact-list">{{CONTACTS}}</ul>
     </div>
     <div class="sidebar-section">
-      <h2>TÓM TẮT</h2>
+      <h2>{{H_SUMMARY}}</h2>
       <p class="sidebar-text">{{SUMMARY}}</p>
     </div>
     <div class="sidebar-section">
-      <h2>HỌC VẤN</h2>
+      <h2>{{H_EDU_V}}</h2>
       <div class="education-item">{{EDUCATION}}</div>
     </div>
     <div class="sidebar-section">
-      <h2>NGÔN NGỮ</h2>
+      <h2>{{H_LANG_V}}</h2>
       <ul class="lang-list">{{LANGUAGES}}</ul>
     </div>
   </div>
   <div class="main-content">
     <div class="main-section">
-      <h2>KINH NGHIỆM LÀM VIỆC</h2>
+      <h2>{{H_EXP}}</h2>
       <div>
         <div class="experience-header">
-          <span class="experience-title">Lập trình viên Web &amp; Cơ sở dữ liệu</span>
-          <span class="company-name">TẬP ĐOÀN HOÀN CẦU</span>
+          <span class="experience-title">{{JOB_TITLE}}</span>
+          <span class="company-name">{{COMPANY}}</span>
         </div>
         <div class="job-date">{{JOB_META}}</div>
         <ul class="bullet-list">{{BULLETS}}</ul>
       </div>
     </div>
     <div class="main-section">
-      <h2>DỰ ÁN TIÊU BIỂU</h2>
+      <h2>{{H_PROJ}}</h2>
       {{PROJECTS}}
     </div>
     <div class="main-section">
-      <h2>KỸ NĂNG CHUYÊN MÔN</h2>
+      <h2>{{H_SKILLS}}</h2>
       <div class="skills-grid">{{SKILLS}}</div>
     </div>
   </div>
@@ -611,51 +611,73 @@ def render_projects_visual(projects):
     return "\n".join(blocks)
 
 
-def render_contacts_visual():
+def render_contacts_visual(lang="VI"):
     out = []
-    for kind, text in CONTACT_VI:
+    contacts = CONTACT_VI if lang == "VI" else [("pin", CONTACT_EN_PIN)] + CONTACT_VI[1:]
+    for kind, text in contacts:
         out.append(f"        <li>{CONTACT_SVGS[kind]}<span>{text}</span></li>")
     return "\n".join(out)
 
 
-def build_html(role, lang):
-    if lang == "EN":
+LABELS = {
+    "EN": dict(lang="en", summary="Summary", skills="Core Skills", exp="Professional Experience",
+               proj="Selected Projects", edu="Education &amp; Languages", contact="CONTACT",
+               skills_v="TECHNICAL SKILLS", exp_v="EXPERIENCE", proj_v="SELECTED PROJECTS",
+               summary_v="SUMMARY", edu_v="EDUCATION", lang_v="LANGUAGES",
+               job_title="Web &amp; Database Developer", company="HOAN CAU GROUP",
+               langs="<li><strong>Vietnamese:</strong> Native</li><li><strong>English:</strong> Elementary</li>"),
+    "VI": dict(lang="vi", summary="Tóm tắt", skills="Kỹ năng", exp="Kinh nghiệm làm việc",
+               proj="Dự án tiêu biểu", edu="Học vấn &amp; Ngôn ngữ", contact="LIÊN HỆ",
+               skills_v="KỸ NĂNG CHUYÊN MÔN", exp_v="KINH NGHIỆM LÀM VIỆC", proj_v="DỰ ÁN TIÊU BIỂU",
+               summary_v="TÓM TẮT", edu_v="HỌC VẤN", lang_v="NGÔN NGỮ",
+               job_title="Lập trình viên Web &amp; Cơ sở dữ liệu", company="TẬP ĐOÀN HOÀN CẦU",
+               langs="<li><strong>Tiếng Việt:</strong> Bản ngữ</li><li><strong>Tiếng Anh:</strong> Cơ bản</li>"),
+}
+CONTACT_EN_PIN = "Ho Chi Minh City, Vietnam"
+
+
+def build_html(role, lang, kind=None, name=None):
+    """kind: 'ats' (1 cột, máy đọc) | 'human' (2 cột, người đọc). Mặc định cũ: EN=ats, VI=human."""
+    kind = kind or ("ats" if lang == "EN" else "human")
+    k = lang.lower()
+    L = LABELS[lang]
+    name = name or (NAME_EN if lang == "EN" else NAME_VI)
+    title = role["title_" + k]
+    common = {
+        "{{LANG}}": L["lang"], "{{NAME}}": name, "{{TITLE}}": title,
+        "{{SUMMARY}}": role["summary_" + k],
+        "{{BULLETS}}": render_bullets(role["exp_" + k]),
+        "{{EDUCATION}}": EDUCATION_EN if lang == "EN" else EDUCATION_VI,
+        "{{JOB_META}}": JOB_META_EN if lang == "EN" else JOB_META_VI,
+        "{{H_SUMMARY}}": L["summary"] if kind == "ats" else L["summary_v"],
+        "{{H_SKILLS}}": L["skills"] if kind == "ats" else L["skills_v"],
+        "{{H_EXP}}": L["exp"] if kind == "ats" else L["exp_v"],
+        "{{H_PROJ}}": L["proj"] if kind == "ats" else L["proj_v"],
+        "{{H_EDU}}": L["edu"],
+    }
+    if kind == "ats":
         html = ATS_HTML
-        repl = {
-            "{{NAME}}": NAME_EN,
-            "{{TITLE}}": role["title_en"],
+        repl = dict(common, **{
             "{{CONTACT}}": CONTACT_LINE,
-            "{{SUMMARY}}": role["summary_en"],
-            "{{SKILLS}}": render_skills_ats(role["skills_en"]),
-            "{{JOB}}": JOB_EN,
-            "{{JOB_META}}": JOB_META_EN,
-            "{{BULLETS}}": render_bullets(role["exp_en"]),
-            "{{PROJECTS}}": render_projects_ats(role["projects_en"]),
-            "{{EDUCATION}}": EDUCATION_EN,
-            "{{LANGUAGES}}": LANGUAGES_EN,
-        }
+            "{{SKILLS}}": render_skills_ats(role["skills_" + k]),
+            "{{JOB}}": JOB_EN if lang == "EN" else JOB_VI,
+            "{{PROJECTS}}": render_projects_ats(role["projects_" + k]),
+            "{{LANGUAGES}}": LANGUAGES_EN if lang == "EN" else LANGUAGES_VI,
+        })
     else:
         html = VISUAL_HTML
-        repl = {
-            "{{NAME}}": NAME_VI,
-            "{{TITLE}}": role["title_vi"],
-            "{{BADGE}}": role["badge_vi"],
-            "{{CONTACTS}}": render_contacts_visual(),
-            "{{SUMMARY}}": role["summary_vi"],
-            "{{SKILLS}}": render_skills_visual(role["skills_vi"]),
-            "{{JOB_META}}": JOB_META_VI,
-            "{{BULLETS}}": render_bullets(role["exp_vi"]),
-            "{{PROJECTS}}": render_projects_visual(role["projects_vi"]),
-            "{{EDUCATION}}": EDUCATION_VI,
-            "{{LANGUAGES}}": (
-                "<li><strong>Tiếng Việt:</strong> Bản ngữ</li>"
-                "<li><strong>Tiếng Anh:</strong> Cơ bản</li>"
-            ),
-        }
+        repl = dict(common, **{
+            "{{BADGE}}": role.get("badge_" + k) or title.upper(),
+            "{{CONTACTS}}": render_contacts_visual(lang),
+            "{{SKILLS}}": render_skills_visual(role["skills_" + k]),
+            "{{PROJECTS}}": render_projects_visual(role["projects_" + k]),
+            "{{LANGUAGES}}": L["langs"],
+            "{{H_CONTACT}}": L["contact"], "{{H_EDU_V}}": L["edu_v"], "{{H_LANG_V}}": L["lang_v"],
+            "{{JOB_TITLE}}": L["job_title"], "{{COMPANY}}": L["company"],
+        })
     for key, value in repl.items():
         html = html.replace(key, value)
     return html
-
 
 def build_pdf(html_path, pdf_path):
     subprocess.run(
