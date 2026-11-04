@@ -1,0 +1,821 @@
+{
+ "name": {
+  "en": "Vu Huu Do",
+  "vi": "Vũ Hữu Đô"
+ },
+ "avatar": "",
+ "location": {
+  "en": "Ho Chi Minh City, Vietnam",
+  "vi": "TP. Hồ Chí Minh, Việt Nam"
+ },
+ "phone": "+84 347 299 934",
+ "email": "vuhuudo2004@gmail.com",
+ "github": "github.com/vuhuudo",
+ "linkedin": "linkedin.com/in/vũ-hữu-đô-b899bb360",
+ "contactLine": {
+  "en": "Ho Chi Minh City, Vietnam &bull; +84 347 299 934 &bull; vuhuudo2004@gmail.com &bull; github.com/vuhuudo &bull; linkedin.com/in/vũ-hữu-đô-b899bb360",
+  "vi": "TP. Hồ Chí Minh, Việt Nam &bull; +84 347 299 934 &bull; vuhuudo2004@gmail.com &bull; github.com/vuhuudo &bull; linkedin.com/in/vũ-hữu-đô-b899bb360"
+ },
+ "contacts": {
+  "en": [
+   [
+    "pin",
+    "Ho Chi Minh City, Vietnam"
+   ],
+   [
+    "phone",
+    "+84 347 299 934"
+   ],
+   [
+    "mail",
+    "<a href=\"mailto:vuhuudo2004@gmail.com\">vuhuudo2004@gmail.com</a>"
+   ],
+   [
+    "github",
+    "<a href=\"https://github.com/vuhuudo\">github.com/vuhuudo</a>"
+   ],
+   [
+    "linkedin",
+    "<a href=\"https://www.linkedin.com/in/v%C5%A9-h%E1%BB%AFu-%C4%91%C3%B4-b899bb360/\">linkedin.com/in/vũ-hữu-đô-b899bb360</a>"
+   ]
+  ],
+  "vi": [
+   [
+    "pin",
+    "TP. Hồ Chí Minh, Việt Nam"
+   ],
+   [
+    "phone",
+    "+84 347 299 934"
+   ],
+   [
+    "mail",
+    "<a href=\"mailto:vuhuudo2004@gmail.com\">vuhuudo2004@gmail.com</a>"
+   ],
+   [
+    "github",
+    "<a href=\"https://github.com/vuhuudo\">github.com/vuhuudo</a>"
+   ],
+   [
+    "linkedin",
+    "<a href=\"https://www.linkedin.com/in/v%C5%A9-h%E1%BB%AFu-%C4%91%C3%B4-b899bb360/\">linkedin.com/in/vũ-hữu-đô-b899bb360</a>"
+   ]
+  ]
+ },
+ "job": {
+  "en": {
+   "title": "Web & Database Developer",
+   "org": "Hoan Cau Group",
+   "meta": "June 2025 – November 2026 · 1 yr 5 mos · Ho Chi Minh City, Vietnam"
+  },
+  "vi": {
+   "title": "Lập trình viên Web & Cơ sở dữ liệu",
+   "org": "Tập đoàn Hoàn Cầu",
+   "meta": "06/2025 - 11/2026 (1 năm 5 tháng) · TP. Hồ Chí Minh"
+  }
+ },
+ "education": {
+  "en": {
+   "strong": "Bachelor of Artificial Intelligence",
+   "line": "Van Lang University",
+   "years": "2023 - 2026",
+   "ats": "Bachelor of Artificial Intelligence — Van Lang University, Ho Chi Minh City (2023 – 2026)"
+  },
+  "vi": {
+   "strong": "Cử nhân Trí tuệ nhân tạo",
+   "line": "Đại học Văn Lang",
+   "years": "2023 - 2026",
+   "ats": "Cử nhân Trí tuệ nhân tạo — Đại học Văn Lang (2023 - 2026)"
+  }
+ },
+ "languages": {
+  "en": {
+   "ats": "Vietnamese (native) · English (elementary)",
+   "items": [
+    [
+     "Vietnamese",
+     "Native"
+    ],
+    [
+     "English",
+     "Elementary"
+    ]
+   ]
+  },
+  "vi": {
+   "ats": "Tiếng Việt (bản ngữ) · Tiếng Anh (cơ bản)",
+   "items": [
+    [
+     "Tiếng Việt",
+     "Bản ngữ"
+    ],
+    [
+     "Tiếng Anh",
+     "Cơ bản"
+    ]
+   ]
+  }
+ },
+ "years": {
+  "en": "1.5",
+  "vi": "1,5"
+ },
+ "summary": {
+  "en": "{title} with {years} years of experience building and operating enterprise web platforms. Hands-on with {skills}. Delivered reporting, authentication and data platforms to production.",
+  "vi": "{title} với {years} năm kinh nghiệm xây dựng và vận hành nền tảng web doanh nghiệp. Thực chiến với {skills}. Đã đưa nền tảng báo cáo, xác thực và dữ liệu lên production."
+ },
+ "experience": [
+  {
+   "w": 3,
+   "t": [
+    "fullstack",
+    "backend",
+    "frontend",
+    "dotnet",
+    "react",
+    "data"
+   ],
+   "en": "Built internal platforms end-to-end: .NET (ABP) APIs, React + TypeScript UIs and SQL Server, including an enterprise reporting platform and a project-data platform, both in production.",
+   "vi": "Xây dựng nền tảng nội bộ trọn gói: API .NET (ABP), giao diện React + TypeScript, SQL Server, gồm nền tảng báo cáo doanh nghiệp và nền tảng dữ liệu dự án, đều đã lên production."
+  },
+  {
+   "w": 2,
+   "t": [
+    "backend",
+    "dotnet",
+    "data"
+   ],
+   "en": "Designed REST APIs and domain/data layers with ABP Framework, EF Core and SQL Server: schemas, migrations, import & validation pipelines and approval workflows.",
+   "vi": "Thiết kế REST API và tầng domain/dữ liệu với ABP Framework, EF Core, SQL Server: schema, migration, pipeline nhập & kiểm tra dữ liệu và quy trình duyệt."
+  },
+  {
+   "w": 2,
+   "t": [
+    "auth",
+    "backend"
+   ],
+   "en": "Implemented central single sign-on (OpenID Connect / OAuth2): PKCE flows, service-to-service access, role-based permissions, session management and audit logging.",
+   "vi": "Triển khai đăng nhập tập trung (OpenID Connect / OAuth2): luồng PKCE, truy cập giữa các dịch vụ, phân quyền theo vai trò, quản lý phiên và nhật ký kiểm toán."
+  },
+  {
+   "w": 1,
+   "t": [
+    "backend",
+    "integration"
+   ],
+   "en": "Delivered service-to-service integrations: user-lookup and member APIs, master-data synchronisation between internal systems.",
+   "vi": "Xây dựng tích hợp service-to-service: API tra cứu người dùng/thành viên, đồng bộ dữ liệu danh mục giữa các hệ thống nội bộ."
+  },
+  {
+   "w": 2,
+   "t": [
+    "frontend",
+    "react"
+   ],
+   "en": "Built React + TypeScript UIs: dashboards, filterable tables, multi-step import wizards and approval flows, with vi/en internationalisation.",
+   "vi": "Xây dựng giao diện React + TypeScript: dashboard, bảng có bộ lọc, wizard nhập liệu nhiều bước và luồng duyệt, hỗ trợ đa ngôn ngữ vi/en."
+  },
+  {
+   "w": 1,
+   "t": [
+    "frontend",
+    "svelte"
+   ],
+   "en": "Built a Svelte portal for a data lakehouse; refactored oversized screens into small reusable components with no behaviour change.",
+   "vi": "Xây dựng portal Svelte cho data lakehouse; tách màn hình lớn thành component nhỏ tái sử dụng, không đổi hành vi."
+  },
+  {
+   "w": 1,
+   "t": [
+    "frontend",
+    "auth",
+    "react"
+   ],
+   "en": "Integrated SPA authentication with OpenID Connect (PKCE), silent token renewal and role-aware UI.",
+   "vi": "Tích hợp xác thực SPA với OpenID Connect (PKCE), gia hạn token ngầm và giao diện theo vai trò."
+  },
+  {
+   "w": 3,
+   "t": [
+    "data",
+    "ai",
+    "backend"
+   ],
+   "en": "Built a Medallion data lakehouse (ClickHouse, PostgreSQL, S3) with a Python API, Svelte UI and a Rust core for file parsing & export.",
+   "vi": "Xây dựng data lakehouse kiểu Medallion (ClickHouse, PostgreSQL, S3) với API Python, giao diện Svelte và lõi Rust xử lý/xuất tệp."
+  },
+  {
+   "w": 2,
+   "t": [
+    "data",
+    "backend"
+   ],
+   "en": "Engineered data pipelines (Bronze / Silver / Gold): file import, validation and per-row error reporting for multi-entity period reports.",
+   "vi": "Xây dựng pipeline dữ liệu (Bronze / Silver / Gold): nhập tệp, kiểm tra và báo lỗi theo từng dòng cho báo cáo theo kỳ đa đơn vị."
+  },
+  {
+   "w": 2,
+   "t": [
+    "devops",
+    "testing"
+   ],
+   "en": "Cut CI test time by ~65% by sharding tests into parallel jobs; added unit, integration and end-to-end (Playwright) test gates.",
+   "vi": "Giảm ~65% thời gian test CI nhờ chia shard song song; bổ sung cổng kiểm thử unit, integration và end-to-end (Playwright)."
+  },
+  {
+   "w": 3,
+   "t": [
+    "devops"
+   ],
+   "en": "Operated dev / UAT / production on Docker & Linux: CI/CD with build, test, scan and deploy stages, rollback-safe versioned releases.",
+   "vi": "Vận hành dev / UAT / production trên Docker & Linux: CI/CD gồm build, test, quét, deploy; phát hành theo version có rollback."
+  },
+  {
+   "w": 2,
+   "t": [
+    "devops",
+    "data"
+   ],
+   "en": "Set up monitoring and alerting (Prometheus, Grafana), health checks with auto-restart, scheduled backups with restore drills and capacity cleanup.",
+   "vi": "Thiết lập giám sát và cảnh báo (Prometheus, Grafana), health check tự restart, backup định kỳ kèm diễn tập restore và dọn dung lượng."
+  },
+  {
+   "w": 1,
+   "t": [
+    "devops",
+    "auth"
+   ],
+   "en": "Ran the access layer: reverse proxy with TLS, SSO-protected internal tools and VPN access for branches.",
+   "vi": "Vận hành tầng truy cập: reverse proxy với TLS, công cụ nội bộ bảo vệ bằng SSO và VPN cho chi nhánh."
+  },
+  {
+   "w": 2,
+   "t": [
+    "ai"
+   ],
+   "en": "Built Python + LLM-API automation pipelines that remove repetitive manual processing for management teams.",
+   "vi": "Xây dựng pipeline tự động hóa Python + LLM API, loại bỏ xử lý thủ công lặp lại cho bộ phận quản lý."
+  },
+  {
+   "w": 1,
+   "t": [
+    "ai",
+    "data"
+   ],
+   "en": "Added AI-generated narrative analysis to a data portal, with a rule-based fallback when the model is unavailable.",
+   "vi": "Bổ sung phân tích văn bản do AI sinh vào portal dữ liệu, có phương án dự phòng theo quy tắc khi mô hình không khả dụng."
+  },
+  {
+   "w": 1,
+   "t": [
+    "testing",
+    "backend",
+    "frontend"
+   ],
+   "en": "Wrote xUnit, Vitest and Playwright tests and ran them as CI gates.",
+   "vi": "Viết test xUnit, Vitest và Playwright và chạy như cổng CI."
+  }
+ ],
+ "projects": [
+  {
+   "w": 3,
+   "t": [
+    "fullstack",
+    "backend",
+    "frontend",
+    "data"
+   ],
+   "n": {
+    "en": "Enterprise reporting platform",
+    "vi": "Nền tảng báo cáo doanh nghiệp"
+   },
+   "tech": "ABP / .NET · React · TypeScript · SQL Server · Docker",
+   "en": "Multi-entity period reporting: data import & validation, approval workflow, dashboards.",
+   "vi": "Báo cáo theo kỳ đa đơn vị: nhập & kiểm tra dữ liệu, quy trình duyệt, dashboard."
+  },
+  {
+   "w": 2,
+   "t": [
+    "auth",
+    "backend"
+   ],
+   "n": {
+    "en": "Central authentication (SSO) service",
+    "vi": "Dịch vụ xác thực tập trung (SSO)"
+   },
+   "tech": "ABP / .NET · OpenID Connect · OAuth2 · SQL Server",
+   "en": "Single sign-on, RBAC, session and audit management for internal applications.",
+   "vi": "Đăng nhập một lần, RBAC, quản lý phiên và nhật ký kiểm toán cho các ứng dụng nội bộ."
+  },
+  {
+   "w": 3,
+   "t": [
+    "data",
+    "ai",
+    "backend"
+   ],
+   "n": {
+    "en": "Data lakehouse & analytics",
+    "vi": "Data lakehouse & phân tích"
+   },
+   "tech": "Python · Rust · ClickHouse · PostgreSQL · Svelte",
+   "en": "Medallion-style pipeline with REST APIs, dashboards and automated tests.",
+   "vi": "Pipeline kiểu Medallion với REST API, dashboard và kiểm thử tự động."
+  },
+  {
+   "w": 1,
+   "t": [
+    "fullstack",
+    "backend",
+    "frontend"
+   ],
+   "n": {
+    "en": "Project data platform",
+    "vi": "Nền tảng dữ liệu dự án"
+   },
+   "tech": "ABP / .NET · React · TypeScript · Docker",
+   "en": "Coordination workspace, member invitations and master-data synchronisation; in production.",
+   "vi": "Không gian điều phối, mời thành viên và đồng bộ dữ liệu danh mục; đã chạy production."
+  },
+  {
+   "w": 2,
+   "t": [
+    "devops"
+   ],
+   "n": {
+    "en": "Delivery platform & observability",
+    "vi": "Nền tảng phát hành & giám sát"
+   },
+   "tech": "Docker · CI/CD · Prometheus · Grafana · Linux",
+   "en": "Multi-environment release pipeline with test gates and rollback, dashboards, alerts and backups.",
+   "vi": "Pipeline phát hành đa môi trường có cổng kiểm thử và rollback, dashboard, cảnh báo và backup."
+  },
+  {
+   "w": 1,
+   "t": [
+    "ai"
+   ],
+   "n": {
+    "en": "LLM automation pipelines",
+    "vi": "Pipeline tự động hóa với LLM"
+   },
+   "tech": "Python · LLM APIs · WSL",
+   "en": "Automated data extraction and processing workflows for management teams.",
+   "vi": "Tự động hóa trích xuất và xử lý dữ liệu cho bộ phận quản lý."
+  }
+ ],
+ "skills": [
+  {
+   "g": {
+    "en": "Backend",
+    "vi": "Backend"
+   },
+   "items": [
+    {
+     "n": "C#",
+     "m": [
+      "c#",
+      "csharp"
+     ],
+     "t": [
+      "backend",
+      "dotnet"
+     ]
+    },
+    {
+     "n": ".NET (ASP.NET Core)",
+     "m": [
+      ".net",
+      "asp.net",
+      "dotnet"
+     ],
+     "t": [
+      "backend",
+      "dotnet"
+     ]
+    },
+    {
+     "n": "ABP Framework",
+     "m": [
+      "abp"
+     ],
+     "t": [
+      "backend",
+      "dotnet"
+     ]
+    },
+    {
+     "n": "Entity Framework Core",
+     "m": [
+      "entity framework",
+      "ef core"
+     ],
+     "t": [
+      "backend",
+      "dotnet",
+      "data"
+     ]
+    },
+    {
+     "n": "REST APIs",
+     "m": [
+      "rest",
+      "restful",
+      "api"
+     ],
+     "t": [
+      "backend"
+     ]
+    }
+   ]
+  },
+  {
+   "g": {
+    "en": "Frontend",
+    "vi": "Frontend"
+   },
+   "items": [
+    {
+     "n": "React",
+     "m": [
+      "react",
+      "reactjs",
+      "react.js"
+     ],
+     "t": [
+      "frontend",
+      "react"
+     ]
+    },
+    {
+     "n": "TypeScript",
+     "m": [
+      "typescript"
+     ],
+     "t": [
+      "frontend"
+     ]
+    },
+    {
+     "n": "JavaScript",
+     "m": [
+      "javascript",
+      "js"
+     ],
+     "t": [
+      "frontend"
+     ]
+    },
+    {
+     "n": "Svelte",
+     "t": [
+      "frontend",
+      "svelte"
+     ]
+    },
+    {
+     "n": "Vite",
+     "t": [
+      "frontend"
+     ]
+    },
+    {
+     "n": "HTML5",
+     "m": [
+      "html"
+     ],
+     "t": [
+      "frontend"
+     ]
+    },
+    {
+     "n": "CSS3",
+     "m": [
+      "css"
+     ],
+     "t": [
+      "frontend"
+     ]
+    },
+    {
+     "n": "responsive design",
+     "m": [
+      "responsive"
+     ],
+     "t": [
+      "frontend"
+     ]
+    }
+   ]
+  },
+  {
+   "g": {
+    "en": "Languages",
+    "vi": "Ngôn ngữ"
+   },
+   "items": [
+    {
+     "n": "Python",
+     "t": [
+      "ai",
+      "data",
+      "backend"
+     ]
+    },
+    {
+     "n": "Rust",
+     "t": [
+      "backend",
+      "data"
+     ]
+    },
+    {
+     "n": "Bash",
+     "m": [
+      "bash",
+      "shell"
+     ],
+     "t": [
+      "devops"
+     ]
+    }
+   ]
+  },
+  {
+   "g": {
+    "en": "Data",
+    "vi": "Dữ liệu"
+   },
+   "items": [
+    {
+     "n": "SQL Server (T-SQL)",
+     "m": [
+      "sql server",
+      "t-sql",
+      "mssql"
+     ],
+     "t": [
+      "data",
+      "backend"
+     ]
+    },
+    {
+     "n": "PostgreSQL",
+     "m": [
+      "postgres",
+      "postgresql"
+     ],
+     "t": [
+      "data"
+     ]
+    },
+    {
+     "n": "ClickHouse",
+     "t": [
+      "data"
+     ]
+    },
+    {
+     "n": "SQL",
+     "t": [
+      "data"
+     ]
+    },
+    {
+     "n": "Pandas",
+     "t": [
+      "data",
+      "ai"
+     ]
+    },
+    {
+     "n": "NumPy",
+     "t": [
+      "data",
+      "ai"
+     ]
+    }
+   ]
+  },
+  {
+   "g": {
+    "en": "Auth & Security",
+    "vi": "Xác thực & Bảo mật"
+   },
+   "items": [
+    {
+     "n": "OpenID Connect",
+     "m": [
+      "openid",
+      "oidc"
+     ],
+     "t": [
+      "auth"
+     ]
+    },
+    {
+     "n": "OAuth2",
+     "m": [
+      "oauth",
+      "oauth2"
+     ],
+     "t": [
+      "auth"
+     ]
+    },
+    {
+     "n": "PKCE",
+     "t": [
+      "auth"
+     ]
+    },
+    {
+     "n": "RBAC",
+     "m": [
+      "rbac",
+      "role-based"
+     ],
+     "t": [
+      "auth",
+      "backend"
+     ]
+    },
+    {
+     "n": "SSO",
+     "m": [
+      "sso",
+      "single sign-on"
+     ],
+     "t": [
+      "auth"
+     ]
+    },
+    {
+     "n": "audit logging",
+     "m": [
+      "audit"
+     ],
+     "t": [
+      "auth"
+     ]
+    }
+   ]
+  },
+  {
+   "g": {
+    "en": "DevOps",
+    "vi": "DevOps"
+   },
+   "items": [
+    {
+     "n": "Docker",
+     "t": [
+      "devops"
+     ]
+    },
+    {
+     "n": "Docker Compose",
+     "t": [
+      "devops"
+     ]
+    },
+    {
+     "n": "Linux",
+     "m": [
+      "linux",
+      "ubuntu"
+     ],
+     "t": [
+      "devops"
+     ]
+    },
+    {
+     "n": "Git",
+     "m": [
+      "git",
+      "github",
+      "gitlab",
+      "gitea"
+     ],
+     "t": [
+      "devops"
+     ]
+    },
+    {
+     "n": "CI/CD",
+     "m": [
+      "ci/cd",
+      "cicd",
+      "ci cd",
+      "pipeline"
+     ],
+     "t": [
+      "devops"
+     ]
+    },
+    {
+     "n": "reverse proxy",
+     "m": [
+      "reverse proxy",
+      "nginx",
+      "traefik"
+     ],
+     "t": [
+      "devops"
+     ]
+    },
+    {
+     "n": "Prometheus",
+     "t": [
+      "devops"
+     ]
+    },
+    {
+     "n": "Grafana",
+     "t": [
+      "devops"
+     ]
+    },
+    {
+     "n": "backup & restore",
+     "m": [
+      "backup"
+     ],
+     "t": [
+      "devops",
+      "data"
+     ]
+    }
+   ]
+  },
+  {
+   "g": {
+    "en": "AI & Automation",
+    "vi": "AI & Tự động hóa"
+   },
+   "items": [
+    {
+     "n": "LLM API integration",
+     "m": [
+      "llm",
+      "gpt",
+      "gemini",
+      "openai"
+     ],
+     "t": [
+      "ai"
+     ]
+    },
+    {
+     "n": "Python automation",
+     "m": [
+      "automation",
+      "automate"
+     ],
+     "t": [
+      "ai"
+     ]
+    },
+    {
+     "n": "prompt design",
+     "m": [
+      "prompt"
+     ],
+     "t": [
+      "ai"
+     ]
+    }
+   ]
+  },
+  {
+   "g": {
+    "en": "Testing",
+    "vi": "Kiểm thử"
+   },
+   "items": [
+    {
+     "n": "xUnit",
+     "t": [
+      "testing",
+      "backend"
+     ]
+    },
+    {
+     "n": "Vitest",
+     "t": [
+      "testing",
+      "frontend"
+     ]
+    },
+    {
+     "n": "Playwright",
+     "t": [
+      "testing",
+      "frontend"
+     ]
+    }
+   ]
+  }
+ ],
+ "denylist": []
+}

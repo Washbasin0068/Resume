@@ -19,13 +19,49 @@ Nội dung được viết một lần, sinh ra nhiều bản theo **role** và 
 - **`cv/fullstack/CV_VuHuuDo_FullStack_EN_Visual.pdf`** — bản EN 2 cột (gửi email cho nhà tuyển dụng nước ngoài).
 - **`cv/linkedin/CV_VuHuuDo_LinkedIn.pdf`** — bản export từ LinkedIn (tham chiếu).
 
+## Web app (C# / Docker)
+
+```bash
+docker compose up -d --build     # http://localhost:8080
+```
+
+- Điền form, chọn role, tạo **2 loại CV 1 trang**: Human (2 cột, có ảnh) và ATS (1 cột, chữ thuần).
+- Tải CV có sẵn lên (.pdf/.docx/.txt/.md) để trích nội dung và nhận góp ý: thiếu mục chuẩn, sáo ngữ, không có số liệu, từ cấm có thể lộ thông tin.
+- Hồ sơ và PDF nằm ở `./data/` (mount vào container, không commit). File do container tạo thuộc
+  `PUID:PGID` (mặc định `1000:1000` — đổi bằng `PUID=$(id -u) PGID=$(id -g) docker compose up -d`).
+- Không gọi dịch vụ AI ngoài; toàn bộ chạy offline trong container.
+- Image dùng `chrome-headless-shell` chính thức (cùng engine in PDF với Chrome, bỏ GTK/X11/DRM) và chỉ
+  cài font Liberation — đủ dấu tiếng Việt; mỗi PDF sinh ra vẫn được đối chiếu text layer để bắt lỗi mất dấu.
+
+API: `GET /api/health`, `GET/PUT /api/profiles/{id}`, `POST /api/render`, `POST /api/improve` (multipart).
+
+## TUI + CLI (nhiều người dùng)
+
+```bash
+uv run cvtui.py                    # TUI: chọn hồ sơ, nhập role/JD, Ctrl+G tạo, Ctrl+S lưu
+uv run cvtui.py --new <id>         # tạo hồ sơ từ profiles/_template
+uv run cvtui.py --list
+uv run cvtui.py --profile <id> --role "DevOps Engineer" --jd jd.txt --lang EN,VI \
+    [--title "Senior DevOps"] [--name "..."] [--avatar ~/anh.jpg]
+uv run cvtui.py --check
+```
+
+- Hồ sơ: `profiles/<id>/profile.json`. Hồ sơ mẫu `vuhuudo` dựng từ `content/` (chỉ đọc) — `--new` để tạo bản sửa được.
+- `profiles/<id>/denylist.txt`: mỗi dòng một từ cấm; CV chứa từ này sẽ bị báo `RÒ RỈ` và lệnh trả mã 1.
+- `profiles/*`, `denylist.txt`, `data/`, `out/` đều bị gitignore.
+
+Hướng dẫn viết nội dung: [`docs/CV_GUIDE.md`](docs/CV_GUIDE.md). Quy trình cho AI agent: [`AGENTS.md`](AGENTS.md).
+
 ## Cấu trúc
 
 ```
 ├── README.md
 ├── build.sh                  # lệnh build duy nhất: ./build.sh
 ├── build.py                  # sinh HTML (build/out/) và PDF (cv/)
-├── cvtui.py                  # TUI tạo CV theo role/JD (đầu ra ở out/, không commit)
+├── cvtui.py                  # TUI tạo CV theo role/JD đa người dùng (out/, không commit)
+├── webapp/                   # Web app C# (.NET 10) + Dockerfile
+├── docker-compose.yml        # docker compose up -d --build -> :8080
+├── profiles/                 # hồ sơ người dùng (gitignore trừ _template)
 ├── content/                  # NGUỒN NỘI DUNG
 │   ├── profile.py            #   thông tin chung: tên, liên hệ, học vấn, ngôn ngữ, nhãn mục
 │   ├── bank.json             #   ngân hàng nội dung (kinh nghiệm, dự án, kỹ năng) cho cvtui.py

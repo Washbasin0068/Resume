@@ -1,0 +1,11 @@
+.git
+.gitignore
+**/bin
+**/obj
+**/node_modules
+data
+out
+build
+cv
+webapp/wwwroot/*.map
+*.pdf
