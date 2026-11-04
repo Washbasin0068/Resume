@@ -1,6 +1,9 @@
 # Build tạm (HTML sinh ra trong quá trình build)
 build/
 
+# CV sinh bởi TUI (cvtui.py)
+out/
+
 # Python
 __pycache__/
 *.pyc

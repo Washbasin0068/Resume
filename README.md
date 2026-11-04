@@ -25,8 +25,10 @@ Nội dung được viết một lần, sinh ra nhiều bản theo **role** và 
 ├── README.md
 ├── build.sh                  # lệnh build duy nhất: ./build.sh
 ├── build.py                  # sinh HTML (build/out/) và PDF (cv/)
+├── cvtui.py                  # TUI tạo CV theo role/JD (đầu ra ở out/, không commit)
 ├── content/                  # NGUỒN NỘI DUNG
 │   ├── profile.py            #   thông tin chung: tên, liên hệ, học vấn, ngôn ngữ, nhãn mục
+│   ├── bank.json             #   ngân hàng nội dung (kinh nghiệm, dự án, kỹ năng) cho cvtui.py
 │   └── cvs/                  #   mỗi role một file
 │       ├── fullstack.py
 │       ├── software_engineer.py
@@ -40,7 +42,8 @@ Nội dung được viết một lần, sinh ra nhiều bản theo **role** và 
 ├── assets/
 │   └── avatar.png            # ảnh dùng chung cho mọi bản
 ├── cv/                       # ĐẦU RA — PDF đã build (commit sẵn để tải/gửi ngay)
-└── build/                    # HTML tạm trong lúc build (không commit)
+├── build/                    # HTML tạm trong lúc build (không commit)
+└── out/                      # CV sinh bởi cvtui.py (không commit)
 ```
 
 ## Build lại PDF
@@ -55,6 +58,21 @@ python3 build.py
 ```
 
 Script build toàn bộ, kiểm tra từng bản **vừa đúng 1 trang** và báo lỗi nếu không.
+
+## TUI tạo CV theo role
+
+```bash
+uv run cvtui.py                                   # mở TUI: nhập role (+ dán JD) -> Ctrl+G
+uv run cvtui.py --role "DevOps Engineer" --jd jd.txt --lang EN,VI   # không cần TUI
+uv run cvtui.py --check                           # tự kiểm tra logic chọn nội dung
+# tuỳ chỉnh: --name "Nguyen Van A" --title "Senior Backend Engineer" --avatar ~/anh.jpg
+```
+
+Mỗi lần ra 2 loại, 1 trang A4, lưu ở `out/<role>/` (không commit):
+- `*_Human.pdf` — 2 cột, có ảnh, nộp cho người đọc.
+- `*_ATS.pdf` — 1 cột, chữ thuần, nộp cho máy đọc.
+
+Nội dung chọn từ `content/bank.json` (ngân hàng nội dung) theo độ khớp role/JD. Kỹ năng JD đòi mà bank chưa có chỉ được **báo thiếu**, không tự thêm vào CV. Muốn thêm kinh nghiệm/kỹ năng: sửa `content/bank.json` (viết chung chung, không nêu thông tin nội bộ).
 
 ## Chỉnh sửa nội dung
 

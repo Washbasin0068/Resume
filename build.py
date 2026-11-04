@@ -111,14 +111,15 @@ def render_soft_skills(cv, lang):
 
 
 # ------------------------------------------------------------------ build ---
-def build_html(cv, lang, style):
+def build_html(cv, lang, style, name=None, avatar="avatar.png"):
     labels = profile.LABELS[lang]
     title = cv[f"title_{lang}"]
+    display_name = name or profile.NAME[lang]
     if style == "ats":
         mapping = {
             "{{HTML_LANG}}": lang,
-            "{{DOC_TITLE}}": f'{profile.NAME[lang]} — {title} — CV',
-            "{{NAME}}": profile.NAME[lang],
+            "{{DOC_TITLE}}": f'{display_name} — {title} — CV',
+            "{{NAME}}": display_name,
             "{{TITLE}}": title,
             "{{CONTACT}}": profile.CONTACT_LINE[lang],
             "{{L_SUMMARY}}": labels["summary"],
@@ -140,8 +141,9 @@ def build_html(cv, lang, style):
     else:
         mapping = {
             "{{HTML_LANG}}": lang,
-            "{{DOC_TITLE}}": f'{profile.NAME[lang]} — {title} — CV',
-            "{{NAME}}": profile.NAME[lang],
+            "{{DOC_TITLE}}": f'{display_name} — {title} — CV',
+            "{{NAME}}": display_name,
+            "{{AVATAR}}": avatar,
             "{{BADGE}}": cv[f"badge_{lang}"],
             "{{L_CONTACT}}": labels["contact"],
             "{{CONTACTS}}": render_contacts(lang),
@@ -170,7 +172,8 @@ def build_html(cv, lang, style):
     return html
 
 
-def build_pdf(html_path: Path, pdf_path: Path) -> str:
+def build_pdf(html_path, pdf_path) -> str:
+    html_path, pdf_path = Path(html_path), Path(pdf_path)
     subprocess.run(
         [CHROME, "--headless", "--disable-gpu", "--no-sandbox", "--no-pdf-header-footer",
          f"--print-to-pdf={pdf_path}", html_path.as_uri()],
