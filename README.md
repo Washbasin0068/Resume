@@ -42,24 +42,23 @@ Mỗi role có 2 bản: **`_EN.pdf`** (1 cột, thân thiện ATS) và **`_VI.pd
     ├── CV_FullStackDev.html        # nguồn bản EN (2 cột)
     ├── CV_FullStackDev_ATS.html    # nguồn bản EN (1 cột, ATS)
     ├── CV_VuHuuDo_VI.html          # nguồn bản VI (2 cột)
-    ├── Web_resume.html             # bản 1 cột cũ (đã thay bằng bản _ATS)
     └── Avatar.png
 ```
 
 ## Build lại PDF
 
-Yêu cầu: Chromium (hoặc Chrome) + Python 3 (`pdfinfo` tuỳ chọn, để kiểm tra số trang).
+Yêu cầu: Chromium (hoặc Chrome) + uv + Python (`pdfinfo` tuỳ chọn, để kiểm tra số trang).
 
 ```bash
 ./build.sh              # build tất cả: CV chính + roles/
-python3 build_cvs.py    # chỉ build lại CV theo role
+uv run build_cvs.py    # chỉ build lại CV theo role
 ```
 
 Hoặc in thủ công: mở file HTML bằng Chrome/Chromium → Print → Save as PDF (khổ A4, margins theo CSS `@media print`).
 
 ## Ghi chú
 
-- **Nội dung CV theo role nằm trong `build_cvs.py`** (mục `ROLES`) — sửa ở đó rồi chạy `python3 build_cvs.py`; script sẽ **ghi đè** HTML/PDF trong `roles/`. Muốn thêm role mới: copy một mục trong `ROLES`, đổi `id`/`file`/nội dung.
+- **Nội dung CV theo role nằm trong `build_cvs.py`** (mục `ROLES`) — sửa ở đó rồi chạy `uv run build_cvs.py`; script sẽ **ghi đè** HTML/PDF trong `roles/`. Muốn thêm role mới: copy một mục trong `ROLES`, đổi `id`/`file`/nội dung.
 - Bản `_ATS` (và bản `_EN` của roles) không dùng cột/icon/ảnh — an toàn khi máy đọc CV tự động.
-- Tên hệ thống nội bộ trong CV được viết dạng **mô tả chung** (repo nội bộ); chi tiết kỹ thuật giữ đầy đủ.
+- CV chỉ mô tả chung (không nêu tên hệ thống nội bộ, số liệu đơn vị, hạ tầng); repo công khai nên không thêm chi tiết nội bộ.
 - Nên đặt LinkedIn custom URL (vd: `linkedin.com/in/vuhuudo`) rồi cập nhật lại trong CV.
