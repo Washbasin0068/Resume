@@ -1,0 +1,40 @@
+{
+ "_doc": "MẪU HỒ SƠ. Sao chép: uv run cvtui.py --new <id> rồi sửa file profiles/<id>/profile.json (hoặc sửa trong tab Hồ sơ của TUI). Văn bản thuần; **chữ** in đậm. Trường nội dung nhận chuỗi hoặc {\"en\":..,\"vi\":..}. avatar: đường dẫn, tương đối với thư mục này (trống = CV không ảnh). Trong summary, {title} {years} {skills} tự điền. experience/projects/skills: t = tag trong content/bank.json (aliases), m = từ khóa khớp JD, w = trọng số 1-3. Viết dư mục: tool chọn mục khớp role nhất và tự cắt cho vừa 1 trang.",
+ "name": {"en": "Your Name", "vi": "Tên Của Bạn"},
+ "avatar": "",
+ "location": {"en": "City, Country", "vi": "Thành phố, Quốc gia"},
+ "phone": "+00 000 000 000",
+ "email": "you@example.com",
+ "github": "github.com/you",
+ "linkedin": "",
+ "contact_line": {"en": "City, Country", "vi": "Thành phố, Quốc gia"},
+ "contacts": {"en": [["pin", "City, Country"]], "vi": [["pin", "Thành phố, Quốc gia"]]},
+ "job": {
+  "en": {"title": "Software Developer", "org": "Company Name", "meta": "Jan 2024 – Present · City, Country"},
+  "vi": {"title": "Lập trình viên", "org": "Tên công ty", "meta": "01/2024 – nay · Thành phố"}
+ },
+ "education": {
+  "en": {"strong": "Bachelor of Computer Science", "line": "University Name", "years": "2020 - 2024", "ats": "Bachelor of Computer Science — University Name (2020 – 2024)"},
+  "vi": {"strong": "Cử nhân Khoa học máy tính", "line": "Tên trường", "years": "2020 - 2024", "ats": "Cử nhân Khoa học máy tính — Tên trường (2020 - 2024)"}
+ },
+ "languages": {
+  "en": {"ats": "Vietnamese (native) · English (intermediate)", "items": [["Vietnamese", "Native"], ["English", "Intermediate"]]},
+  "vi": {"ats": "Tiếng Việt (bản ngữ) · Tiếng Anh (trung cấp)", "items": [["Tiếng Việt", "Bản ngữ"], ["Tiếng Anh", "Trung cấp"]]}
+ },
+ "years": {"en": "2", "vi": "2"},
+ "summary": {
+  "en": "{title} with {years} years of experience building web applications. Hands-on with {skills}.",
+  "vi": "{title} với {years} năm kinh nghiệm xây dựng ứng dụng web. Thực chiến với {skills}."
+ },
+ "experience": [
+  {"w": 3, "t": ["fullstack", "backend", "frontend"], "en": "Built and shipped web features end-to-end (API, UI, database) used by internal teams.", "vi": "Xây dựng và đưa tính năng web trọn gói (API, giao diện, CSDL) cho các nhóm nội bộ."},
+  {"w": 2, "t": ["devops"], "en": "Set up CI/CD and Docker-based deployments with automated tests.", "vi": "Thiết lập CI/CD và triển khai bằng Docker kèm kiểm thử tự động."}
+ ],
+ "projects": [
+  {"w": 2, "t": ["fullstack"], "n": {"en": "Project name", "vi": "Tên dự án"}, "tech": "Tech A · Tech B", "en": "One line on what it does and the result.", "vi": "Một dòng mô tả dự án và kết quả."}
+ ],
+ "skills": [
+  {"g": {"en": "Backend", "vi": "Backend"}, "items": [{"n": "Python", "t": ["backend", "ai", "data"]}, {"n": "REST APIs", "m": ["rest", "api"], "t": ["backend"]}]},
+  {"g": {"en": "DevOps", "vi": "DevOps"}, "items": [{"n": "Docker", "t": ["devops"]}, {"n": "Git", "t": ["devops"]}]}
+ ]
+}
