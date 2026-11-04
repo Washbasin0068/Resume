@@ -2,7 +2,7 @@
 
 CV của **Vũ Hữu Đô** — Full Stack Developer (.NET / React), TP. Hồ Chí Minh.
 
-## Các bản CV
+## CV chính (full-stack)
 
 | Tệp | Dùng khi nào |
 |---|---|
@@ -11,6 +11,18 @@ CV của **Vũ Hữu Đô** — Full Stack Developer (.NET / React), TP. Hồ Ch
 | `CV_VuHuuDo_VI.pdf` | Bản tiếng Việt 2 cột — gửi nhà tuyển dụng Việt Nam |
 | `CV_VuHuuDo_LinkedIn.pdf` | Bản export từ LinkedIn (giữ nguyên để tham chiếu) |
 
+## CV theo role — `roles/`
+
+Mỗi role có 2 bản: **`_EN.pdf`** (1 cột, thân thiện ATS) và **`_VI.pdf`** (2 cột, tiếng Việt).
+
+| Thư mục | Vị trí ứng tuyển |
+|---|---|
+| `roles/software-engineer/` | Software Engineer (tổng quát, full stack & platform) |
+| `roles/backend-dotnet/` | Backend Developer (.NET / C#) |
+| `roles/frontend-react/` | Frontend Developer (React / TypeScript) |
+| `roles/devops/` | DevOps Engineer (Docker / Linux / CI-CD) |
+| `roles/ai-automation/` | AI & Automation Engineer (Python / LLM APIs) |
+
 ## Cấu trúc
 
 ```
@@ -18,7 +30,14 @@ CV của **Vũ Hữu Đô** — Full Stack Developer (.NET / React), TP. Hồ Ch
 ├── CV_VuHuuDo_FullStack_ATS.pdf    # sinh từ html/CV_FullStackDev_ATS.html
 ├── CV_VuHuuDo_VI.pdf               # sinh từ html/CV_VuHuuDo_VI.html
 ├── CV_VuHuuDo_LinkedIn.pdf         # export từ LinkedIn
-├── build.sh                        # build lại toàn bộ PDF
+├── build.sh                        # build toàn bộ (CV chính + roles/)
+├── build_cvs.py                    # sinh CV theo role từ dữ liệu trong script
+├── roles/
+│   ├── software-engineer/          # CV_VuHuuDo_SoftwareEngineer_{EN,VI}.{html,pdf}
+│   ├── backend-dotnet/             # CV_VuHuuDo_BackendDotNet_{EN,VI}.{html,pdf}
+│   ├── frontend-react/             # CV_VuHuuDo_FrontendReact_{EN,VI}.{html,pdf}
+│   ├── devops/                     # CV_VuHuuDo_DevOps_{EN,VI}.{html,pdf}
+│   └── ai-automation/              # CV_VuHuuDo_AIAutomation_{EN,VI}.{html,pdf}
 └── html/
     ├── CV_FullStackDev.html        # nguồn bản EN (2 cột)
     ├── CV_FullStackDev_ATS.html    # nguồn bản EN (1 cột, ATS)
@@ -29,16 +48,18 @@ CV của **Vũ Hữu Đô** — Full Stack Developer (.NET / React), TP. Hồ Ch
 
 ## Build lại PDF
 
-Yêu cầu: Chromium (hoặc Chrome) cài sẵn.
+Yêu cầu: Chromium (hoặc Chrome) + Python 3 (`pdfinfo` tuỳ chọn, để kiểm tra số trang).
 
 ```bash
-./build.sh
+./build.sh              # build tất cả: CV chính + roles/
+python3 build_cvs.py    # chỉ build lại CV theo role
 ```
 
 Hoặc in thủ công: mở file HTML bằng Chrome/Chromium → Print → Save as PDF (khổ A4, margins theo CSS `@media print`).
 
 ## Ghi chú
 
-- Bản `_ATS` không dùng cột/icon/ảnh — an toàn khi máy đọc CV tự động.
-- Khi cập nhật nội dung: sửa file HTML trong `html/`, chạy `./build.sh`, rồi commit cả HTML lẫn PDF.
+- **Nội dung CV theo role nằm trong `build_cvs.py`** (mục `ROLES`) — sửa ở đó rồi chạy `python3 build_cvs.py`; script sẽ **ghi đè** HTML/PDF trong `roles/`. Muốn thêm role mới: copy một mục trong `ROLES`, đổi `id`/`file`/nội dung.
+- Bản `_ATS` (và bản `_EN` của roles) không dùng cột/icon/ảnh — an toàn khi máy đọc CV tự động.
+- Tên hệ thống nội bộ trong CV được viết dạng **mô tả chung** (repo nội bộ); chi tiết kỹ thuật giữ đầy đủ.
 - Nên đặt LinkedIn custom URL (vd: `linkedin.com/in/vuhuudo`) rồi cập nhật lại trong CV.

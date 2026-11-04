@@ -11,6 +11,10 @@ build() { # <html> <out.pdf>
   echo "built: $2"
 }
 
+# --- CV chính (full-stack) ---
 build html/CV_FullStackDev.html     CV_VuHuuDo_FullStack.pdf
 build html/CV_FullStackDev_ATS.html CV_VuHuuDo_FullStack_ATS.pdf
 build html/CV_VuHuuDo_VI.html       CV_VuHuuDo_VI.pdf
+
+# --- CV theo role (roles/<id>/, EN + VI) ---
+python3 build_cvs.py
