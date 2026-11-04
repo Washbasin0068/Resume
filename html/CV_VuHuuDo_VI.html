@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Vũ Hữu Đô - Lập trình viên Full Stack - CV</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Calibri, Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5; color: #333; line-height: 1.38; padding: 20px;
+  }
+  .resume-container {
+    max-width: 900px; margin: 0 auto; background: #fff; display: flex;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  }
+  /* Sidebar */
+  .sidebar { width: 31%; background-color: #f4f6f8; padding: 20px 15px; border-right: 1px solid #e1e4e8; }
+  .profile-img-container { text-align: center; margin-bottom: 12px; }
+  .profile-img { width: 104px; height: 104px; border-radius: 50%; object-fit: cover; border: 3px solid #005080; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+  .name-title-container { text-align: center; margin-bottom: 14px; }
+  .name-title-container h1 { font-size: 19px; font-weight: 700; color: #111827; text-transform: uppercase; letter-spacing: .5px; line-height: 1.2; margin-bottom: 5px; }
+  .name-title-container .job-badge { font-size: 10.5px; font-weight: 600; color: #005080; text-transform: uppercase; letter-spacing: .7px; border-top: 2px solid #005080; border-bottom: 2px solid #005080; padding: 3px 0; display: inline-block; width: 100%; }
+  .sidebar-section { margin-bottom: 14px; }
+  .sidebar-section h2 { font-size: 12.5px; font-weight: 700; color: #1e293b; text-transform: uppercase; border-bottom: 1.5px solid #1e293b; padding-bottom: 3px; margin-bottom: 7px; letter-spacing: .5px; }
+  .contact-list { list-style: none; font-size: 10.5px; }
+  .contact-list li { margin-bottom: 6px; display: flex; align-items: flex-start; word-break: break-word; }
+  .contact-list svg { width: 13px; height: 13px; flex: 0 0 13px; color: #005080; margin-right: 6px; margin-top: 2px; }
+  .contact-list a { color: #005080; text-decoration: none; }
+  .sidebar-text { font-size: 10.5px; color: #4b5563; text-align: left; }
+  .education-item { font-size: 10.5px; margin-bottom: 5px; }
+  .education-item strong { color: #111827; display: block; }
+  .education-item i { color: #6b7280; }
+  .lang-list, .skills-sidebar-list { list-style: none; font-size: 10.5px; }
+  .lang-list li, .skills-sidebar-list li { margin-bottom: 3px; color: #374151; }
+  /* Main */
+  .main-content { width: 69%; padding: 20px; }
+  .main-section { margin-bottom: 13px; }
+  .main-section h2 { font-size: 13.5px; font-weight: 700; color: #1e293b; text-transform: uppercase; border-bottom: 2px solid #1e293b; padding-bottom: 3px; margin-bottom: 8px; letter-spacing: .5px; }
+  .experience-header, .project-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1px; }
+  .experience-title, .project-title { font-size: 12.2px; font-weight: 700; color: #111827; }
+  .company-name { font-size: 11.3px; font-weight: 700; color: #1e293b; text-transform: uppercase; }
+  .job-date { font-size: 10.4px; font-style: italic; color: #6b7280; margin-bottom: 5px; }
+  ul.bullet-list { padding-left: 16px; margin-bottom: 8px; font-size: 10.9px; }
+  ul.bullet-list li { margin-bottom: 3px; color: #374151; text-align: left; }
+  .project-block { margin-bottom: 8px; }
+  .project-tech { font-size: 10.2px; font-style: italic; color: #6b7280; margin-bottom: 3px; }
+  .skills-grid { display: flex; flex-direction: column; gap: 5px; }
+  .skill-row { display: flex; font-size: 10.9px; }
+  .skill-category { width: 26%; font-weight: 700; color: #111827; }
+  .skill-details { width: 74%; color: #374151; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .resume-container { box-shadow: none; max-width: 100%; width: 100%; }
+    @page { margin: 0; size: A4 portrait; }
+  }
+</style>
+</head>
+<body>
+
+<div class="resume-container">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="profile-img-container">
+      <img src="Avatar.png" alt="Vũ Hữu Đô" class="profile-img">
+    </div>
+
+    <div class="name-title-container">
+      <h1>VŨ HỮU ĐÔ</h1>
+      <div class="job-badge">LẬP TRÌNH VIÊN FULL STACK</div>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>LIÊN HỆ</h2>
+      <ul class="contact-list">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>TP. Hồ Chí Minh, Việt Nam</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>+84 347 299 934</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span><a href="mailto:vuhuudo2004@gmail.com">vuhuudo2004@gmail.com</a></span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          <span><a href="https://github.com/vuhuudo" target="_blank">github.com/vuhuudo</a></span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          <span><a href="https://www.linkedin.com/in/v%C5%A9-h%E1%BB%AFu-%C4%91%C3%B4-b899bb360/" target="_blank">linkedin.com/in/vũ-hữu-đô-b899bb360</a></span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>TÓM TẮT</h2>
+      <p class="sidebar-text">Lập trình viên Full Stack với hơn 1,5 năm kinh nghiệm xây dựng và vận hành các nền tảng nội bộ tại Tập đoàn Hoàn Cầu. Làm chủ toàn bộ vòng đời sản phẩm: API .NET (ABP Framework), giao diện React + TypeScript, cơ sở dữ liệu SQL Server và hạ tầng Docker/Linux kèm CI/CD, giám sát. Có kinh nghiệm triển khai đăng nhập tập trung OpenID Connect (OpenIddict) và tự động hóa bằng Python + Gemini API. Tốt nghiệp ngành Trí tuệ nhân tạo.</p>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>HỌC VẤN</h2>
+      <div class="education-item">
+        <strong>Cử nhân Trí tuệ nhân tạo</strong>
+        <div>Đại học Văn Lang</div>
+        <i>2023 - 2026</i>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>NGÔN NGỮ</h2>
+      <ul class="lang-list">
+        <li><strong>Tiếng Việt:</strong> Bản ngữ</li>
+        <li><strong>Tiếng Anh:</strong> Cơ bản</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>KỸ NĂNG MỀM</h2>
+      <ul class="skills-sidebar-list">
+        <li>• Tự học &amp; thích nghi nhanh</li>
+        <li>• Làm việc nhóm</li>
+        <li>• Giải quyết vấn đề kỹ thuật</li>
+        <li>• Viết tài liệu rõ ràng</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main-content">
+    <div class="main-section">
+      <h2>KINH NGHIỆM LÀM VIỆC</h2>
+      <div>
+        <div class="experience-header">
+          <span class="experience-title">Lập trình viên Web &amp; Cơ sở dữ liệu</span>
+          <span class="company-name">TẬP ĐOÀN HOÀN CẦU</span>
+        </div>
+        <div class="job-date">06/2025 - Nay · TP. Hồ Chí Minh</div>
+        <ul class="bullet-list">
+          <li><strong>Phát triển Full Stack:</strong> Xây dựng và vận hành nền tảng nội bộ trọn gói — API ABP Framework (.NET), giao diện React + TypeScript, SQL Server — gồm <strong>HCG EPM</strong> (báo cáo tài chính &amp; quỹ tập đoàn) và <strong>HCG CDE</strong> (dữ liệu dự án xây dựng).</li>
+          <li><strong>Định danh &amp; SSO (HCG ID):</strong> Phát triển <strong>MagicAuth</strong> — dịch vụ đăng nhập tập trung OpenID Connect cho các ứng dụng nội bộ (HCG EPM, Master Data, CDE, CloudBeaver): phân quyền theo vai trò, danh mục ứng dụng, nhật ký phiên &amp; kiểm toán, API dịch vụ.</li>
+          <li><strong>DevOps &amp; Phát hành:</strong> Quản lý quy trình 3 môi trường (dev / UAT / production) trên Docker &amp; Linux: CI/CD (Gitea Actions), cổng kiểm thử tự động, health check, cảnh báo Prometheus/Grafana, backup định kỳ, phát hành có rollback.</li>
+          <li><strong>AI &amp; Tự động hóa:</strong> Tự động hóa xử lý dữ liệu nội bộ bằng Python (WSL) + Gemini API, giảm việc thủ công lặp lại cho bộ phận quản lý.</li>
+          <li><strong>Chuyển đổi số:</strong> Chủ trì triển khai Base.vn cho các chi nhánh/khu vực; theo dõi tiến độ dự án và báo cáo trực tiếp Ban Tổng Giám đốc.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-section">
+      <h2>DỰ ÁN TIÊU BIỂU</h2>
+
+      <div class="project-block">
+        <div class="project-header">
+          <span class="project-title">HCG EPM — Nền tảng báo cáo tài chính tập đoàn</span>
+        </div>
+        <div class="project-tech">ABP / .NET · React · TypeScript · SQL Server · Docker</div>
+        <ul class="bullet-list">
+          <li>Nhập &amp; kiểm tra sổ MISA theo kỳ, quy trình duyệt đa công ty, dashboard cho khối kế toán.</li>
+          <li>Hạ tầng 3 môi trường có kiểm thử tự động, health check và quy trình backup/restore.</li>
+        </ul>
+      </div>
+
+      <div class="project-block">
+        <div class="project-header">
+          <span class="project-title">MagicAuth (HCG ID) — Dịch vụ định danh &amp; SSO</span>
+        </div>
+        <div class="project-tech">ABP / .NET · OpenIddict / OIDC · SQL Server</div>
+        <ul class="bullet-list">
+          <li>SSO và danh mục ứng dụng tập trung, màn quản trị người dùng/vai trò/phiên/nhật ký.</li>
+          <li>API dịch vụ (tra cứu người dùng, thành viên ứng dụng) cho các hệ thống khác.</li>
+        </ul>
+      </div>
+
+      <div class="project-block">
+        <div class="project-header">
+          <span class="project-title">HCG CDE — Nền tảng dữ liệu dự án xây dựng</span>
+        </div>
+        <div class="project-tech">ABP / .NET · React · TypeScript · Docker</div>
+        <ul class="bullet-list">
+          <li>Dữ liệu dự án phía chủ đầu tư: không gian điều phối, mời thành viên, đồng bộ Master Data.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-section">
+      <h2>KỸ NĂNG CHUYÊN MÔN</h2>
+      <div class="skills-grid">
+        <div class="skill-row">
+          <div class="skill-category">Backend:</div>
+          <div class="skill-details">C#, .NET (ASP.NET Core), ABP Framework, REST API, OpenIddict / OIDC, Entity Framework Core</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-category">Frontend:</div>
+          <div class="skill-details">React, TypeScript, JavaScript, HTML5, CSS3, giao diện responsive</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-category">Cơ sở dữ liệu:</div>
+          <div class="skill-details">SQL Server, PostgreSQL, xử lý dữ liệu (Python, Pandas, NumPy)</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-category">DevOps &amp; Hạ tầng:</div>
+          <div class="skill-details">Docker, Docker Compose, Linux, WSL, Git, CI/CD (Gitea Actions), Traefik/Pangolin, Prometheus &amp; Grafana, backup &amp; restore, Bash</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-category">AI &amp; Tự động hóa:</div>
+          <div class="skill-details">Tích hợp Gemini API, tự động hóa bằng Python, tối ưu quy trình</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
