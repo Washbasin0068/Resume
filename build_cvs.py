@@ -1,19 +1,34 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# requires-python = ">=3.10"
+# dependencies = []
+# ///
 """Sinh CV theo role cho Vũ Hữu Đô (HTML -> PDF).
 
 - Nội dung nằm ở ROLES bên dưới (một nơi duy nhất).
 - Mỗi role xuất ra roles/<id>/ gồm: bản EN (1 cột, thân thiện ATS) và bản VI (2 cột).
-- Chạy:  python3 build_cvs.py     (cần Chromium; đặt CHROME=... nếu khác)
+- Chạy:  uv run build_cvs.py     (cần Chromium/Chrome; đặt CHROME=... nếu khác)
 
 Lưu ý: chạy script sẽ GHI ĐÈ các file HTML/PDF trong roles/.
 """
+import glob
 import os
 import shutil
 import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-CHROME = os.environ.get("CHROME", "chromium")
+def find_chrome():
+    if os.environ.get("CHROME"):
+        return os.environ["CHROME"]
+    for n in ("chromium", "chromium-browser", "google-chrome", "chrome"):
+        if shutil.which(n):
+            return n
+    hits = sorted(glob.glob(os.path.expanduser("~/.cache/ms-playwright/chromium-*/chrome-linux*/chrome")))
+    return hits[-1] if hits else "chromium"
+
+
+CHROME = find_chrome()
 AVATAR = os.path.join(ROOT, "html", "Avatar.png")
 
 NAME_EN = "Vu Huu Do"
@@ -41,101 +56,68 @@ ROLES = [
         "title_vi": "Kỹ sư phần mềm — Full Stack &amp; Nền tảng",
         "badge_vi": "KỸ SƯ PHẦN MỀM",
         "summary_en": (
-            "Software Engineer with 1.5 years of hands-on experience delivering and operating "
-            "enterprise platforms at Hoan Cau Group. Works across the stack: C#/.NET (ABP Framework) "
-            "APIs, React + TypeScript front-ends, SQL Server, and the Docker/Linux infrastructure with "
-            "CI/CD and monitoring. Built a central OpenID Connect sign-on service for five internal "
-            "applications and shipped multi-company reporting and project-data platforms to production. "
-            "AI graduate; automates workflows with Python + Gemini API."
+            "Software Engineer with 1.5 years of experience building and operating enterprise web "
+            "platforms. Full-stack across C#/.NET (ABP Framework), React + TypeScript, SQL Server and "
+            "Docker/Linux with CI/CD. Delivered reporting, authentication (OpenID Connect) and data "
+            "platforms to production. AI graduate; automates workflows with Python."
         ),
         "summary_vi": (
-            "Kỹ sư phần mềm với 1,5 năm kinh nghiệm xây dựng và vận hành nền tảng nội bộ tại Tập đoàn "
-            "Hoàn Cầu. Làm việc xuyên suốt stack: API C#/.NET (ABP Framework), giao diện React + "
-            "TypeScript, SQL Server và hạ tầng Docker/Linux kèm CI/CD, giám sát. Đã xây dựng dịch vụ "
-            "đăng nhập tập trung OpenID Connect cho 5 ứng dụng nội bộ; đưa nền tảng báo cáo đa công ty "
-            "và nền tảng dữ liệu dự án lên production. Tốt nghiệp AI; tự động hóa bằng Python + Gemini API."
+            "Kỹ sư phần mềm với 1,5 năm kinh nghiệm xây dựng và vận hành nền tảng web doanh nghiệp. "
+            "Full-stack với C#/.NET (ABP Framework), React + TypeScript, SQL Server và Docker/Linux kèm "
+            "CI/CD. Đã đưa nền tảng báo cáo, xác thực (OpenID Connect) và dữ liệu lên production. "
+            "Tốt nghiệp AI; tự động hóa quy trình bằng Python."
         ),
         "skills_en": [
-            ("Languages:", "C#, TypeScript / JavaScript, Python, SQL (T-SQL), Bash"),
-            ("Frameworks:", ".NET (ASP.NET Core), ABP Framework, React, Entity Framework Core, REST APIs, Vite"),
-            ("Auth &amp; Data:", "OpenID Connect / OAuth2 (OpenIddict), RBAC, SQL Server, PostgreSQL, Pandas / NumPy"),
-            ("Infrastructure:", "Docker, Docker Compose, Linux, WSL, Git / Gitea, CI/CD (Gitea Actions), Nginx, "
-                               "Traefik / Pangolin, Prometheus &amp; Grafana, backup &amp; restore"),
-            ("Practices:", "Automated testing (xUnit, Vitest, Playwright), code review, technical documentation, "
-                           "rollback-safe releases"),
-            ("AI &amp; Automation:", "Gemini API integration, Python automation, workflow optimisation"),
+            ("Languages:", "C#, TypeScript / JavaScript, Python, Rust, SQL, Bash"),
+            ("Frameworks:", ".NET (ASP.NET Core), ABP Framework, React, Svelte, Entity Framework Core, REST APIs"),
+            ("Auth &amp; Data:", "OpenID Connect / OAuth2, RBAC, SQL Server, PostgreSQL, ClickHouse"),
+            ("DevOps:", "Docker, Linux, Git, CI/CD, reverse proxy, monitoring &amp; alerting, backup / restore"),
+            ("Quality:", "Automated testing (xUnit, Vitest, Playwright), code review, documentation"),
+            ("AI &amp; Automation:", "Python automation, LLM API integration"),
         ],
         "skills_vi": [
-            ("Ngôn ngữ:", "C#, TypeScript / JavaScript, Python, SQL (T-SQL), Bash"),
-            ("Framework:", ".NET (ASP.NET Core), ABP Framework, React, Entity Framework Core, REST API, Vite"),
-            ("Xác thực &amp; Dữ liệu:", "OpenID Connect / OAuth2 (OpenIddict), RBAC, SQL Server, PostgreSQL, Pandas / NumPy"),
-            ("Hạ tầng:", "Docker, Docker Compose, Linux, WSL, Git / Gitea, CI/CD (Gitea Actions), Nginx, "
-                        "Traefik / Pangolin, Prometheus &amp; Grafana, backup &amp; restore"),
-            ("Quy trình:", "Kiểm thử tự động (xUnit, Vitest, Playwright), review code, viết tài liệu, "
-                          "phát hành có rollback"),
-            ("AI &amp; Tự động hóa:", "Tích hợp Gemini API, tự động hóa bằng Python, tối ưu quy trình"),
+            ("Ngôn ngữ:", "C#, TypeScript / JavaScript, Python, Rust, SQL, Bash"),
+            ("Framework:", ".NET (ASP.NET Core), ABP Framework, React, Svelte, Entity Framework Core, REST API"),
+            ("Xác thực &amp; Dữ liệu:", "OpenID Connect / OAuth2, RBAC, SQL Server, PostgreSQL, ClickHouse"),
+            ("DevOps:", "Docker, Linux, Git, CI/CD, reverse proxy, giám sát &amp; cảnh báo, backup / restore"),
+            ("Chất lượng:", "Kiểm thử tự động (xUnit, Vitest, Playwright), review code, viết tài liệu"),
+            ("AI &amp; Tự động hóa:", "Tự động hóa bằng Python, tích hợp LLM API"),
         ],
         "exp_en": [
-            "Delivered internal platforms end-to-end — .NET (ABP Framework) APIs, React + TypeScript UIs and "
-            "SQL Server — including a <b>multi-company financial reporting platform</b> (44 companies: MISA "
-            "ledger import &amp; validation, approval workflows, dashboards) and a <b>construction project "
-            "data platform</b>, both in production.",
-            "Built a central <b>OpenID Connect (OpenIddict)</b> sign-on service for <b>5 internal applications</b>: "
-            "SPA flows with PKCE, client-credentials service scopes, role-based access, per-application catalogue "
-            "&amp; policies, session/location tracking, audit logs and an admin console.",
-            "Operate the full delivery pipeline across <b>three environments (dev / UAT / production)</b>: "
-            "Docker &amp; Linux, CI/CD with Gitea Actions (build, automated test gates, security scans), "
-            "reverse proxy (Traefik / Pangolin), Prometheus/Grafana alerting, scheduled backups and "
-            "rollback-safe releases.",
-            "Automate internal data workflows with Python (WSL) + Gemini API, removing repetitive manual "
-            "processing for management teams.",
-            "Led the Base.vn rollout at the <b>HCM head office and Khanh Hoa branch</b>; tracked project "
-            "milestones and reported progress directly to the Board of Directors.",
+            "Built internal platforms end-to-end: .NET (ABP) APIs, React + TypeScript UIs and SQL Server, "
+            "including an enterprise reporting platform and a project-data platform, both in production.",
+            "Implemented central single sign-on (OpenID Connect / OAuth2): PKCE flows, service-to-service "
+            "access, role-based permissions, session management and audit logging.",
+            "Built a data lakehouse (ClickHouse, PostgreSQL, S3) with a Python API, Svelte UI and a Rust core "
+            "for file parsing and export; sharded CI cut test time by ~65%.",
+            "Operated dev / UAT / production on Docker &amp; Linux: CI/CD with test gates, monitoring, "
+            "alerting, backups and rollback-safe releases.",
         ],
         "exp_vi": [
-            "Xây dựng nền tảng nội bộ trọn gói — API .NET (ABP Framework), giao diện React + TypeScript, "
-            "SQL Server — gồm <b>nền tảng báo cáo tài chính đa công ty</b> (44 công ty: nhập &amp; kiểm tra "
-            "sổ MISA, quy trình duyệt, dashboard) và <b>nền tảng dữ liệu dự án xây dựng</b>, cả hai đã lên production.",
-            "Xây dựng dịch vụ đăng nhập tập trung <b>OpenID Connect (OpenIddict)</b> cho <b>5 ứng dụng nội bộ</b>: "
-            "luồng SPA với PKCE, client-credentials cho service, phân quyền theo vai trò, danh mục &amp; chính sách "
-            "theo ứng dụng, theo dõi phiên theo vùng, nhật ký kiểm toán và màn quản trị.",
-            "Vận hành quy trình phát hành trên <b>3 môi trường (dev / UAT / production)</b>: Docker &amp; Linux, "
-            "CI/CD với Gitea Actions (build, cổng kiểm thử tự động, quét bảo mật), reverse proxy (Traefik / "
-            "Pangolin), cảnh báo Prometheus/Grafana, backup định kỳ, phát hành có rollback.",
-            "Tự động hóa xử lý dữ liệu nội bộ bằng Python (WSL) + Gemini API, giảm việc thủ công lặp lại cho "
-            "bộ phận quản lý.",
-            "Chủ trì triển khai Base.vn tại <b>hội sở HCM và chi nhánh Khánh Hòa</b>; theo dõi tiến độ dự án "
-            "và báo cáo trực tiếp Ban Tổng Giám đốc.",
+            "Xây dựng nền tảng nội bộ trọn gói: API .NET (ABP), giao diện React + TypeScript, SQL Server, "
+            "gồm nền tảng báo cáo doanh nghiệp và nền tảng dữ liệu dự án, đều đã lên production.",
+            "Triển khai đăng nhập tập trung (OpenID Connect / OAuth2): luồng PKCE, truy cập giữa các dịch vụ, "
+            "phân quyền theo vai trò, quản lý phiên và nhật ký kiểm toán.",
+            "Xây dựng data lakehouse (ClickHouse, PostgreSQL, S3) với API Python, giao diện Svelte và lõi Rust "
+            "xử lý/xuất tệp; CI chia shard giảm ~65% thời gian test.",
+            "Vận hành dev / UAT / production trên Docker &amp; Linux: CI/CD có cổng kiểm thử, giám sát, "
+            "cảnh báo, backup và phát hành có rollback.",
         ],
         "projects_en": [
-            ("Multi-company financial &amp; fund reporting platform",
-             "ABP / .NET · React · TypeScript · SQL Server · Docker",
-             ["Period-based reporting for 44 companies: MISA ledger import &amp; validation, approval "
-              "workflows, dashboards for accounting teams.",
-              "Three-environment delivery with automated tests, health checks, monitoring and backup/restore."]),
-            ("Central SSO &amp; identity service",
-             "ABP / .NET · OpenIddict / OIDC · SQL Server · Docker",
-             ["Single sign-on and application catalogue for 5 internal applications; admin console for users, "
-              "roles, sessions and audit history.",
-              "Service-to-service APIs (user lookup, application members) for access verification and sync."]),
-            ("Construction project data platform",
-             "ABP / .NET · React · TypeScript · Docker",
-             ["Investor-side project data: coordination workspace, member invitations and master-data "
-              "synchronisation; released to production."]),
+            ("Enterprise reporting platform", "ABP / .NET · React · TypeScript · SQL Server · Docker",
+             ["Multi-entity period reporting: data import &amp; validation, approval workflow, dashboards."]),
+            ("Central authentication (SSO) service", "ABP / .NET · OpenID Connect · OAuth2 · SQL Server",
+             ["Single sign-on, RBAC, session and audit management for internal applications."]),
+            ("Data lakehouse &amp; analytics", "Python · Rust · ClickHouse · PostgreSQL · Svelte",
+             ["Medallion-style pipeline with REST APIs, dashboards and automated tests."]),
         ],
         "projects_vi": [
-            ("Nền tảng báo cáo tài chính &amp; quỹ đa công ty",
-             "ABP / .NET · React · TypeScript · SQL Server · Docker",
-             ["Báo cáo theo kỳ cho 44 công ty: nhập &amp; kiểm tra sổ MISA, quy trình duyệt, dashboard cho khối kế toán.",
-              "Vận hành 3 môi trường với kiểm thử tự động, health check, giám sát và backup/restore."]),
-            ("Dịch vụ định danh &amp; SSO tập trung",
-             "ABP / .NET · OpenIddict / OIDC · SQL Server · Docker",
-             ["SSO và danh mục ứng dụng cho 5 ứng dụng nội bộ; màn quản trị người dùng/vai trò/phiên/nhật ký.",
-              "API dịch vụ (tra cứu người dùng, thành viên ứng dụng) để xác minh và đồng bộ quyền truy cập."]),
-            ("Nền tảng dữ liệu dự án xây dựng",
-             "ABP / .NET · React · TypeScript · Docker",
-             ["Dữ liệu dự án phía chủ đầu tư: không gian điều phối, mời thành viên, đồng bộ Master Data; "
-              "đã phát hành production."]),
+            ("Nền tảng báo cáo doanh nghiệp", "ABP / .NET · React · TypeScript · SQL Server · Docker",
+             ["Báo cáo theo kỳ đa đơn vị: nhập &amp; kiểm tra dữ liệu, quy trình duyệt, dashboard."]),
+            ("Dịch vụ xác thực tập trung (SSO)", "ABP / .NET · OpenID Connect · OAuth2 · SQL Server",
+             ["Đăng nhập một lần, RBAC, quản lý phiên và nhật ký kiểm toán cho các ứng dụng nội bộ."]),
+            ("Data lakehouse &amp; phân tích", "Python · Rust · ClickHouse · PostgreSQL · Svelte",
+             ["Pipeline kiểu Medallion với REST API, dashboard và kiểm thử tự động."]),
         ],
     },
     {
@@ -145,100 +127,67 @@ ROLES = [
         "title_vi": "Lập trình viên Backend — .NET / C#",
         "badge_vi": "LẬP TRÌNH VIÊN BACKEND",
         "summary_en": (
-            "Backend-focused developer with 1.5 years building .NET services at Hoan Cau Group. Designs and "
-            "ships APIs with ABP Framework / ASP.NET Core, Entity Framework Core and SQL Server — including "
-            "data-heavy import &amp; validation pipelines and multi-company approval workflows. Strong on "
-            "authentication &amp; authorization (OpenID Connect / OpenIddict, OAuth2 client credentials, RBAC) "
-            "and system-to-system integrations; operates what is built with Docker, CI/CD and monitoring."
+            "Backend developer with 1.5 years building .NET services. Designs APIs with ABP Framework / "
+            "ASP.NET Core, EF Core and SQL Server, including data import &amp; validation pipelines and "
+            "approval workflows. Strong in authentication &amp; authorization (OpenID Connect, OAuth2, RBAC) "
+            "and system integrations."
         ),
         "summary_vi": (
-            "Lập trình viên thiên về backend với 1,5 năm xây dựng dịch vụ .NET tại Tập đoàn Hoàn Cầu. Thiết kế "
-            "và phát triển API với ABP Framework / ASP.NET Core, Entity Framework Core và SQL Server — gồm các "
-            "pipeline nhập &amp; kiểm tra dữ liệu nặng và quy trình duyệt đa công ty. Mạnh về xác thực &amp; phân "
-            "quyền (OpenID Connect / OpenIddict, OAuth2 client credentials, RBAC) và tích hợp hệ thống; vận hành "
-            "sản phẩm với Docker, CI/CD và giám sát."
+            "Lập trình viên backend với 1,5 năm xây dựng dịch vụ .NET. Thiết kế API với ABP Framework / "
+            "ASP.NET Core, EF Core và SQL Server, gồm pipeline nhập &amp; kiểm tra dữ liệu và quy trình duyệt. "
+            "Mạnh về xác thực &amp; phân quyền (OpenID Connect, OAuth2, RBAC) và tích hợp hệ thống."
         ),
         "skills_en": [
-            ("Backend:", "C#, .NET (ASP.NET Core), ABP Framework, Entity Framework Core, REST APIs, "
-                         "validation &amp; import pipelines"),
-            ("Auth &amp; Security:", "OpenID Connect / OAuth2 (OpenIddict), authorization-code + PKCE, "
-                                    "client credentials, RBAC, audit logging"),
-            ("Data:", "SQL Server (T-SQL, schema design, EF Core migrations), PostgreSQL, "
-                      "data validation, Python (Pandas, NumPy)"),
-            ("Integration:", "Service-to-service APIs, master-data synchronisation, webhooks, user lookup APIs"),
-            ("Quality &amp; Ops:", "xUnit, CI test gates &amp; security scans, Docker, Linux, Gitea Actions "
-                                  "CI/CD, Prometheus / Grafana"),
-            ("Secondary:", "React + TypeScript, Python + Gemini API automation"),
+            ("Backend:", "C#, .NET (ASP.NET Core), ABP Framework, Entity Framework Core, REST APIs"),
+            ("Auth &amp; Security:", "OpenID Connect / OAuth2, PKCE, client credentials, RBAC, audit logging"),
+            ("Data:", "SQL Server (T-SQL, migrations), PostgreSQL, ClickHouse, data validation"),
+            ("Integration:", "Service-to-service APIs, data synchronisation, webhooks"),
+            ("Quality &amp; Ops:", "xUnit, CI test gates, Docker, Linux, monitoring"),
+            ("Secondary:", "React + TypeScript, Python, Rust"),
         ],
         "skills_vi": [
-            ("Backend:", "C#, .NET (ASP.NET Core), ABP Framework, Entity Framework Core, REST API, "
-                         "pipeline nhập &amp; kiểm tra dữ liệu"),
-            ("Xác thực &amp; Bảo mật:", "OpenID Connect / OAuth2 (OpenIddict), authorization-code + PKCE, "
-                                       "client credentials, RBAC, nhật ký kiểm toán"),
-            ("Dữ liệu:", "SQL Server (T-SQL, thiết kế schema, EF Core migrations), PostgreSQL, "
-                        "kiểm tra dữ liệu, Python (Pandas, NumPy)"),
-            ("Tích hợp:", "API service-to-service, đồng bộ Master Data, webhook, API tra cứu người dùng"),
-            ("Chất lượng &amp; Vận hành:", "xUnit, cổng kiểm thử &amp; quét bảo mật trong CI, Docker, Linux, "
-                                          "Gitea Actions CI/CD, Prometheus / Grafana"),
-            ("Bổ trợ:", "React + TypeScript, tự động hóa Python + Gemini API"),
+            ("Backend:", "C#, .NET (ASP.NET Core), ABP Framework, Entity Framework Core, REST API"),
+            ("Xác thực &amp; Bảo mật:", "OpenID Connect / OAuth2, PKCE, client credentials, RBAC, nhật ký kiểm toán"),
+            ("Dữ liệu:", "SQL Server (T-SQL, migration), PostgreSQL, ClickHouse, kiểm tra dữ liệu"),
+            ("Tích hợp:", "API service-to-service, đồng bộ dữ liệu, webhook"),
+            ("Chất lượng &amp; Vận hành:", "xUnit, cổng kiểm thử CI, Docker, Linux, giám sát"),
+            ("Bổ trợ:", "React + TypeScript, Python, Rust"),
         ],
         "exp_en": [
-            "Designed and shipped .NET APIs for two production platforms: a <b>multi-company financial "
-            "reporting platform</b> (44 companies — MISA ledger import &amp; validation, approval workflows) "
-            "and a <b>construction project data platform</b> (coordination, member invitations, master-data sync).",
-            "Built the domain, data and API layers: ABP Framework modules, EF Core + SQL Server schemas and "
-            "migrations, REST endpoints consumed by React SPAs and other systems.",
-            "Implemented authentication &amp; access control: central <b>OIDC / OpenIddict</b> service "
-            "(authorization-code + PKCE, client-credentials service scopes), role-based access, per-application "
-            "policies, session/audit tracking and admin APIs.",
-            "Delivered integrations: service-to-service APIs (user lookup, application members) and "
-            "master-data synchronisation between internal systems.",
-            "Own quality &amp; operations: xUnit tests wired into CI, Dockerized deployments across "
-            "dev / UAT / production, monitoring and backups; automate workflows with Python + Gemini API.",
+            "Designed and shipped .NET APIs for production platforms: enterprise reporting (import &amp; "
+            "validation, approval workflows) and project data management.",
+            "Built domain, data and API layers: ABP modules, EF Core + SQL Server schemas and migrations, "
+            "REST endpoints for SPAs and other systems.",
+            "Implemented central authentication: OpenID Connect / OAuth2, PKCE, client credentials, "
+            "role-based access, session and audit tracking.",
+            "Delivered service-to-service integrations and a data lakehouse backend (Python, ClickHouse, "
+            "Rust parsing core); wired xUnit and integration tests into CI.",
         ],
         "exp_vi": [
-            "Thiết kế và phát triển API .NET cho hai nền tảng production: <b>nền tảng báo cáo tài chính đa "
-            "công ty</b> (44 công ty — nhập &amp; kiểm tra sổ MISA, quy trình duyệt) và <b>nền tảng dữ liệu dự án "
-            "xây dựng</b> (điều phối, mời thành viên, đồng bộ Master Data).",
-            "Xây dựng tầng domain, dữ liệu và API: module ABP Framework, schema &amp; migration EF Core + "
-            "SQL Server, REST endpoint cho SPA React và các hệ thống khác.",
-            "Triển khai xác thực &amp; phân quyền: dịch vụ <b>OIDC / OpenIddict</b> tập trung "
-            "(authorization-code + PKCE, client-credentials cho service), phân quyền theo vai trò, chính sách "
-            "theo ứng dụng, theo dõi phiên/kiểm toán và API quản trị.",
-            "Xây dựng tích hợp: API service-to-service (tra cứu người dùng, thành viên ứng dụng) và đồng bộ "
-            "Master Data giữa các hệ thống nội bộ.",
-            "Quản lý chất lượng &amp; vận hành: kiểm thử xUnit trong CI, triển khai Docker trên "
-            "dev / UAT / production, giám sát và backup; tự động hóa bằng Python + Gemini API.",
+            "Thiết kế và phát triển API .NET cho các nền tảng production: báo cáo doanh nghiệp (nhập &amp; "
+            "kiểm tra dữ liệu, quy trình duyệt) và quản lý dữ liệu dự án.",
+            "Xây dựng tầng domain, dữ liệu và API: module ABP, schema &amp; migration EF Core + SQL Server, "
+            "REST endpoint cho SPA và hệ thống khác.",
+            "Triển khai xác thực tập trung: OpenID Connect / OAuth2, PKCE, client credentials, phân quyền "
+            "theo vai trò, theo dõi phiên và kiểm toán.",
+            "Xây dựng tích hợp service-to-service và backend data lakehouse (Python, ClickHouse, lõi Rust); "
+            "đưa test xUnit và integration test vào CI.",
         ],
         "projects_en": [
-            ("Multi-company financial &amp; fund reporting platform",
-             "ABP / .NET · EF Core · SQL Server · Docker",
-             ["MISA ledger import &amp; validation pipeline (44 companies), approval workflows and "
-              "reporting APIs for the React SPA.",
-              "EF Core migrations, multi-company data model and period management."]),
-            ("Central SSO &amp; identity service",
-             "ABP / .NET · OpenIddict / OIDC · SQL Server",
-             ["OIDC flows (authorization-code + PKCE, client credentials), RBAC, per-application policies, "
-              "session &amp; audit tracking.",
-              "Service-to-service APIs: user lookup and application members for other systems."]),
-            ("Construction project data platform",
-             "ABP / .NET · EF Core · SQL Server · Docker",
-             ["APIs for project coordination, member invitations and master-data synchronisation; "
-              "released to production."]),
+            ("Enterprise reporting platform", "ABP / .NET · EF Core · SQL Server",
+             ["Import &amp; validation pipeline, approval workflows and reporting APIs."]),
+            ("Central authentication (SSO) service", "ABP / .NET · OpenID Connect · SQL Server",
+             ["OIDC flows, RBAC, session &amp; audit tracking, user-lookup APIs for other systems."]),
+            ("Project data platform", "ABP / .NET · EF Core · SQL Server · Docker",
+             ["APIs for coordination, member invitations and master-data sync."]),
         ],
         "projects_vi": [
-            ("Nền tảng báo cáo tài chính &amp; quỹ đa công ty",
-             "ABP / .NET · EF Core · SQL Server · Docker",
-             ["Pipeline nhập &amp; kiểm tra sổ MISA (44 công ty), quy trình duyệt và API báo cáo cho SPA React.",
-              "Migration EF Core, mô hình dữ liệu đa công ty và quản lý kỳ báo cáo."]),
-            ("Dịch vụ định danh &amp; SSO tập trung",
-             "ABP / .NET · OpenIddict / OIDC · SQL Server",
-             ["Luồng OIDC (authorization-code + PKCE, client credentials), RBAC, chính sách theo ứng dụng, "
-              "theo dõi phiên &amp; kiểm toán.",
-              "API service-to-service: tra cứu người dùng và thành viên ứng dụng cho hệ thống khác."]),
-            ("Nền tảng dữ liệu dự án xây dựng",
-             "ABP / .NET · EF Core · SQL Server · Docker",
-             ["API cho điều phối dự án, mời thành viên và đồng bộ Master Data; đã phát hành production."]),
+            ("Nền tảng báo cáo doanh nghiệp", "ABP / .NET · EF Core · SQL Server",
+             ["Pipeline nhập &amp; kiểm tra dữ liệu, quy trình duyệt và API báo cáo."]),
+            ("Dịch vụ xác thực tập trung (SSO)", "ABP / .NET · OpenID Connect · SQL Server",
+             ["Luồng OIDC, RBAC, theo dõi phiên &amp; kiểm toán, API tra cứu người dùng cho hệ thống khác."]),
+            ("Nền tảng dữ liệu dự án", "ABP / .NET · EF Core · SQL Server · Docker",
+             ["API điều phối, mời thành viên và đồng bộ dữ liệu danh mục."]),
         ],
     },
     {
@@ -248,90 +197,62 @@ ROLES = [
         "title_vi": "Lập trình viên Frontend — React / TypeScript",
         "badge_vi": "LẬP TRÌNH VIÊN FRONTEND",
         "summary_en": (
-            "Frontend-focused developer with 1.5 years building React + TypeScript applications at Hoan Cau "
-            "Group. Ships data-dense internal UIs — dashboards, tables, multi-step import and approval flows — "
-            "with clean component structure, vi/en internationalisation and automated test coverage. Integrates "
-            "SPA authentication with OpenID Connect (authorization-code + PKCE) and works comfortably with the "
-            ".NET APIs and SQL data behind the UI."
+            "Frontend developer with 1.5 years building React + TypeScript applications. Ships data-dense "
+            "internal UIs (dashboards, tables, multi-step import and approval flows) with clean components, "
+            "vi/en i18n and automated tests. Integrates SPA authentication via OpenID Connect and works "
+            "comfortably with .NET APIs."
         ),
         "summary_vi": (
-            "Lập trình viên thiên về frontend với 1,5 năm xây dựng ứng dụng React + TypeScript tại Tập đoàn "
-            "Hoàn Cầu. Phát triển giao diện nội bộ dày dữ liệu — dashboard, bảng biểu, luồng nhập liệu &amp; "
-            "duyệt nhiều bước — với cấu trúc component rõ ràng, đa ngôn ngữ vi/en và kiểm thử tự động. Tích hợp "
-            "xác thực SPA với OpenID Connect (authorization-code + PKCE), làm việc tốt với API .NET và dữ liệu "
-            "SQL phía sau."
+            "Lập trình viên frontend với 1,5 năm xây dựng ứng dụng React + TypeScript. Phát triển giao diện "
+            "nội bộ dày dữ liệu (dashboard, bảng, luồng nhập &amp; duyệt nhiều bước) với component rõ ràng, "
+            "đa ngôn ngữ vi/en và kiểm thử tự động. Tích hợp xác thực SPA qua OpenID Connect, làm việc tốt "
+            "với API .NET."
         ),
         "skills_en": [
-            ("Frontend:", "React, TypeScript, JavaScript, Vite, HTML5, CSS3, responsive web design, "
-                          "component architecture"),
-            ("UI patterns:", "Dashboards &amp; data tables, multi-step forms &amp; wizards, i18n (vi/en), "
-                             "theming &amp; branding"),
-            ("Auth:", "OIDC SPA integration (authorization-code + PKCE), token renewal, session-expiry UX"),
-            ("Testing:", "Vitest (unit), Playwright (E2E), CI test gates"),
-            ("Backend awareness:", "REST APIs, .NET / ABP, SQL Server"),
-            ("Tooling:", "Git / Gitea, Gitea Actions, Docker"),
+            ("Frontend:", "React, TypeScript, JavaScript, Svelte, Vite, HTML5, CSS3, responsive design"),
+            ("UI patterns:", "Dashboards &amp; data tables, multi-step forms, i18n (vi/en), theming"),
+            ("Auth:", "OIDC SPA integration (PKCE), token renewal, session-expiry UX"),
+            ("Testing:", "Vitest, Playwright (end-to-end), component tests"),
+            ("Backend &amp; Tools:", "REST APIs, C# / .NET basics, Node.js, pnpm, Git, Docker"),
         ],
         "skills_vi": [
-            ("Frontend:", "React, TypeScript, JavaScript, Vite, HTML5, CSS3, giao diện responsive, "
-                          "kiến trúc component"),
-            ("Mẫu UI:", "Dashboard &amp; bảng dữ liệu, form/wizard nhiều bước, đa ngôn ngữ (vi/en), "
-                       "theme &amp; thương hiệu"),
-            ("Xác thực:", "Tích hợp OIDC cho SPA (authorization-code + PKCE), gia hạn token, xử lý hết phiên"),
-            ("Kiểm thử:", "Vitest (unit), Playwright (E2E), cổng kiểm thử trong CI"),
-            ("Hiểu backend:", "REST API, .NET / ABP, SQL Server"),
-            ("Công cụ:", "Git / Gitea, Gitea Actions, Docker"),
+            ("Frontend:", "React, TypeScript, JavaScript, Svelte, Vite, HTML5, CSS3, responsive design"),
+            ("Mẫu giao diện:", "Dashboard &amp; bảng dữ liệu, form nhiều bước, i18n (vi/en), theming"),
+            ("Xác thực:", "Tích hợp OIDC cho SPA (PKCE), gia hạn token, xử lý hết phiên"),
+            ("Kiểm thử:", "Vitest, Playwright (end-to-end), component test"),
+            ("Backend &amp; Công cụ:", "REST API, C# / .NET cơ bản, Node.js, pnpm, Git, Docker"),
         ],
         "exp_en": [
-            "Built the React + TypeScript UIs of two production platforms: a <b>multi-company financial "
-            "reporting platform</b> (dashboards, period &amp; company navigation, MISA import and approval "
-            "flows) and a <b>construction project data platform</b> (coordination workspace, member "
-            "invitations, master-data screens).",
-            "Integrated SPA authentication with the central <b>OIDC</b> service (authorization-code + PKCE, "
-            "silent token renewal, session-expiry handling).",
-            "Delivered UI quality at scale: responsive layouts, vi/en i18n, theming/branding, data-dense "
-            "tables with sorting and filtering.",
-            "Covered the UI with automated tests — Vitest unit tests and Playwright E2E — wired into CI "
-            "alongside the .NET APIs.",
-            "Worked full-cycle with .NET APIs and SQL-backed data; automate internal workflows with "
-            "Python + Gemini API; led Base.vn rollout (HCM HQ, Khanh Hoa branch).",
+            "Built React + TypeScript UIs for reporting and project-data platforms: dashboards, filterable "
+            "tables, import wizards and approval flows.",
+            "Built a Svelte portal for a data lakehouse; refactored large screens into small reusable "
+            "components with no behaviour change.",
+            "Integrated SPA authentication with OpenID Connect (PKCE), silent renewal and role-based UI.",
+            "Wrote Vitest and Playwright tests and ran them as CI gates; added vi/en internationalisation.",
         ],
         "exp_vi": [
-            "Xây dựng giao diện React + TypeScript cho hai nền tảng production: <b>nền tảng báo cáo tài chính "
-            "đa công ty</b> (dashboard, điều hướng theo kỳ/công ty, luồng nhập &amp; duyệt sổ MISA) và "
-            "<b>nền tảng dữ liệu dự án xây dựng</b> (không gian điều phối, mời thành viên, màn Master Data).",
-            "Tích hợp xác thực SPA với dịch vụ <b>OIDC</b> tập trung (authorization-code + PKCE, gia hạn token "
-            "ngầm, xử lý hết phiên).",
-            "Đảm bảo chất lượng giao diện: layout responsive, đa ngôn ngữ vi/en, theme/thương hiệu, bảng dữ "
-            "liệu dày đặc với sắp xếp và lọc.",
-            "Phủ kiểm thử tự động cho giao diện — Vitest (unit) và Playwright (E2E) — chạy trong CI cùng API .NET.",
-            "Làm việc trọn vòng với API .NET và dữ liệu SQL; tự động hóa bằng Python + Gemini API; chủ trì "
-            "triển khai Base.vn (hội sở HCM, chi nhánh Khánh Hòa).",
+            "Xây dựng giao diện React + TypeScript cho nền tảng báo cáo và dữ liệu dự án: dashboard, bảng có "
+            "bộ lọc, wizard nhập liệu và luồng duyệt.",
+            "Xây dựng portal Svelte cho data lakehouse; tách màn hình lớn thành component nhỏ tái sử dụng, "
+            "không đổi hành vi.",
+            "Tích hợp xác thực SPA với OpenID Connect (PKCE), gia hạn token ngầm và giao diện theo vai trò.",
+            "Viết test Vitest và Playwright chạy như cổng CI; bổ sung đa ngôn ngữ vi/en.",
         ],
         "projects_en": [
-            ("Multi-company financial &amp; fund reporting platform (React SPA)",
-             "React · TypeScript · Vite · REST APIs",
-             ["Dashboards and data-dense tables for 44 companies; period &amp; company navigation; "
-              "MISA import and approval flows.",
-              "vi/en internationalisation, theming and responsive layouts; Vitest + Playwright coverage."]),
-            ("Central SSO — SPA integration",
-             "OIDC (PKCE) · React · TypeScript",
-             ["Authorization-code + PKCE flow, silent token renewal and session-expiry UX for internal SPAs."]),
-            ("Construction project data platform (React UI)",
-             "React · TypeScript · Vite",
-             ["Coordination workspace, member invitations and master-data screens; released to production."]),
+            ("Enterprise reporting UI", "React · TypeScript · Vite",
+             ["Dashboards, import wizards and approval screens for accounting teams."]),
+            ("Data portal", "Svelte · TypeScript · Playwright",
+             ["Role-aware portal with charts, exports and end-to-end tests."]),
+            ("Project data UI", "React · TypeScript · Vite",
+             ["Coordination workspace, member invitations and master-data screens."]),
         ],
         "projects_vi": [
-            ("Nền tảng báo cáo tài chính đa công ty (SPA React)",
-             "React · TypeScript · Vite · REST API",
-             ["Dashboard và bảng dữ liệu dày đặc cho 44 công ty; điều hướng theo kỳ &amp; công ty; "
-              "luồng nhập và duyệt sổ MISA.",
-              "Đa ngôn ngữ vi/en, theme và layout responsive; kiểm thử Vitest + Playwright."]),
-            ("SSO tập trung — tích hợp SPA",
-             "OIDC (PKCE) · React · TypeScript",
-             ["Luồng authorization-code + PKCE, gia hạn token ngầm và xử lý hết phiên cho các SPA nội bộ."]),
-            ("Nền tảng dữ liệu dự án xây dựng (giao diện React)",
-             "React · TypeScript · Vite",
-             ["Không gian điều phối, mời thành viên và màn Master Data; đã phát hành production."]),
+            ("Giao diện báo cáo doanh nghiệp", "React · TypeScript · Vite",
+             ["Dashboard, wizard nhập liệu và màn duyệt cho khối kế toán."]),
+            ("Portal dữ liệu", "Svelte · TypeScript · Playwright",
+             ["Portal theo vai trò với biểu đồ, xuất báo cáo và test end-to-end."]),
+            ("Giao diện dữ liệu dự án", "React · TypeScript · Vite",
+             ["Không gian điều phối, mời thành viên và màn dữ liệu danh mục."]),
         ],
     },
     {
@@ -341,98 +262,62 @@ ROLES = [
         "title_vi": "Kỹ sư DevOps — Docker / Linux / CI-CD",
         "badge_vi": "KỸ SƯ DEVOPS",
         "summary_en": (
-            "DevOps-minded engineer with 1.5 years building and running internal platforms at Hoan Cau Group. "
-            "Operates multiple systems across three environments (dev / UAT / production) on Docker &amp; Linux: "
-            "CI/CD with Gitea Actions, reverse proxy &amp; TLS, monitoring &amp; alerting (Prometheus / Grafana), "
-            "scheduled backups and rollback-safe releases. Also develops on the stack (.NET / React), so tooling "
-            "and pipelines fit the teams' real needs."
+            "DevOps-minded engineer with 1.5 years running internal platforms across dev / UAT / production "
+            "on Docker &amp; Linux: CI/CD, reverse proxy &amp; TLS, monitoring and alerting, backups and "
+            "rollback-safe releases. Also develops on the stack (.NET / React / Python)."
         ),
         "summary_vi": (
-            "Kỹ sư thiên về DevOps với 1,5 năm xây dựng và vận hành nền tảng nội bộ tại Tập đoàn Hoàn Cầu. "
-            "Vận hành nhiều hệ thống trên 3 môi trường (dev / UAT / production) với Docker &amp; Linux: CI/CD "
-            "Gitea Actions, reverse proxy &amp; TLS, giám sát &amp; cảnh báo (Prometheus / Grafana), backup định "
-            "kỳ và phát hành có rollback. Đồng thời phát triển trên chính stack đó (.NET / React) nên pipeline "
-            "và công cụ sát nhu cầu thực tế của đội."
+            "Kỹ sư thiên về DevOps với 1,5 năm vận hành nền tảng nội bộ trên dev / UAT / production với "
+            "Docker &amp; Linux: CI/CD, reverse proxy &amp; TLS, giám sát và cảnh báo, backup và phát hành "
+            "có rollback. Đồng thời phát triển trên stack (.NET / React / Python)."
         ),
         "skills_en": [
             ("Containers &amp; OS:", "Docker, Docker Compose, Linux (Ubuntu), WSL, Bash"),
-            ("CI/CD:", "Gitea (self-hosted Git), Gitea Actions pipelines, automated test gates, security scans, "
-                       "versioned releases &amp; rollback"),
-            ("Networking &amp; edge:", "Nginx, Traefik, Pangolin (reverse proxy / remote access), DNS &amp; TLS, "
-                                       "WireGuard (wg-easy) VPN"),
-            ("Observability:", "Prometheus, Grafana, Alertmanager, node-exporter; health checks &amp; alert design"),
-            ("Data operations:", "SQL Server on Docker, scheduled backups &amp; restore drills, "
-                                 "capacity &amp; cleanup automation"),
-            ("Development:", "C# / .NET, React + TypeScript, Python + Gemini API automation"),
+            ("CI/CD:", "Git, pipeline automation, test gates, security scans, versioned releases &amp; rollback"),
+            ("Networking:", "Nginx, reverse proxy, DNS &amp; TLS, VPN, SSO-protected access"),
+            ("Observability:", "Prometheus, Grafana, alerting, health checks"),
+            ("Data operations:", "SQL Server / PostgreSQL / ClickHouse backup &amp; restore, maintenance automation"),
+            ("Development:", "C# / .NET, React + TypeScript, Python, Rust"),
         ],
         "skills_vi": [
             ("Container &amp; OS:", "Docker, Docker Compose, Linux (Ubuntu), WSL, Bash"),
-            ("CI/CD:", "Gitea (Git tự vận hành), pipeline Gitea Actions, cổng kiểm thử tự động, quét bảo mật, "
-                      "phát hành theo version &amp; rollback"),
-            ("Mạng &amp; edge:", "Nginx, Traefik, Pangolin (reverse proxy / truy cập từ xa), DNS &amp; TLS, "
-                                "VPN WireGuard (wg-easy)"),
-            ("Giám sát:", "Prometheus, Grafana, Alertmanager, node-exporter; health check &amp; thiết kế cảnh báo"),
-            ("Vận hành dữ liệu:", "SQL Server trên Docker, backup định kỳ &amp; diễn tập restore, "
-                                  "tự động hóa dọn dung lượng"),
-            ("Phát triển:", "C# / .NET, React + TypeScript, tự động hóa Python + Gemini API"),
+            ("CI/CD:", "Git, tự động hóa pipeline, cổng kiểm thử, quét bảo mật, phát hành theo version &amp; rollback"),
+            ("Mạng:", "Nginx, reverse proxy, DNS &amp; TLS, VPN, truy cập bảo vệ bằng SSO"),
+            ("Giám sát:", "Prometheus, Grafana, cảnh báo, health check"),
+            ("Vận hành dữ liệu:", "Backup &amp; restore SQL Server / PostgreSQL / ClickHouse, tự động hóa bảo trì"),
+            ("Phát triển:", "C# / .NET, React + TypeScript, Python, Rust"),
         ],
         "exp_en": [
-            "Built and operate the delivery platform for multiple internal systems across <b>three environments "
-            "(dev / UAT / production)</b>: Dockerized services, self-hosted registry, CI/CD pipelines in Gitea "
-            "Actions (build → test gates → security scan → deploy) with rollback-safe releases.",
-            "Run the edge &amp; access layer: reverse proxy (Traefik / Pangolin) with per-application routing "
-            "and TLS; SSO-protected internal tools; WireGuard VPN access for branches (region mapping).",
-            "Set up observability &amp; reliability: Prometheus + Grafana dashboards and alerts (service health, "
-            "data blobs, backups, disk), health checks, scheduled backups with restore drills, incident "
-            "handling and capacity cleanup.",
-            "Operate SQL Server on Docker for several systems: backup/restore, migration runs and monitoring "
-            "of long-running import jobs.",
-            "Also develop on the stack (.NET / React) and automate workflows with Python + Gemini API; led the "
-            "Base.vn rollout at HCM head office and Khanh Hoa branch.",
+            "Built and operated the delivery platform for several systems across dev / UAT / production: "
+            "Dockerized services and CI/CD with build, test, scan and deploy stages.",
+            "Ran the access layer: reverse proxy with TLS, SSO-protected tools and VPN access.",
+            "Set up monitoring and alerting (Prometheus, Grafana), health checks with auto-restart, "
+            "scheduled backups with restore drills and capacity cleanup.",
+            "Cut CI test time by ~65% via sharded parallel jobs; automated maintenance with Python / Bash.",
         ],
         "exp_vi": [
-            "Xây dựng và vận hành nền tảng phát hành cho nhiều hệ thống nội bộ trên <b>3 môi trường "
-            "(dev / UAT / production)</b>: dịch vụ đóng gói Docker, registry tự vận hành, pipeline CI/CD "
-            "trong Gitea Actions (build → kiểm thử → quét bảo mật → deploy) với phát hành có rollback.",
-            "Vận hành tầng edge &amp; truy cập: reverse proxy (Traefik / Pangolin) định tuyến theo ứng dụng "
-            "và TLS; công cụ nội bộ bảo vệ bằng SSO; VPN WireGuard cho chi nhánh (ánh xạ theo vùng).",
-            "Thiết lập giám sát &amp; độ tin cậy: dashboard và cảnh báo Prometheus + Grafana (sức khỏe dịch vụ, "
-            "file dữ liệu, backup, dung lượng), health check, backup định kỳ kèm diễn tập restore, xử lý sự cố "
-            "và dọn dung lượng.",
-            "Vận hành SQL Server trên Docker cho nhiều hệ thống: backup/restore, chạy migration và theo dõi "
-            "các job nhập dữ liệu dài.",
-            "Đồng thời phát triển trên stack (.NET / React) và tự động hóa bằng Python + Gemini API; chủ trì "
-            "triển khai Base.vn tại hội sở HCM và chi nhánh Khánh Hòa.",
+            "Xây dựng và vận hành nền tảng phát hành cho nhiều hệ thống trên dev / UAT / production: dịch vụ "
+            "Docker và CI/CD gồm các bước build, test, quét, deploy.",
+            "Vận hành tầng truy cập: reverse proxy với TLS, công cụ bảo vệ bằng SSO và VPN.",
+            "Thiết lập giám sát và cảnh báo (Prometheus, Grafana), health check tự restart, backup định kỳ "
+            "kèm diễn tập restore và dọn dung lượng.",
+            "Giảm ~65% thời gian test CI nhờ chia shard song song; tự động hóa bảo trì bằng Python / Bash.",
         ],
         "projects_en": [
-            ("Delivery platform &amp; environments",
-             "Docker · Gitea Actions · Traefik / Pangolin · Linux",
-             ["Three-environment release pipeline for multiple systems: build, automated test gates, security "
-              "scans, versioned images and rollback.",
-              "Self-hosted registry and configuration/secrets management across environments."]),
-            ("Observability, backups &amp; VPN",
-             "Prometheus · Grafana · Alertmanager · WireGuard",
-             ["Dashboards and alerts for service health, blob integrity, backups and disk capacity.",
-              "Scheduled SQL Server backups with restore drills; WireGuard VPN (wg-easy) for branch access "
-              "with region mapping."]),
-            ("Automation &amp; maintenance tooling",
-             "Python · Bash · WSL",
-             ["Scheduled cleanup and maintenance jobs; Python + Gemini API automations for internal workflows."]),
+            ("Delivery platform &amp; environments", "Docker · CI/CD · Reverse proxy · Linux",
+             ["Multi-environment release pipeline with test gates, versioned images and rollback."]),
+            ("Observability &amp; backups", "Prometheus · Grafana · Bash",
+             ["Dashboards, alerts, scheduled backups and restore drills."]),
+            ("Maintenance automation", "Python · Bash · WSL",
+             ["Scheduled cleanup and maintenance jobs for internal platforms."]),
         ],
         "projects_vi": [
-            ("Nền tảng phát hành &amp; môi trường",
-             "Docker · Gitea Actions · Traefik / Pangolin · Linux",
-             ["Pipeline phát hành 3 môi trường cho nhiều hệ thống: build, cổng kiểm thử tự động, quét bảo mật, "
-              "image theo version và rollback.",
-              "Registry tự vận hành và quản lý cấu hình/secrets giữa các môi trường."]),
-            ("Giám sát, backup &amp; VPN",
-             "Prometheus · Grafana · Alertmanager · WireGuard",
-             ["Dashboard và cảnh báo cho sức khỏe dịch vụ, toàn vẹn file dữ liệu, backup và dung lượng đĩa.",
-              "Backup SQL Server định kỳ kèm diễn tập restore; VPN WireGuard (wg-easy) cho chi nhánh, "
-              "ánh xạ theo vùng."]),
-            ("Công cụ tự động hóa &amp; bảo trì",
-             "Python · Bash · WSL",
-             ["Job dọn dẹp &amp; bảo trì định kỳ; tự động hóa quy trình nội bộ bằng Python + Gemini API."]),
+            ("Nền tảng phát hành &amp; môi trường", "Docker · CI/CD · Reverse proxy · Linux",
+             ["Pipeline phát hành đa môi trường với cổng kiểm thử, image theo version và rollback."]),
+            ("Giám sát &amp; backup", "Prometheus · Grafana · Bash",
+             ["Dashboard, cảnh báo, backup định kỳ và diễn tập restore."]),
+            ("Tự động hóa bảo trì", "Python · Bash · WSL",
+             ["Job dọn dẹp và bảo trì định kỳ cho nền tảng nội bộ."]),
         ],
     },
     {
@@ -442,85 +327,65 @@ ROLES = [
         "title_vi": "Kỹ sư AI &amp; Tự động hóa — Python / LLM API",
         "badge_vi": "KỸ SƯ AI &amp; TỰ ĐỘNG HÓA",
         "summary_en": (
-            "AI graduate (Van Lang University) and hands-on automation engineer with 1.5 years at Hoan Cau "
-            "Group. Builds Python workflows that combine LLM APIs (Gemini) with data processing to automate "
-            "internal operations — and ships the surrounding software (.NET / React) and infrastructure "
-            "(Docker, CI/CD, monitoring). Strong at turning messy manual processes into reliable, monitored "
-            "pipelines."
+            "AI graduate (B.Sc. Artificial Intelligence) and automation engineer with 1.5 years of "
+            "experience. Builds Python workflows that combine LLM APIs with data processing to automate "
+            "internal operations, and ships the surrounding software (.NET / React) and infrastructure "
+            "(Docker, CI/CD, monitoring)."
         ),
         "summary_vi": (
-            "Tốt nghiệp ngành Trí tuệ nhân tạo (Đại học Văn Lang), kỹ sư tự động hóa với 1,5 năm tại Tập đoàn "
-            "Hoàn Cầu. Xây dựng quy trình Python kết hợp LLM API (Gemini) với xử lý dữ liệu để tự động hóa "
-            "vận hành nội bộ — đồng thời phát triển phần mềm xung quanh (.NET / React) và hạ tầng (Docker, "
-            "CI/CD, giám sát). Mạnh về biến quy trình thủ công phức tạp thành pipeline ổn định, có giám sát."
+            "Tốt nghiệp ngành Trí tuệ nhân tạo, kỹ sư tự động hóa với 1,5 năm kinh nghiệm. Xây dựng quy "
+            "trình Python kết hợp LLM API với xử lý dữ liệu để tự động hóa vận hành nội bộ, đồng thời phát "
+            "triển phần mềm xung quanh (.NET / React) và hạ tầng (Docker, CI/CD, giám sát)."
         ),
         "skills_en": [
-            ("AI &amp; LLM:", "Gemini API integration, prompt &amp; workflow design, automation pipelines; "
-                             "AI/ML fundamentals (B.Sc. Artificial Intelligence)"),
-            ("Python:", "Automation scripts, data processing (Pandas, NumPy), REST API integration, WSL"),
-            ("Data:", "SQL (T-SQL / PostgreSQL), Excel / MISA data handling, validation pipelines"),
-            ("Software:", "C# / .NET (ABP Framework), React + TypeScript, REST APIs"),
-            ("Operations:", "Docker, Linux / WSL, CI/CD (Gitea Actions), Prometheus / Grafana monitoring, backups"),
+            ("AI &amp; LLM:", "LLM API integration, prompt &amp; workflow design, automation pipelines; AI/ML fundamentals"),
+            ("Python:", "Automation scripts, data processing (Pandas, NumPy), REST API integration"),
+            ("Data:", "SQL, PostgreSQL, ClickHouse, Excel data handling, validation pipelines"),
+            ("Software:", "C# / .NET, React + TypeScript, Rust, REST APIs"),
+            ("Operations:", "Docker, Linux / WSL, CI/CD, monitoring, backups"),
         ],
         "skills_vi": [
-            ("AI &amp; LLM:", "Tích hợp Gemini API, thiết kế prompt &amp; workflow, pipeline tự động hóa; "
-                             "nền tảng AI/ML (Cử nhân Trí tuệ nhân tạo)"),
-            ("Python:", "Script tự động hóa, xử lý dữ liệu (Pandas, NumPy), tích hợp REST API, WSL"),
-            ("Dữ liệu:", "SQL (T-SQL / PostgreSQL), xử lý dữ liệu Excel / MISA, pipeline kiểm tra dữ liệu"),
-            ("Phần mềm:", "C# / .NET (ABP Framework), React + TypeScript, REST API"),
-            ("Vận hành:", "Docker, Linux / WSL, CI/CD (Gitea Actions), giám sát Prometheus / Grafana, backup"),
+            ("AI &amp; LLM:", "Tích hợp LLM API, thiết kế prompt &amp; workflow, pipeline tự động hóa; nền tảng AI/ML"),
+            ("Python:", "Script tự động hóa, xử lý dữ liệu (Pandas, NumPy), tích hợp REST API"),
+            ("Dữ liệu:", "SQL, PostgreSQL, ClickHouse, xử lý dữ liệu Excel, pipeline kiểm tra dữ liệu"),
+            ("Phần mềm:", "C# / .NET, React + TypeScript, Rust, REST API"),
+            ("Vận hành:", "Docker, Linux / WSL, CI/CD, giám sát, backup"),
         ],
         "exp_en": [
-            "Built Python (WSL) + <b>Gemini API</b> automation pipelines for internal data extraction and "
-            "processing, removing repetitive manual work for management teams.",
-            "Automated executive milestone tracking: summarised project progress and produced reporting "
-            "inputs used directly with the Board of Directors.",
-            "Led the <b>Base.vn</b> digital-transformation rollout at the HCM head office and Khanh Hoa branch, "
-            "standardising workflows and communication.",
-            "Engineered the data pipeline of a multi-company reporting platform: MISA ledger import, parsing "
-            "and validation across <b>44 companies</b>.",
-            "Delivered the surrounding software end-to-end: .NET APIs, React UIs, a central SSO service, and "
-            "Docker / CI-CD infrastructure with monitoring and backups.",
+            "Built Python + LLM API automation pipelines for data extraction and processing, removing "
+            "repetitive manual work for management teams.",
+            "Added AI-generated narrative analysis to a data portal, with rule-based fallback when the "
+            "model is unavailable.",
+            "Engineered data pipelines (Bronze / Silver / Gold) with a Rust parsing core: import, "
+            "validation and per-row error reporting.",
+            "Delivered the surrounding software and infrastructure: .NET APIs, React UIs, SSO, Docker, "
+            "CI/CD and monitoring.",
         ],
         "exp_vi": [
-            "Xây dựng pipeline tự động hóa Python (WSL) + <b>Gemini API</b> để trích xuất và xử lý dữ liệu "
-            "nội bộ, loại bỏ việc thủ công lặp lại cho bộ phận quản lý.",
-            "Tự động hóa theo dõi mốc tiến độ: tổng hợp tiến độ dự án và tạo đầu vào báo cáo dùng trực tiếp "
-            "với Ban Tổng Giám đốc.",
-            "Chủ trì triển khai chuyển đổi số <b>Base.vn</b> tại hội sở HCM và chi nhánh Khánh Hòa, chuẩn hóa "
-            "quy trình và truyền thông nội bộ.",
-            "Xây dựng pipeline dữ liệu của nền tảng báo cáo đa công ty: nhập, phân tích và kiểm tra sổ MISA "
-            "cho <b>44 công ty</b>.",
-            "Phát triển trọn gói phần mềm xung quanh: API .NET, giao diện React, dịch vụ SSO tập trung và hạ "
-            "tầng Docker / CI-CD kèm giám sát, backup.",
+            "Xây dựng pipeline tự động hóa Python + LLM API để trích xuất và xử lý dữ liệu, loại bỏ việc "
+            "thủ công lặp lại cho bộ phận quản lý.",
+            "Bổ sung phân tích văn bản do AI sinh vào portal dữ liệu, có phương án dự phòng theo quy tắc "
+            "khi mô hình không khả dụng.",
+            "Xây dựng pipeline dữ liệu (Bronze / Silver / Gold) với lõi Rust: nhập, kiểm tra và báo lỗi "
+            "theo từng dòng.",
+            "Phát triển phần mềm và hạ tầng xung quanh: API .NET, giao diện React, SSO, Docker, CI/CD và "
+            "giám sát.",
         ],
         "projects_en": [
-            ("LLM automation pipelines",
-             "Python · Gemini API · WSL",
-             ["Automated internal data extraction and processing workflows that replace repetitive manual "
-              "steps for management teams.",
-              "Runs on Linux/WSL alongside the group's internal platforms, with logging for follow-up."]),
-            ("Reporting data pipeline (MISA import)",
-             ".NET · SQL Server · Excel / MISA data",
-             ["Ledger import, parsing and validation pipeline covering 44 companies with per-row error "
-              "reporting."]),
-            ("Platform engineering (context)",
-             ".NET · React · Docker · CI/CD",
-             ["Central OIDC SSO for 5 internal applications; reporting and project-data platforms shipped "
-              "to production."]),
+            ("LLM automation pipelines", "Python · LLM APIs · WSL",
+             ["Automated data extraction and processing workflows for management teams."]),
+            ("Data pipeline &amp; lakehouse", "Python · Rust · ClickHouse · PostgreSQL",
+             ["Import, validation and analytics pipeline with AI narrative and automated tests."]),
+            ("Platform engineering", ".NET · React · Docker · CI/CD",
+             ["Authentication, reporting and project-data platforms shipped to production."]),
         ],
         "projects_vi": [
-            ("Pipeline tự động hóa với LLM",
-             "Python · Gemini API · WSL",
-             ["Tự động hóa trích xuất &amp; xử lý dữ liệu nội bộ, thay thế các bước thủ công lặp lại cho "
-              "bộ phận quản lý.",
-              "Chạy trên Linux/WSL song song với các nền tảng nội bộ, có ghi log để theo dõi."]),
-            ("Pipeline dữ liệu báo cáo (nhập sổ MISA)",
-             ".NET · SQL Server · dữ liệu Excel / MISA",
-             ["Pipeline nhập, phân tích và kiểm tra sổ cho 44 công ty, báo lỗi theo từng dòng."]),
-            ("Kỹ thuật nền tảng (bối cảnh)",
-             ".NET · React · Docker · CI/CD",
-             ["SSO OIDC tập trung cho 5 ứng dụng nội bộ; nền tảng báo cáo và dữ liệu dự án đã lên production."]),
+            ("Pipeline tự động hóa với LLM", "Python · LLM API · WSL",
+             ["Tự động hóa trích xuất và xử lý dữ liệu cho bộ phận quản lý."]),
+            ("Pipeline dữ liệu &amp; lakehouse", "Python · Rust · ClickHouse · PostgreSQL",
+             ["Pipeline nhập, kiểm tra, phân tích kèm nhận định AI và kiểm thử tự động."]),
+            ("Kỹ thuật nền tảng", ".NET · React · Docker · CI/CD",
+             ["Nền tảng xác thực, báo cáo và dữ liệu dự án đã lên production."]),
         ],
     },
 ]

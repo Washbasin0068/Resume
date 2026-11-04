@@ -35,46 +35,43 @@
     <div class="contact">Ho Chi Minh City, Vietnam &bull; +84 347 299 934 &bull; vuhuudo2004@gmail.com &bull; github.com/vuhuudo &bull; linkedin.com/in/vũ-hữu-đô-b899bb360</div>
   </header>
   <h2>Summary</h2>
-  <p>Software Engineer with 1.5 years of hands-on experience delivering and operating enterprise platforms at Hoan Cau Group. Works across the stack: C#/.NET (ABP Framework) APIs, React + TypeScript front-ends, SQL Server, and the Docker/Linux infrastructure with CI/CD and monitoring. Built a central OpenID Connect sign-on service for five internal applications and shipped multi-company reporting and project-data platforms to production. AI graduate; automates workflows with Python + Gemini API.</p>
+  <p>Software Engineer with 1.5 years of experience building and operating enterprise web platforms. Full-stack across C#/.NET (ABP Framework), React + TypeScript, SQL Server and Docker/Linux with CI/CD. Delivered reporting, authentication (OpenID Connect) and data platforms to production. AI graduate; automates workflows with Python.</p>
   <h2>Core Skills</h2>
-  <div class="skills">    <p><b>Languages:</b> C#, TypeScript / JavaScript, Python, SQL (T-SQL), Bash</p>
-    <p><b>Frameworks:</b> .NET (ASP.NET Core), ABP Framework, React, Entity Framework Core, REST APIs, Vite</p>
-    <p><b>Auth &amp; Data:</b> OpenID Connect / OAuth2 (OpenIddict), RBAC, SQL Server, PostgreSQL, Pandas / NumPy</p>
-    <p><b>Infrastructure:</b> Docker, Docker Compose, Linux, WSL, Git / Gitea, CI/CD (Gitea Actions), Nginx, Traefik / Pangolin, Prometheus &amp; Grafana, backup &amp; restore</p>
-    <p><b>Practices:</b> Automated testing (xUnit, Vitest, Playwright), code review, technical documentation, rollback-safe releases</p>
-    <p><b>AI &amp; Automation:</b> Gemini API integration, Python automation, workflow optimisation</p></div>
+  <div class="skills">    <p><b>Languages:</b> C#, TypeScript / JavaScript, Python, Rust, SQL, Bash</p>
+    <p><b>Frameworks:</b> .NET (ASP.NET Core), ABP Framework, React, Svelte, Entity Framework Core, REST APIs</p>
+    <p><b>Auth &amp; Data:</b> OpenID Connect / OAuth2, RBAC, SQL Server, PostgreSQL, ClickHouse</p>
+    <p><b>DevOps:</b> Docker, Linux, Git, CI/CD, reverse proxy, monitoring &amp; alerting, backup / restore</p>
+    <p><b>Quality:</b> Automated testing (xUnit, Vitest, Playwright), code review, documentation</p>
+    <p><b>AI &amp; Automation:</b> Python automation, LLM API integration</p></div>
   <h2>Professional Experience</h2>
   <div>
     <p class="role">Web &amp; Database Developer — Hoan Cau Group</p>
     <p class="meta">June 2025 – November 2026 · 1 yr 5 mos · Ho Chi Minh City, Vietnam</p>
-    <ul>      <li>Delivered internal platforms end-to-end — .NET (ABP Framework) APIs, React + TypeScript UIs and SQL Server — including a <b>multi-company financial reporting platform</b> (44 companies: MISA ledger import &amp; validation, approval workflows, dashboards) and a <b>construction project data platform</b>, both in production.</li>
-      <li>Built a central <b>OpenID Connect (OpenIddict)</b> sign-on service for <b>5 internal applications</b>: SPA flows with PKCE, client-credentials service scopes, role-based access, per-application catalogue &amp; policies, session/location tracking, audit logs and an admin console.</li>
-      <li>Operate the full delivery pipeline across <b>three environments (dev / UAT / production)</b>: Docker &amp; Linux, CI/CD with Gitea Actions (build, automated test gates, security scans), reverse proxy (Traefik / Pangolin), Prometheus/Grafana alerting, scheduled backups and rollback-safe releases.</li>
-      <li>Automate internal data workflows with Python (WSL) + Gemini API, removing repetitive manual processing for management teams.</li>
-      <li>Led the Base.vn rollout at the <b>HCM head office and Khanh Hoa branch</b>; tracked project milestones and reported progress directly to the Board of Directors.</li></ul>
+    <ul>      <li>Built internal platforms end-to-end: .NET (ABP) APIs, React + TypeScript UIs and SQL Server, including an enterprise reporting platform and a project-data platform, both in production.</li>
+      <li>Implemented central single sign-on (OpenID Connect / OAuth2): PKCE flows, service-to-service access, role-based permissions, session management and audit logging.</li>
+      <li>Built a data lakehouse (ClickHouse, PostgreSQL, S3) with a Python API, Svelte UI and a Rust core for file parsing and export; sharded CI cut test time by ~65%.</li>
+      <li>Operated dev / UAT / production on Docker &amp; Linux: CI/CD with test gates, monitoring, alerting, backups and rollback-safe releases.</li></ul>
   </div>
   <h2>Selected Projects</h2>
     <div class="proj">
-    <p class="name">Multi-company financial &amp; fund reporting platform</p>
+    <p class="name">Enterprise reporting platform</p>
     <p class="tech">ABP / .NET · React · TypeScript · SQL Server · Docker</p>
     <ul>
-      <li>Period-based reporting for 44 companies: MISA ledger import &amp; validation, approval workflows, dashboards for accounting teams.</li>
-      <li>Three-environment delivery with automated tests, health checks, monitoring and backup/restore.</li>
+      <li>Multi-entity period reporting: data import &amp; validation, approval workflow, dashboards.</li>
     </ul>
   </div>
   <div class="proj">
-    <p class="name">Central SSO &amp; identity service</p>
-    <p class="tech">ABP / .NET · OpenIddict / OIDC · SQL Server · Docker</p>
+    <p class="name">Central authentication (SSO) service</p>
+    <p class="tech">ABP / .NET · OpenID Connect · OAuth2 · SQL Server</p>
     <ul>
-      <li>Single sign-on and application catalogue for 5 internal applications; admin console for users, roles, sessions and audit history.</li>
-      <li>Service-to-service APIs (user lookup, application members) for access verification and sync.</li>
+      <li>Single sign-on, RBAC, session and audit management for internal applications.</li>
     </ul>
   </div>
   <div class="proj">
-    <p class="name">Construction project data platform</p>
-    <p class="tech">ABP / .NET · React · TypeScript · Docker</p>
+    <p class="name">Data lakehouse &amp; analytics</p>
+    <p class="tech">Python · Rust · ClickHouse · PostgreSQL · Svelte</p>
     <ul>
-      <li>Investor-side project data: coordination workspace, member invitations and master-data synchronisation; released to production.</li>
+      <li>Medallion-style pipeline with REST APIs, dashboards and automated tests.</li>
     </ul>
   </div>
   <h2>Education &amp; Languages</h2>

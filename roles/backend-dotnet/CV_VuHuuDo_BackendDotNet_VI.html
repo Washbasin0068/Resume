@@ -76,7 +76,7 @@
     </div>
     <div class="sidebar-section">
       <h2>TÓM TẮT</h2>
-      <p class="sidebar-text">Lập trình viên thiên về backend với 1,5 năm xây dựng dịch vụ .NET tại Tập đoàn Hoàn Cầu. Thiết kế và phát triển API với ABP Framework / ASP.NET Core, Entity Framework Core và SQL Server — gồm các pipeline nhập &amp; kiểm tra dữ liệu nặng và quy trình duyệt đa công ty. Mạnh về xác thực &amp; phân quyền (OpenID Connect / OpenIddict, OAuth2 client credentials, RBAC) và tích hợp hệ thống; vận hành sản phẩm với Docker, CI/CD và giám sát.</p>
+      <p class="sidebar-text">Lập trình viên backend với 1,5 năm xây dựng dịch vụ .NET. Thiết kế API với ABP Framework / ASP.NET Core, EF Core và SQL Server, gồm pipeline nhập &amp; kiểm tra dữ liệu và quy trình duyệt. Mạnh về xác thực &amp; phân quyền (OpenID Connect, OAuth2, RBAC) và tích hợp hệ thống.</p>
     </div>
     <div class="sidebar-section">
       <h2>HỌC VẤN</h2>
@@ -96,47 +96,44 @@
           <span class="company-name">TẬP ĐOÀN HOÀN CẦU</span>
         </div>
         <div class="job-date">06/2025 - 11/2026 (1 năm 5 tháng) · TP. Hồ Chí Minh</div>
-        <ul class="bullet-list">      <li>Thiết kế và phát triển API .NET cho hai nền tảng production: <b>nền tảng báo cáo tài chính đa công ty</b> (44 công ty — nhập &amp; kiểm tra sổ MISA, quy trình duyệt) và <b>nền tảng dữ liệu dự án xây dựng</b> (điều phối, mời thành viên, đồng bộ Master Data).</li>
-      <li>Xây dựng tầng domain, dữ liệu và API: module ABP Framework, schema &amp; migration EF Core + SQL Server, REST endpoint cho SPA React và các hệ thống khác.</li>
-      <li>Triển khai xác thực &amp; phân quyền: dịch vụ <b>OIDC / OpenIddict</b> tập trung (authorization-code + PKCE, client-credentials cho service), phân quyền theo vai trò, chính sách theo ứng dụng, theo dõi phiên/kiểm toán và API quản trị.</li>
-      <li>Xây dựng tích hợp: API service-to-service (tra cứu người dùng, thành viên ứng dụng) và đồng bộ Master Data giữa các hệ thống nội bộ.</li>
-      <li>Quản lý chất lượng &amp; vận hành: kiểm thử xUnit trong CI, triển khai Docker trên dev / UAT / production, giám sát và backup; tự động hóa bằng Python + Gemini API.</li></ul>
+        <ul class="bullet-list">      <li>Thiết kế và phát triển API .NET cho các nền tảng production: báo cáo doanh nghiệp (nhập &amp; kiểm tra dữ liệu, quy trình duyệt) và quản lý dữ liệu dự án.</li>
+      <li>Xây dựng tầng domain, dữ liệu và API: module ABP, schema &amp; migration EF Core + SQL Server, REST endpoint cho SPA và hệ thống khác.</li>
+      <li>Triển khai xác thực tập trung: OpenID Connect / OAuth2, PKCE, client credentials, phân quyền theo vai trò, theo dõi phiên và kiểm toán.</li>
+      <li>Xây dựng tích hợp service-to-service và backend data lakehouse (Python, ClickHouse, lõi Rust); đưa test xUnit và integration test vào CI.</li></ul>
       </div>
     </div>
     <div class="main-section">
       <h2>DỰ ÁN TIÊU BIỂU</h2>
             <div class="project-block">
-        <div class="project-title">Nền tảng báo cáo tài chính &amp; quỹ đa công ty</div>
-        <div class="project-tech">ABP / .NET · EF Core · SQL Server · Docker</div>
+        <div class="project-title">Nền tảng báo cáo doanh nghiệp</div>
+        <div class="project-tech">ABP / .NET · EF Core · SQL Server</div>
         <ul class="bullet-list">
-        <li>Pipeline nhập &amp; kiểm tra sổ MISA (44 công ty), quy trình duyệt và API báo cáo cho SPA React.</li>
-        <li>Migration EF Core, mô hình dữ liệu đa công ty và quản lý kỳ báo cáo.</li>
+        <li>Pipeline nhập &amp; kiểm tra dữ liệu, quy trình duyệt và API báo cáo.</li>
         </ul>
       </div>
       <div class="project-block">
-        <div class="project-title">Dịch vụ định danh &amp; SSO tập trung</div>
-        <div class="project-tech">ABP / .NET · OpenIddict / OIDC · SQL Server</div>
+        <div class="project-title">Dịch vụ xác thực tập trung (SSO)</div>
+        <div class="project-tech">ABP / .NET · OpenID Connect · SQL Server</div>
         <ul class="bullet-list">
-        <li>Luồng OIDC (authorization-code + PKCE, client credentials), RBAC, chính sách theo ứng dụng, theo dõi phiên &amp; kiểm toán.</li>
-        <li>API service-to-service: tra cứu người dùng và thành viên ứng dụng cho hệ thống khác.</li>
+        <li>Luồng OIDC, RBAC, theo dõi phiên &amp; kiểm toán, API tra cứu người dùng cho hệ thống khác.</li>
         </ul>
       </div>
       <div class="project-block">
-        <div class="project-title">Nền tảng dữ liệu dự án xây dựng</div>
+        <div class="project-title">Nền tảng dữ liệu dự án</div>
         <div class="project-tech">ABP / .NET · EF Core · SQL Server · Docker</div>
         <ul class="bullet-list">
-        <li>API cho điều phối dự án, mời thành viên và đồng bộ Master Data; đã phát hành production.</li>
+        <li>API điều phối, mời thành viên và đồng bộ dữ liệu danh mục.</li>
         </ul>
       </div>
     </div>
     <div class="main-section">
       <h2>KỸ NĂNG CHUYÊN MÔN</h2>
-      <div class="skills-grid">        <div class="skill-row"><div class="skill-category">Backend:</div><div class="skill-details">C#, .NET (ASP.NET Core), ABP Framework, Entity Framework Core, REST API, pipeline nhập &amp; kiểm tra dữ liệu</div></div>
-        <div class="skill-row"><div class="skill-category">Xác thực &amp; Bảo mật:</div><div class="skill-details">OpenID Connect / OAuth2 (OpenIddict), authorization-code + PKCE, client credentials, RBAC, nhật ký kiểm toán</div></div>
-        <div class="skill-row"><div class="skill-category">Dữ liệu:</div><div class="skill-details">SQL Server (T-SQL, thiết kế schema, EF Core migrations), PostgreSQL, kiểm tra dữ liệu, Python (Pandas, NumPy)</div></div>
-        <div class="skill-row"><div class="skill-category">Tích hợp:</div><div class="skill-details">API service-to-service, đồng bộ Master Data, webhook, API tra cứu người dùng</div></div>
-        <div class="skill-row"><div class="skill-category">Chất lượng &amp; Vận hành:</div><div class="skill-details">xUnit, cổng kiểm thử &amp; quét bảo mật trong CI, Docker, Linux, Gitea Actions CI/CD, Prometheus / Grafana</div></div>
-        <div class="skill-row"><div class="skill-category">Bổ trợ:</div><div class="skill-details">React + TypeScript, tự động hóa Python + Gemini API</div></div></div>
+      <div class="skills-grid">        <div class="skill-row"><div class="skill-category">Backend:</div><div class="skill-details">C#, .NET (ASP.NET Core), ABP Framework, Entity Framework Core, REST API</div></div>
+        <div class="skill-row"><div class="skill-category">Xác thực &amp; Bảo mật:</div><div class="skill-details">OpenID Connect / OAuth2, PKCE, client credentials, RBAC, nhật ký kiểm toán</div></div>
+        <div class="skill-row"><div class="skill-category">Dữ liệu:</div><div class="skill-details">SQL Server (T-SQL, migration), PostgreSQL, ClickHouse, kiểm tra dữ liệu</div></div>
+        <div class="skill-row"><div class="skill-category">Tích hợp:</div><div class="skill-details">API service-to-service, đồng bộ dữ liệu, webhook</div></div>
+        <div class="skill-row"><div class="skill-category">Chất lượng &amp; Vận hành:</div><div class="skill-details">xUnit, cổng kiểm thử CI, Docker, Linux, giám sát</div></div>
+        <div class="skill-row"><div class="skill-category">Bổ trợ:</div><div class="skill-details">React + TypeScript, Python, Rust</div></div></div>
     </div>
   </div>
 </div>

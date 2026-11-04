@@ -76,7 +76,7 @@
     </div>
     <div class="sidebar-section">
       <h2>TÓM TẮT</h2>
-      <p class="sidebar-text">Kỹ sư thiên về DevOps với 1,5 năm xây dựng và vận hành nền tảng nội bộ tại Tập đoàn Hoàn Cầu. Vận hành nhiều hệ thống trên 3 môi trường (dev / UAT / production) với Docker &amp; Linux: CI/CD Gitea Actions, reverse proxy &amp; TLS, giám sát &amp; cảnh báo (Prometheus / Grafana), backup định kỳ và phát hành có rollback. Đồng thời phát triển trên chính stack đó (.NET / React) nên pipeline và công cụ sát nhu cầu thực tế của đội.</p>
+      <p class="sidebar-text">Kỹ sư thiên về DevOps với 1,5 năm vận hành nền tảng nội bộ trên dev / UAT / production với Docker &amp; Linux: CI/CD, reverse proxy &amp; TLS, giám sát và cảnh báo, backup và phát hành có rollback. Đồng thời phát triển trên stack (.NET / React / Python).</p>
     </div>
     <div class="sidebar-section">
       <h2>HỌC VẤN</h2>
@@ -96,47 +96,44 @@
           <span class="company-name">TẬP ĐOÀN HOÀN CẦU</span>
         </div>
         <div class="job-date">06/2025 - 11/2026 (1 năm 5 tháng) · TP. Hồ Chí Minh</div>
-        <ul class="bullet-list">      <li>Xây dựng và vận hành nền tảng phát hành cho nhiều hệ thống nội bộ trên <b>3 môi trường (dev / UAT / production)</b>: dịch vụ đóng gói Docker, registry tự vận hành, pipeline CI/CD trong Gitea Actions (build → kiểm thử → quét bảo mật → deploy) với phát hành có rollback.</li>
-      <li>Vận hành tầng edge &amp; truy cập: reverse proxy (Traefik / Pangolin) định tuyến theo ứng dụng và TLS; công cụ nội bộ bảo vệ bằng SSO; VPN WireGuard cho chi nhánh (ánh xạ theo vùng).</li>
-      <li>Thiết lập giám sát &amp; độ tin cậy: dashboard và cảnh báo Prometheus + Grafana (sức khỏe dịch vụ, file dữ liệu, backup, dung lượng), health check, backup định kỳ kèm diễn tập restore, xử lý sự cố và dọn dung lượng.</li>
-      <li>Vận hành SQL Server trên Docker cho nhiều hệ thống: backup/restore, chạy migration và theo dõi các job nhập dữ liệu dài.</li>
-      <li>Đồng thời phát triển trên stack (.NET / React) và tự động hóa bằng Python + Gemini API; chủ trì triển khai Base.vn tại hội sở HCM và chi nhánh Khánh Hòa.</li></ul>
+        <ul class="bullet-list">      <li>Xây dựng và vận hành nền tảng phát hành cho nhiều hệ thống trên dev / UAT / production: dịch vụ Docker và CI/CD gồm các bước build, test, quét, deploy.</li>
+      <li>Vận hành tầng truy cập: reverse proxy với TLS, công cụ bảo vệ bằng SSO và VPN.</li>
+      <li>Thiết lập giám sát và cảnh báo (Prometheus, Grafana), health check tự restart, backup định kỳ kèm diễn tập restore và dọn dung lượng.</li>
+      <li>Giảm ~65% thời gian test CI nhờ chia shard song song; tự động hóa bảo trì bằng Python / Bash.</li></ul>
       </div>
     </div>
     <div class="main-section">
       <h2>DỰ ÁN TIÊU BIỂU</h2>
             <div class="project-block">
         <div class="project-title">Nền tảng phát hành &amp; môi trường</div>
-        <div class="project-tech">Docker · Gitea Actions · Traefik / Pangolin · Linux</div>
+        <div class="project-tech">Docker · CI/CD · Reverse proxy · Linux</div>
         <ul class="bullet-list">
-        <li>Pipeline phát hành 3 môi trường cho nhiều hệ thống: build, cổng kiểm thử tự động, quét bảo mật, image theo version và rollback.</li>
-        <li>Registry tự vận hành và quản lý cấu hình/secrets giữa các môi trường.</li>
+        <li>Pipeline phát hành đa môi trường với cổng kiểm thử, image theo version và rollback.</li>
         </ul>
       </div>
       <div class="project-block">
-        <div class="project-title">Giám sát, backup &amp; VPN</div>
-        <div class="project-tech">Prometheus · Grafana · Alertmanager · WireGuard</div>
+        <div class="project-title">Giám sát &amp; backup</div>
+        <div class="project-tech">Prometheus · Grafana · Bash</div>
         <ul class="bullet-list">
-        <li>Dashboard và cảnh báo cho sức khỏe dịch vụ, toàn vẹn file dữ liệu, backup và dung lượng đĩa.</li>
-        <li>Backup SQL Server định kỳ kèm diễn tập restore; VPN WireGuard (wg-easy) cho chi nhánh, ánh xạ theo vùng.</li>
+        <li>Dashboard, cảnh báo, backup định kỳ và diễn tập restore.</li>
         </ul>
       </div>
       <div class="project-block">
-        <div class="project-title">Công cụ tự động hóa &amp; bảo trì</div>
+        <div class="project-title">Tự động hóa bảo trì</div>
         <div class="project-tech">Python · Bash · WSL</div>
         <ul class="bullet-list">
-        <li>Job dọn dẹp &amp; bảo trì định kỳ; tự động hóa quy trình nội bộ bằng Python + Gemini API.</li>
+        <li>Job dọn dẹp và bảo trì định kỳ cho nền tảng nội bộ.</li>
         </ul>
       </div>
     </div>
     <div class="main-section">
       <h2>KỸ NĂNG CHUYÊN MÔN</h2>
       <div class="skills-grid">        <div class="skill-row"><div class="skill-category">Container &amp; OS:</div><div class="skill-details">Docker, Docker Compose, Linux (Ubuntu), WSL, Bash</div></div>
-        <div class="skill-row"><div class="skill-category">CI/CD:</div><div class="skill-details">Gitea (Git tự vận hành), pipeline Gitea Actions, cổng kiểm thử tự động, quét bảo mật, phát hành theo version &amp; rollback</div></div>
-        <div class="skill-row"><div class="skill-category">Mạng &amp; edge:</div><div class="skill-details">Nginx, Traefik, Pangolin (reverse proxy / truy cập từ xa), DNS &amp; TLS, VPN WireGuard (wg-easy)</div></div>
-        <div class="skill-row"><div class="skill-category">Giám sát:</div><div class="skill-details">Prometheus, Grafana, Alertmanager, node-exporter; health check &amp; thiết kế cảnh báo</div></div>
-        <div class="skill-row"><div class="skill-category">Vận hành dữ liệu:</div><div class="skill-details">SQL Server trên Docker, backup định kỳ &amp; diễn tập restore, tự động hóa dọn dung lượng</div></div>
-        <div class="skill-row"><div class="skill-category">Phát triển:</div><div class="skill-details">C# / .NET, React + TypeScript, tự động hóa Python + Gemini API</div></div></div>
+        <div class="skill-row"><div class="skill-category">CI/CD:</div><div class="skill-details">Git, tự động hóa pipeline, cổng kiểm thử, quét bảo mật, phát hành theo version &amp; rollback</div></div>
+        <div class="skill-row"><div class="skill-category">Mạng:</div><div class="skill-details">Nginx, reverse proxy, DNS &amp; TLS, VPN, truy cập bảo vệ bằng SSO</div></div>
+        <div class="skill-row"><div class="skill-category">Giám sát:</div><div class="skill-details">Prometheus, Grafana, cảnh báo, health check</div></div>
+        <div class="skill-row"><div class="skill-category">Vận hành dữ liệu:</div><div class="skill-details">Backup &amp; restore SQL Server / PostgreSQL / ClickHouse, tự động hóa bảo trì</div></div>
+        <div class="skill-row"><div class="skill-category">Phát triển:</div><div class="skill-details">C# / .NET, React + TypeScript, Python, Rust</div></div></div>
     </div>
   </div>
 </div>
