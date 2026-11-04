@@ -45,13 +45,16 @@ Nội dung được viết một lần, sinh ra nhiều bản theo **role** và 
 
 ## Build lại PDF
 
-Yêu cầu: **Python 3** + **Chromium** (hoặc Chrome; `pdfinfo` tuỳ chọn để kiểm tra số trang).
+Yêu cầu: **Chromium** (hoặc Chrome) + **Python 3** (khuyến nghị **uv**; `pdfinfo` tuỳ chọn để kiểm tra số trang).
+Script tự tìm Chrome theo thứ tự: biến `CHROME` → chromium/chrome trong PATH → Chromium của Playwright.
 
 ```bash
-./build.sh
+./build.sh          # tự dùng uv nếu có, không thì python3
+uv run build.py     # hoặc chạy trực tiếp (PEP 723, không cần cài thêm gì)
+python3 build.py
 ```
 
-Script sẽ build toàn bộ, kiểm tra từng bản **vừa đúng 1 trang** và báo lỗi nếu không.
+Script build toàn bộ, kiểm tra từng bản **vừa đúng 1 trang** và báo lỗi nếu không.
 
 ## Chỉnh sửa nội dung
 
@@ -64,6 +67,6 @@ trong `content/cvs/__init__.py`.
 
 ## Ghi chú
 
-- Tên các hệ thống nội bộ được viết dạng **mô tả chung** (repo nội bộ); chi tiết kỹ thuật giữ đầy đủ.
+- CV chỉ **mô tả chung** (không nêu tên hệ thống nội bộ, số liệu đơn vị, hạ tầng); repo công khai nên không thêm chi tiết nội bộ.
 - Nên đặt LinkedIn custom URL (vd: `linkedin.com/in/vuhuudo`) rồi cập nhật lại trong `content/profile.py`.
 - Nội dung CV là thông tin cá nhân — vui lòng không dùng lại; mã build (`build.py`, `templates/`) tự do tham khảo.

@@ -1,13 +1,18 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# requires-python = ">=3.10"
+# dependencies = []
+# ///
 """Build toàn bộ CV: HTML (build/out/) -> PDF (cv/).
 
 Nguồn dữ liệu:  content/profile.py  +  content/cvs/*.py
 Mẫu trình bày:  templates/ats.html (1 cột)  và  templates/visual.html (2 cột)
 
-Chạy:  ./build.sh   (hoặc: python3 build.py; đặt CHROME=... nếu Chrome khác chromium)
+Chạy:  ./build.sh   (hoặc: uv run build.py / python3 build.py; đặt CHROME=... nếu cần)
 """
 from __future__ import annotations
 
+import glob
 import os
 import shutil
 import subprocess
@@ -20,7 +25,20 @@ sys.path.insert(0, str(ROOT))
 from content import profile                       # noqa: E402
 from content.cvs import CVS                       # noqa: E402
 
-CHROME = os.environ.get("CHROME", "chromium")
+
+def find_chrome() -> str:
+    """CHROME env -> chromium/chrome trong PATH -> Chromium của Playwright."""
+    if os.environ.get("CHROME"):
+        return os.environ["CHROME"]
+    for name in ("chromium", "chromium-browser", "google-chrome", "chrome"):
+        if shutil.which(name):
+            return name
+    hits = sorted(glob.glob(os.path.expanduser(
+        "~/.cache/ms-playwright/chromium-*/chrome-linux*/chrome")))
+    return hits[-1] if hits else "chromium"
+
+
+CHROME = find_chrome()
 AVATAR = ROOT / "assets" / "avatar.png"
 HTML_OUT = ROOT / "build" / "out"
 PDF_OUT = ROOT / "cv"
