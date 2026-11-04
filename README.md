@@ -62,6 +62,7 @@ Hoặc in thủ công: mở file HTML bằng Chrome/Chromium → Print → Save 
 uv run cvtui.py                                   # mở TUI: nhập role (+ dán JD) -> Ctrl+G
 uv run cvtui.py --role "DevOps Engineer" --jd jd.txt --lang EN,VI   # không TUI
 uv run cvtui.py --check                           # tự kiểm tra
+# tuỳ chỉnh: --name "Nguyen Van A" --title "Senior Backend Engineer" --avatar ~/anh.jpg
 ```
 
 Mỗi lần ra 2 loại, đều 1 trang A4, lưu ở `out/<role>/` (không commit):

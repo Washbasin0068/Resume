@@ -122,21 +122,29 @@ def slug(s):
     return re.sub(r"[^A-Za-z0-9]+", "", s.title()) or "Role"
 
 
-def generate(title, jd="", langs=("EN", "VI"), log=print):
-    """Sinh {lang × (Human, ATS)} PDF 1 trang vào out/<slug>/. Trả về danh sách file."""
-    a, exp, proj, groups = pick(title, jd)
-    d = os.path.join(OUT, slug(title))
+def generate(role, jd="", langs=("EN", "VI"), log=print, name="", title="", avatar=""):
+    """Sinh {lang × (Human, ATS)} PDF 1 trang vào out/<slug>/. Trả về danh sách file.
+    role: để chọn nội dung. title: chức danh hiển thị (mặc định = role). name/avatar: để trống = mặc định."""
+    title = title.strip() or role
+    name = name.strip()
+    avatar = os.path.expanduser(avatar.strip())
+    if avatar and not os.path.isfile(avatar):
+        raise FileNotFoundError(f"Không thấy ảnh: {avatar}")
+    a, exp, proj, groups = pick(role, jd)
+    d = os.path.join(OUT, slug(role))
     os.makedirs(d, exist_ok=True)
-    shutil.copy(B.AVATAR, d)
+    img = "Avatar" + (os.path.splitext(avatar)[1].lower() if avatar else ".png")
+    shutil.copy(avatar or B.AVATAR, os.path.join(d, img))
+    who = slug(name) if name else "VuHuuDo"
     files = []
     for lang in langs:
         for kind, tag in (("human", "Human"), ("ats", "ATS")):
             e, p, g = list(exp), list(proj), [[s, gr, list(i)] for s, gr, i in groups]
             while True:
-                base = f"CV_VuHuuDo_{slug(title)}_{lang}_{tag}"
+                base = f"CV_{who}_{slug(title)}_{lang}_{tag}"
                 hp, pp = os.path.join(d, base + ".html"), os.path.join(d, base + ".pdf")
                 with open(hp, "w", encoding="utf-8") as f:
-                    f.write(B.build_html(make_role(title, a, e, p, g), lang, kind))
+                    f.write(B.build_html(make_role(title, a, e, p, g), lang, kind, name or None).replace('src="Avatar.png"', f'src="{img}"'))
                 pages = B.build_pdf(hp, pp)
                 if pages in ("1", "?") or not trim(e, p, g):
                     break
@@ -145,8 +153,8 @@ def generate(title, jd="", langs=("EN", "VI"), log=print):
     return files
 
 
-def report(title, jd=""):
-    a, exp, proj, groups = pick(title, jd)
+def report(role, jd=""):
+    a, exp, proj, groups = pick(role, jd)
     tags = ", ".join(f"{k}({v})" for k, v in sorted(a["tags"].items(), key=lambda x: -x[1]))
     lines = [f"Hướng role : {tags}", f"Khớp       : {', '.join(a['matched']) or '-'}"]
     lines.append(f"THIẾU (JD đòi, CV chưa có — không tự thêm): {', '.join(a['gaps']) or '-'}")
@@ -174,7 +182,7 @@ def run_tui():
         TITLE = "CV Generator — Vũ Hữu Đô"
         CSS = """
         #left {width: 50%; padding: 0 1;} #right {width: 50%; padding: 0 1;}
-        TextArea {height: 12;} #log {height: 1fr; border: round $accent;}
+        TextArea {height: 8;} #log {height: 1fr; border: round $accent;}
         #ana {height: 10; border: round $primary; padding: 0 1;}
         """
         BINDINGS = [("ctrl+g", "gen", "Tạo CV"), ("ctrl+q", "quit", "Thoát")]
@@ -183,8 +191,14 @@ def run_tui():
             yield Header()
             with Horizontal():
                 with Vertical(id="left"):
-                    yield Static("Role muốn ứng tuyển:")
+                    yield Static("Role muốn ứng tuyển (để chọn nội dung):")
                     yield Input(placeholder="vd: Backend .NET Developer", id="role")
+                    yield Static("Chức danh hiển thị trên CV (trống = như role):")
+                    yield Input(placeholder="vd: Senior Backend Engineer", id="title")
+                    yield Static("Họ tên (trống = mặc định):")
+                    yield Input(placeholder="Vu Huu Do / Vũ Hữu Đô", id="name")
+                    yield Static("Ảnh đại diện — đường dẫn (trống = mặc định):")
+                    yield Input(placeholder="~/Pictures/avatar.jpg", id="avatar")
                     yield Static("Job description (tuỳ chọn, dán vào để khớp từ khóa tốt hơn):")
                     yield TextArea(id="jd")
                     with Horizontal():
@@ -200,6 +214,10 @@ def run_tui():
 
         def vals(self):
             return self.query_one("#role", Input).value.strip(), self.query_one("#jd", TextArea).text
+
+        def opts(self):
+            q = lambda i: self.query_one(i, Input).value.strip()
+            return dict(title=q("#title"), name=q("#name"), avatar=q("#avatar"))
 
         def refresh_ana(self):
             r, j = self.vals()
@@ -222,14 +240,14 @@ def run_tui():
                 log.write("Cần nhập role và chọn ít nhất 1 ngôn ngữ.")
                 return
             log.write(f"Đang tạo CV cho: {r} ...")
-            self.render_job(r, j, langs)
+            self.render_job(r, j, langs, self.opts())
 
         @work(thread=True, exclusive=True)
-        def render_job(self, r, j, langs):
+        def render_job(self, r, j, langs, o):
             log = self.query_one("#log", RichLog)
             w = lambda m: self.call_from_thread(log.write, m)
             try:
-                generate(r, j, langs, w)
+                generate(r, j, langs, w, **o)
                 w(f"Xong. Human = nộp người đọc, ATS = nộp máy đọc. Thư mục: out/{slug(r)}/")
             except Exception as ex:  # noqa: BLE001
                 w(f"Lỗi: {ex}")
@@ -242,6 +260,9 @@ if __name__ == "__main__":
     ap.add_argument("--role")
     ap.add_argument("--jd", help="file chứa job description")
     ap.add_argument("--lang", default="EN,VI")
+    ap.add_argument("--title", default="", help="chức danh hiển thị (mặc định = role)")
+    ap.add_argument("--name", default="", help="họ tên (mặc định theo từng ngôn ngữ)")
+    ap.add_argument("--avatar", default="", help="đường dẫn ảnh đại diện")
     ap.add_argument("--check", action="store_true")
     a = ap.parse_args()
     if a.check:
@@ -249,6 +270,6 @@ if __name__ == "__main__":
     elif a.role:
         jd = open(a.jd, encoding="utf-8").read() if a.jd else ""
         print(report(a.role, jd))
-        generate(a.role, jd, a.lang.upper().split(","))
+        generate(a.role, jd, a.lang.upper().split(","), name=a.name, title=a.title, avatar=a.avatar)
     else:
         run_tui()
