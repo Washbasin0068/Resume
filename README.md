@@ -1,65 +1,69 @@
-# Resume — Vũ Hữu Đô (Vu Huu Do)
+# CV — Vũ Hữu Đô (Vu Huu Do)
 
-CV của **Vũ Hữu Đô** — Full Stack Developer (.NET / React), TP. Hồ Chí Minh.
+Bộ CV đa phiên bản cho **Vũ Hữu Đô** — Full Stack Developer (.NET / React), TP. Hồ Chí Minh.
+Nội dung được viết một lần, sinh ra nhiều bản theo **role** và **định dạng** (ATS / visual, EN / VI).
 
-## CV chính (full-stack)
+## Nộp ở đâu — dùng file nào
 
-| Tệp | Dùng khi nào |
-|---|---|
-| `CV_VuHuuDo_FullStack.pdf` | Bản đẹp 2 cột (tiếng Anh) — gửi email, gặp trực tiếp |
-| `CV_VuHuuDo_FullStack_ATS.pdf` | Bản 1 cột tối giản (tiếng Anh) — gửi qua hệ thống tuyển dụng (ATS), LinkedIn, TopCV/ITviec |
-| `CV_VuHuuDo_VI.pdf` | Bản tiếng Việt 2 cột — gửi nhà tuyển dụng Việt Nam |
-| `CV_VuHuuDo_LinkedIn.pdf` | Bản export từ LinkedIn (giữ nguyên để tham chiếu) |
+| Ứng tuyển vị trí | Tiếng Anh (ATS) | Tiếng Việt |
+|---|---|---|
+| Full Stack Developer (.NET / React) | `cv/fullstack/CV_VuHuuDo_FullStack_EN_ATS.pdf` | `cv/fullstack/CV_VuHuuDo_FullStack_VI_Visual.pdf` |
+| Software Engineer (tổng quát) | `cv/software-engineer/CV_VuHuuDo_SoftwareEngineer_EN_ATS.pdf` | `cv/software-engineer/CV_VuHuuDo_SoftwareEngineer_VI_Visual.pdf` |
+| Backend Developer (.NET / C#) | `cv/backend-dotnet/CV_VuHuuDo_BackendDotNet_EN_ATS.pdf` | `cv/backend-dotnet/CV_VuHuuDo_BackendDotNet_VI_Visual.pdf` |
+| Frontend Developer (React / TS) | `cv/frontend-react/CV_VuHuuDo_FrontendReact_EN_ATS.pdf` | `cv/frontend-react/CV_VuHuuDo_FrontendReact_VI_Visual.pdf` |
+| DevOps Engineer | `cv/devops/CV_VuHuuDo_DevOps_EN_ATS.pdf` | `cv/devops/CV_VuHuuDo_DevOps_VI_Visual.pdf` |
+| AI & Automation Engineer | `cv/ai-automation/CV_VuHuuDo_AIAutomation_EN_ATS.pdf` | `cv/ai-automation/CV_VuHuuDo_AIAutomation_VI_Visual.pdf` |
 
-## CV theo role — `roles/`
-
-Mỗi role có 2 bản: **`_EN.pdf`** (1 cột, thân thiện ATS) và **`_VI.pdf`** (2 cột, tiếng Việt).
-
-| Thư mục | Vị trí ứng tuyển |
-|---|---|
-| `roles/software-engineer/` | Software Engineer (tổng quát, full stack & platform) |
-| `roles/backend-dotnet/` | Backend Developer (.NET / C#) |
-| `roles/frontend-react/` | Frontend Developer (React / TypeScript) |
-| `roles/devops/` | DevOps Engineer (Docker / Linux / CI-CD) |
-| `roles/ai-automation/` | AI & Automation Engineer (Python / LLM APIs) |
+- **`_EN_ATS.pdf`** — 1 cột, không ảnh/icon: an toàn khi nộp qua hệ thống tuyển dụng (ATS), LinkedIn, ITviec/TopCV.
+- **`_VI_Visual.pdf`** — 2 cột, có ảnh: gửi email hoặc gặp trực tiếp nhà tuyển dụng Việt Nam.
+- **`cv/fullstack/CV_VuHuuDo_FullStack_EN_Visual.pdf`** — bản EN 2 cột (gửi email cho nhà tuyển dụng nước ngoài).
+- **`cv/linkedin/CV_VuHuuDo_LinkedIn.pdf`** — bản export từ LinkedIn (tham chiếu).
 
 ## Cấu trúc
 
 ```
-├── CV_VuHuuDo_FullStack.pdf        # sinh từ html/CV_FullStackDev.html
-├── CV_VuHuuDo_FullStack_ATS.pdf    # sinh từ html/CV_FullStackDev_ATS.html
-├── CV_VuHuuDo_VI.pdf               # sinh từ html/CV_VuHuuDo_VI.html
-├── CV_VuHuuDo_LinkedIn.pdf         # export từ LinkedIn
-├── build.sh                        # build toàn bộ (CV chính + roles/)
-├── build_cvs.py                    # sinh CV theo role từ dữ liệu trong script
-├── roles/
-│   ├── software-engineer/          # CV_VuHuuDo_SoftwareEngineer_{EN,VI}.{html,pdf}
-│   ├── backend-dotnet/             # CV_VuHuuDo_BackendDotNet_{EN,VI}.{html,pdf}
-│   ├── frontend-react/             # CV_VuHuuDo_FrontendReact_{EN,VI}.{html,pdf}
-│   ├── devops/                     # CV_VuHuuDo_DevOps_{EN,VI}.{html,pdf}
-│   └── ai-automation/              # CV_VuHuuDo_AIAutomation_{EN,VI}.{html,pdf}
-└── html/
-    ├── CV_FullStackDev.html        # nguồn bản EN (2 cột)
-    ├── CV_FullStackDev_ATS.html    # nguồn bản EN (1 cột, ATS)
-    ├── CV_VuHuuDo_VI.html          # nguồn bản VI (2 cột)
-    ├── Web_resume.html             # bản 1 cột cũ (đã thay bằng bản _ATS)
-    └── Avatar.png
+├── README.md
+├── build.sh                  # lệnh build duy nhất: ./build.sh
+├── build.py                  # sinh HTML (build/out/) và PDF (cv/)
+├── content/                  # NGUỒN NỘI DUNG
+│   ├── profile.py            #   thông tin chung: tên, liên hệ, học vấn, ngôn ngữ, nhãn mục
+│   └── cvs/                  #   mỗi role một file
+│       ├── fullstack.py
+│       ├── software_engineer.py
+│       ├── backend_dotnet.py
+│       ├── frontend_react.py
+│       ├── devops.py
+│       └── ai_automation.py
+├── templates/                # MẪU TRÌNH BÀY (HTML + CSS)
+│   ├── ats.html              #   bản 1 cột, tối giản
+│   └── visual.html           #   bản 2 cột, sidebar
+├── assets/
+│   └── avatar.png            # ảnh dùng chung cho mọi bản
+├── cv/                       # ĐẦU RA — PDF đã build (commit sẵn để tải/gửi ngay)
+└── build/                    # HTML tạm trong lúc build (không commit)
 ```
 
 ## Build lại PDF
 
-Yêu cầu: Chromium (hoặc Chrome) + Python 3 (`pdfinfo` tuỳ chọn, để kiểm tra số trang).
+Yêu cầu: **Python 3** + **Chromium** (hoặc Chrome; `pdfinfo` tuỳ chọn để kiểm tra số trang).
 
 ```bash
-./build.sh              # build tất cả: CV chính + roles/
-python3 build_cvs.py    # chỉ build lại CV theo role
+./build.sh
 ```
 
-Hoặc in thủ công: mở file HTML bằng Chrome/Chromium → Print → Save as PDF (khổ A4, margins theo CSS `@media print`).
+Script sẽ build toàn bộ, kiểm tra từng bản **vừa đúng 1 trang** và báo lỗi nếu không.
+
+## Chỉnh sửa nội dung
+
+1. Sửa nội dung trong `content/cvs/<role>.py` (hoặc thông tin chung trong `content/profile.py`).
+2. Chạy `./build.sh` — PDF trong `cv/` được cập nhật.
+3. Commit cả nội dung lẫn PDF.
+
+**Thêm role mới**: tạo `content/cvs/<role>.py` theo mẫu các file có sẵn, rồi thêm vào danh sách `CVS`
+trong `content/cvs/__init__.py`.
 
 ## Ghi chú
 
-- **Nội dung CV theo role nằm trong `build_cvs.py`** (mục `ROLES`) — sửa ở đó rồi chạy `python3 build_cvs.py`; script sẽ **ghi đè** HTML/PDF trong `roles/`. Muốn thêm role mới: copy một mục trong `ROLES`, đổi `id`/`file`/nội dung.
-- Bản `_ATS` (và bản `_EN` của roles) không dùng cột/icon/ảnh — an toàn khi máy đọc CV tự động.
-- Tên hệ thống nội bộ trong CV được viết dạng **mô tả chung** (repo nội bộ); chi tiết kỹ thuật giữ đầy đủ.
-- Nên đặt LinkedIn custom URL (vd: `linkedin.com/in/vuhuudo`) rồi cập nhật lại trong CV.
+- Tên các hệ thống nội bộ được viết dạng **mô tả chung** (repo nội bộ); chi tiết kỹ thuật giữ đầy đủ.
+- Nên đặt LinkedIn custom URL (vd: `linkedin.com/in/vuhuudo`) rồi cập nhật lại trong `content/profile.py`.
+- Nội dung CV là thông tin cá nhân — vui lòng không dùng lại; mã build (`build.py`, `templates/`) tự do tham khảo.

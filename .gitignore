@@ -1,0 +1,10 @@
+# Build tạm (HTML sinh ra trong quá trình build)
+build/
+
+# Python
+__pycache__/
+*.pyc
+
+# Hệ điều hành
+.DS_Store
+Thumbs.db

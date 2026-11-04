@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="{{HTML_LANG}}">
+<head>
+<meta charset="UTF-8">
+<title>{{DOC_TITLE}}</title>
+<style>
+  :root { --ink:#161616; --accent:#0b5394; --muted:#4a4a4a; }
+  * { box-sizing: border-box; }
+  body { font-family: Calibri, Carlito, 'Segoe UI', Arial, sans-serif; color: var(--ink);
+         font-size: 9.9pt; line-height: 1.26; margin: 0; padding: 0; }
+  .page { max-width: 820px; margin: 0 auto; padding: 22px 26px; }
+  header { text-align: center; margin-bottom: 6px; }
+  h1 { font-size: 19pt; letter-spacing: .6px; margin: 0 0 2px; text-transform: uppercase; }
+  .title { font-size: 10.8pt; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+  .contact { font-size: 9.4pt; color: var(--muted); }
+  h2 { font-size: 10.8pt; text-transform: uppercase; letter-spacing: .7px; color: var(--accent);
+       border-bottom: 1.5px solid var(--accent); padding-bottom: 2px; margin: 7px 0 4px; }
+  p { margin: 2px 0; }
+  ul { margin: 2px 0 0; padding-left: 16px; }
+  li { margin-bottom: 1.2px; }
+  .role { font-weight: 700; font-size: 10.7pt; margin: 0; }
+  .meta { font-style: italic; color: var(--muted); font-size: 9.3pt; margin: 1px 0 2px; }
+  .proj { margin-top: 4px; }
+  .proj .name { font-weight: 700; margin: 0; }
+  .proj .tech { color: var(--muted); font-size: 9.2pt; font-style: italic; margin: 0 0 1px; }
+  .skills p { margin: 1.5px 0; }
+  @media print { @page { size: A4 portrait; margin: 10mm 11mm; } .page { padding: 0; max-width: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>{{NAME}}</h1>
+    <div class="title">{{TITLE}}</div>
+    <div class="contact">{{CONTACT}}</div>
+  </header>
+  <h2>{{L_SUMMARY}}</h2>
+  <p>{{SUMMARY}}</p>
+  <h2>{{L_SKILLS}}</h2>
+  <div class="skills">{{SKILLS}}</div>
+  <h2>{{L_EXPERIENCE}}</h2>
+  <div>
+    <p class="role">{{JOB_TITLE}} — {{JOB_ORG}}</p>
+    <p class="meta">{{JOB_META}}</p>
+    <ul>{{BULLETS}}</ul>
+  </div>
+  <h2>{{L_PROJECTS}}</h2>
+  {{PROJECTS}}
+  <h2>{{L_EDU_LANG}}</h2>
+  <p>{{EDUCATION_LINE}}</p>
+</div>
+</body>
+</html>
