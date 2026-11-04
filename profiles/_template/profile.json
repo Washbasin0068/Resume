@@ -1,0 +1,136 @@
+{
+ "_doc": "MẪU. Sao chép thư mục này thành profiles/<id-của-bạn>/ (hoặc: uv run cvtui.py --new <id>) rồi sửa. Văn bản thuần, hệ thống tự escape. Chuỗi hoặc {\"en\":..,\"vi\":..}. avatar: đường dẫn ảnh, tương đối với thư mục này (bỏ trống = CV không có ảnh). Trong summary: {title} {years} {skills} được tự điền. t = tag (khóa trong taxonomy.json aliases); m = từ khóa khớp trong JD; w = trọng số. Thêm càng nhiều mục experience/skills càng tốt: tool chọn mục khớp role nhất và tự cắt cho vừa 1 trang.",
+ "name": {
+  "en": "Your Name",
+  "vi": "Tên Của Bạn"
+ },
+ "avatar": "",
+ "location": "City, Country",
+ "phone": "+00 000 000 000",
+ "email": "you@example.com",
+ "github": "github.com/you",
+ "linkedin": "",
+ "years": {
+  "en": "2",
+  "vi": "2"
+ },
+ "job": {
+  "title": "Software Developer",
+  "company": "Company Name",
+  "meta": "Jan 2024 – Present · City, Country"
+ },
+ "education": {
+  "degree": "Bachelor of Computer Science",
+  "school": "University Name",
+  "period": "2020 – 2024"
+ },
+ "languages": {
+  "en": [
+   [
+    "Vietnamese",
+    "Native"
+   ],
+   [
+    "English",
+    "Intermediate"
+   ]
+  ],
+  "vi": [
+   [
+    "Tiếng Việt",
+    "Bản ngữ"
+   ],
+   [
+    "Tiếng Anh",
+    "Trung cấp"
+   ]
+  ]
+ },
+ "summary": {
+  "en": "{title} with {years} years of experience building web applications. Hands-on with {skills}.",
+  "vi": "{title} với {years} năm kinh nghiệm xây dựng ứng dụng web. Thực chiến với {skills}."
+ },
+ "experience": [
+  {
+   "w": 3,
+   "t": [
+    "fullstack",
+    "backend",
+    "frontend"
+   ],
+   "en": "Built and shipped web features end-to-end (API, UI, database) used by internal teams.",
+   "vi": "Xây dựng và đưa tính năng web trọn gói (API, giao diện, CSDL) cho các nhóm nội bộ."
+  },
+  {
+   "w": 2,
+   "t": [
+    "devops"
+   ],
+   "en": "Set up CI/CD and Docker-based deployments with automated tests.",
+   "vi": "Thiết lập CI/CD và triển khai bằng Docker kèm kiểm thử tự động."
+  }
+ ],
+ "projects": [
+  {
+   "w": 2,
+   "t": [
+    "fullstack"
+   ],
+   "n": {
+    "en": "Project name",
+    "vi": "Tên dự án"
+   },
+   "tech": "Tech A · Tech B",
+   "en": "One line on what it does and the result.",
+   "vi": "Một dòng mô tả dự án và kết quả."
+  }
+ ],
+ "skills": [
+  {
+   "g": {
+    "en": "Backend",
+    "vi": "Backend"
+   },
+   "items": [
+    {
+     "n": "Python",
+     "t": [
+      "backend",
+      "ai",
+      "data"
+     ]
+    },
+    {
+     "n": "REST APIs",
+     "m": [
+      "rest",
+      "api"
+     ],
+     "t": [
+      "backend"
+     ]
+    }
+   ]
+  },
+  {
+   "g": {
+    "en": "DevOps",
+    "vi": "DevOps"
+   },
+   "items": [
+    {
+     "n": "Docker",
+     "t": [
+      "devops"
+     ]
+    },
+    {
+     "n": "Git",
+     "t": [
+      "devops"
+     ]
+    }
+   ]
+  }
+ ]
+}

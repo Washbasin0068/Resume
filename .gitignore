@@ -1,1 +1,7 @@
 out/
+profiles/*
+!profiles/_template/
+!profiles/vuhuudo/
+# từ cấm là thông tin mật, không bao giờ commit
+profiles/*/denylist.txt
+__pycache__/

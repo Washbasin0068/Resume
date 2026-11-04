@@ -56,20 +56,24 @@ uv run build_cvs.py    # chỉ build lại CV theo role
 
 Hoặc in thủ công: mở file HTML bằng Chrome/Chromium → Print → Save as PDF (khổ A4, margins theo CSS `@media print`).
 
-## TUI tạo CV theo role
+## TUI tạo CV theo role (nhiều người dùng)
 
 ```bash
-uv run cvtui.py                                   # mở TUI: nhập role (+ dán JD) -> Ctrl+G
-uv run cvtui.py --role "DevOps Engineer" --jd jd.txt --lang EN,VI   # không TUI
-uv run cvtui.py --check                           # tự kiểm tra
-# tuỳ chỉnh: --name "Nguyen Van A" --title "Senior Backend Engineer" --avatar ~/anh.jpg
+uv run cvtui.py --new <id>          # tạo hồ sơ profiles/<id>/profile.json từ mẫu, rồi sửa file đó
+uv run cvtui.py                     # TUI: chọn hồ sơ, nhập role (+ dán JD), tuỳ chỉnh tên/chức danh/ảnh -> Ctrl+G
+uv run cvtui.py --profile <id> --role "DevOps Engineer" --jd jd.txt --lang EN,VI \
+    [--title "Senior DevOps"] [--name "..."] [--avatar ~/anh.jpg]
+uv run cvtui.py --list | --check
 ```
 
-Mỗi lần ra 2 loại, đều 1 trang A4, lưu ở `out/<role>/` (không commit):
-- `*_Human.pdf` — 2 cột, có ảnh, nộp cho người đọc.
-- `*_ATS.pdf` — 1 cột, chữ thuần, nộp cho máy đọc.
+Mỗi lần ra 2 loại, đều 1 trang A4, lưu ở `out/<id>/<role>/` (không commit):
+- `*_Human.pdf`: 2 cột, có ảnh, nộp cho người đọc.
+- `*_ATS.pdf`: 1 cột, chữ thuần, nộp cho máy đọc.
 
-Nội dung chọn từ `profile.json` (ngân hàng nội dung) theo độ khớp với role/JD. Kỹ năng JD đòi mà profile chưa có chỉ được **báo thiếu**, không tự thêm vào CV. Muốn thêm kinh nghiệm/kỹ năng: sửa `profile.json` (viết chung chung, không nêu thông tin nội bộ).
+- Nội dung chọn từ `profiles/<id>/profile.json` theo độ khớp với role/JD (từ khóa ở `taxonomy.json`, dùng chung). Kỹ năng JD đòi mà hồ sơ chưa có chỉ được **báo thiếu**, không tự thêm vào CV.
+- `profiles/<id>/denylist.txt` (mỗi dòng 1 từ cấm): CV nào chứa từ cấm sẽ bị báo `RÒ RỈ`, lệnh trả mã lỗi 1.
+- Hồ sơ người dùng, `denylist.txt` và `out/` đều đã `.gitignore`. Chỉ `_template` và hồ sơ mẫu `vuhuudo` được commit.
+- Hướng dẫn viết CV an toàn: [`docs/CV_GUIDE.md`](docs/CV_GUIDE.md). Quy trình cho AI agent: [`AGENTS.md`](AGENTS.md).
 
 ## Ghi chú
 

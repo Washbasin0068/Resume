@@ -1,0 +1,160 @@
+{
+ "_doc": "Dùng chung cho mọi hồ sơ. aliases: tag -> từ khóa nhận diện trong role/JD. watchlist: công nghệ hay gặp trong JD, nếu hồ sơ không có sẽ báo THIẾU.",
+ "aliases": {
+  "fullstack": [
+   "full stack",
+   "full-stack",
+   "fullstack",
+   "software engineer",
+   "software developer",
+   "developer",
+   "engineer",
+   "kỹ sư phần mềm",
+   "lập trình viên",
+   "phần mềm"
+  ],
+  "backend": [
+   "backend",
+   "back-end",
+   "back end",
+   "api",
+   "server",
+   "microservice",
+   "c#",
+   ".net",
+   "dotnet",
+   "asp.net",
+   "abp",
+   "hệ thống"
+  ],
+  "frontend": [
+   "frontend",
+   "front-end",
+   "front end",
+   "react",
+   "typescript",
+   "javascript",
+   "ui",
+   "ux",
+   "web",
+   "svelte",
+   "vue",
+   "angular",
+   "css",
+   "giao diện"
+  ],
+  "devops": [
+   "devops",
+   "sre",
+   "infrastructure",
+   "platform",
+   "docker",
+   "kubernetes",
+   "ci/cd",
+   "cicd",
+   "linux",
+   "deploy",
+   "cloud",
+   "monitoring",
+   "hạ tầng",
+   "vận hành"
+  ],
+  "data": [
+   "data",
+   "database",
+   "dba",
+   "sql",
+   "etl",
+   "analytics",
+   "clickhouse",
+   "postgres",
+   "bi",
+   "warehouse",
+   "lakehouse",
+   "dữ liệu"
+  ],
+  "ai": [
+   "ai",
+   "ml",
+   "machine learning",
+   "llm",
+   "automation",
+   "python",
+   "gpt",
+   "gemini",
+   "prompt",
+   "trí tuệ nhân tạo",
+   "tự động hóa"
+  ],
+  "auth": [
+   "auth",
+   "sso",
+   "oidc",
+   "oauth",
+   "security",
+   "identity",
+   "iam",
+   "bảo mật",
+   "xác thực"
+  ],
+  "testing": [
+   "test",
+   "qa",
+   "quality",
+   "playwright",
+   "xunit",
+   "kiểm thử"
+  ],
+  "dotnet": [
+   "c#",
+   ".net",
+   "dotnet",
+   "asp.net",
+   "abp",
+   "entity framework"
+  ],
+  "react": [
+   "react",
+   "reactjs",
+   "next.js",
+   "nextjs"
+  ],
+  "svelte": [
+   "svelte",
+   "sveltekit"
+  ],
+  "integration": [
+   "integration",
+   "tích hợp",
+   "middleware",
+   "webhook"
+  ]
+ },
+ "watchlist": [
+  "java",
+  "spring",
+  "kubernetes",
+  "aws",
+  "azure",
+  "gcp",
+  "terraform",
+  "kafka",
+  "redis",
+  "mongodb",
+  "mysql",
+  "node.js",
+  "angular",
+  "vue",
+  "golang",
+  "php",
+  "laravel",
+  "django",
+  "flask",
+  "fastapi",
+  "graphql",
+  "jenkins",
+  "ansible",
+  "spark",
+  "airflow"
+ ]
+}

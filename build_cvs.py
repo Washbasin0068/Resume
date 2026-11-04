@@ -13,6 +13,7 @@ Lưu ý: chạy script sẽ GHI ĐÈ các file HTML/PDF trong roles/.
 """
 import glob
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -523,7 +524,7 @@ VISUAL_HTML = r"""<!DOCTYPE html>
 <div class="resume-container">
   <div class="sidebar">
     <div class="profile-img-container">
-      <img src="Avatar.png" alt="{{NAME}}" class="profile-img">
+      <img src="{{AVATAR}}" alt="{{NAME}}" class="profile-img">
     </div>
     <div class="name-title-container">
       <h1>{{NAME}}</h1>
@@ -636,19 +637,32 @@ LABELS = {
 CONTACT_EN_PIN = "Ho Chi Minh City, Vietnam"
 
 
-def build_html(role, lang, kind=None, name=None):
+def default_ctx(lang):
+    """Thông tin người dùng mặc định (Vũ Hữu Đô). cvtui.py truyền ctx riêng cho từng hồ sơ."""
+    en = lang == "EN"
+    return dict(
+        name=NAME_EN if en else NAME_VI, avatar="Avatar.png", contact_line=CONTACT_LINE,
+        contacts=[("pin", CONTACT_EN_PIN if en else CONTACT_VI[0][1])] + CONTACT_VI[1:],
+        job=JOB_EN if en else JOB_VI, job_meta=JOB_META_EN if en else JOB_META_VI,
+        job_title=LABELS[lang]["job_title"], company=LABELS[lang]["company"],
+        education=EDUCATION_EN if en else EDUCATION_VI,
+        languages=LANGUAGES_EN if en else LANGUAGES_VI, langs_li=LABELS[lang]["langs"])
+
+
+def build_html(role, lang, kind=None, name=None, ctx=None):
     """kind: 'ats' (1 cột, máy đọc) | 'human' (2 cột, người đọc). Mặc định cũ: EN=ats, VI=human."""
     kind = kind or ("ats" if lang == "EN" else "human")
     k = lang.lower()
     L = LABELS[lang]
-    name = name or (NAME_EN if lang == "EN" else NAME_VI)
+    ctx = ctx or default_ctx(lang)
+    name = name or ctx["name"]
     title = role["title_" + k]
     common = {
         "{{LANG}}": L["lang"], "{{NAME}}": name, "{{TITLE}}": title,
         "{{SUMMARY}}": role["summary_" + k],
         "{{BULLETS}}": render_bullets(role["exp_" + k]),
-        "{{EDUCATION}}": EDUCATION_EN if lang == "EN" else EDUCATION_VI,
-        "{{JOB_META}}": JOB_META_EN if lang == "EN" else JOB_META_VI,
+        "{{EDUCATION}}": ctx["education"],
+        "{{JOB_META}}": ctx["job_meta"],
         "{{H_SUMMARY}}": L["summary"] if kind == "ats" else L["summary_v"],
         "{{H_SKILLS}}": L["skills"] if kind == "ats" else L["skills_v"],
         "{{H_EXP}}": L["exp"] if kind == "ats" else L["exp_v"],
@@ -658,25 +672,27 @@ def build_html(role, lang, kind=None, name=None):
     if kind == "ats":
         html = ATS_HTML
         repl = dict(common, **{
-            "{{CONTACT}}": CONTACT_LINE,
+            "{{CONTACT}}": ctx["contact_line"],
             "{{SKILLS}}": render_skills_ats(role["skills_" + k]),
-            "{{JOB}}": JOB_EN if lang == "EN" else JOB_VI,
+            "{{JOB}}": ctx["job"],
             "{{PROJECTS}}": render_projects_ats(role["projects_" + k]),
-            "{{LANGUAGES}}": LANGUAGES_EN if lang == "EN" else LANGUAGES_VI,
+            "{{LANGUAGES}}": ctx["languages"],
         })
     else:
         html = VISUAL_HTML
         repl = dict(common, **{
-            "{{BADGE}}": role.get("badge_" + k) or title.upper(),
-            "{{CONTACTS}}": render_contacts_visual(lang),
+            "{{AVATAR}}": ctx["avatar"], "{{BADGE}}": role.get("badge_" + k) or title.upper(),
+            "{{CONTACTS}}": "\n".join(f"        <li>{CONTACT_SVGS[k]}<span>{t}</span></li>" for k, t in ctx["contacts"]),
             "{{SKILLS}}": render_skills_visual(role["skills_" + k]),
             "{{PROJECTS}}": render_projects_visual(role["projects_" + k]),
-            "{{LANGUAGES}}": L["langs"],
+            "{{LANGUAGES}}": ctx["langs_li"],
             "{{H_CONTACT}}": L["contact"], "{{H_EDU_V}}": L["edu_v"], "{{H_LANG_V}}": L["lang_v"],
-            "{{JOB_TITLE}}": L["job_title"], "{{COMPANY}}": L["company"],
+            "{{JOB_TITLE}}": ctx["job_title"], "{{COMPANY}}": ctx["company"],
         })
     for key, value in repl.items():
         html = html.replace(key, value)
+    if kind != "ats" and not ctx["avatar"]:
+        html = re.sub(r'<div class="profile-img-container">.*?</div>', "", html, flags=re.S)
     return html
 
 def build_pdf(html_path, pdf_path):
