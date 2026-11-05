@@ -6,7 +6,7 @@ services:
     image: cvstudio:latest
     container_name: cvstudio
     ports:
-      - "8080:8080"
+      - "${CV_PORT:-8080}:8080"
     volumes:
       - ./data:/data          # hồ sơ + PDF sinh ra nằm ở đây (không commit)
     environment:
