@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV Studio — tạo CV an toàn, qua ATS</title>
+<style>
+  :root { --bg:#0f172a; --panel:#fff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb;
+          --accent:#2563eb; --ok:#059669; --warn:#b45309; --risk:#b91c1c; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Liberation Sans',sans-serif;
+         background:#f3f4f6; color:var(--ink); }
+  header { background:var(--bg); color:#fff; padding:14px 22px; display:flex; gap:14px; align-items:center; }
+  header h1 { font-size:17px; margin:0; font-weight:650; letter-spacing:.2px; }
+  header .tag { font-size:12px; opacity:.75; }
+  main { display:grid; grid-template-columns:minmax(320px,1fr) minmax(360px,1.1fr); gap:16px; padding:16px; }
+  @media (max-width:900px){ main { grid-template-columns:1fr; } }
+  section.card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:14px; }
+  section.card h2 { font-size:14px; margin:0 0 10px; text-transform:uppercase; letter-spacing:.6px; color:#374151; }
+  label { display:block; font-size:12px; color:var(--muted); margin:8px 0 3px; }
+  input[type=text], input[type=email], input[type=file], textarea, select {
+    width:100%; padding:7px 9px; border:1px solid #d1d5db; border-radius:7px; font:inherit; font-size:13px; background:#fff; }
+  textarea { min-height:74px; resize:vertical; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+  button { font:inherit; font-size:13px; padding:8px 14px; border-radius:8px; border:1px solid var(--line);
+           background:#fff; cursor:pointer; }
+  button.primary { background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; }
+  button.ghost { background:#f9fafb; }
+  .actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  .hint { font-size:12px; color:var(--muted); line-height:1.5; }
+  .files a { display:flex; justify-content:space-between; gap:10px; padding:9px 11px; border:1px solid var(--line);
+             border-radius:8px; margin:6px 0; text-decoration:none; color:var(--ink); font-size:13px; background:#fafafa; }
+  .files a b { font-weight:600; }
+  .files .kind { font-size:11px; color:var(--muted); }
+  .badge { display:inline-block; font-size:11px; padding:2px 7px; border-radius:99px; background:#eef2ff; color:#3730a3; }
+  .msg { font-size:13px; padding:8px 10px; border-radius:8px; margin:6px 0; }
+  .msg.risk { background:#fef2f2; color:var(--risk); }
+  .msg.warn { background:#fffbeb; color:var(--warn); }
+  .msg.info { background:#eff6ff; color:#1d4ed8; }
+  .msg.ok { background:#ecfdf5; color:var(--ok); }
+  #findings, #warnings, #gaps { margin:8px 0 0; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+  .chip { font-size:11px; padding:3px 8px; border-radius:99px; background:#f3f4f6; color:#374151; }
+</style>
+</head>
+<body>
+<header>
+  <h1>CV Studio</h1>
+  <span class="tag">tạo CV theo template · bản cho người đọc + bản cho máy đọc · không bịa, không lộ thông tin nội bộ</span>
+</header>
+<main>
+  <div>
+    <section class="card">
+      <h2>Hồ sơ</h2>
+      <div class="row">
+        <div><label>Hồ sơ đang sửa</label><select id="profileSel"></select></div>
+        <div><label>Đặt tên mới khi lưu (tuỳ chọn)</label><input type="text" id="saveAs" placeholder="vd: nguyenvana"></div>
+      </div>
+      <div class="actions">
+        <button class="ghost" id="btnSave">Lưu hồ sơ</button>
+        <button class="ghost" id="btnReload">Tải lại</button>
+        <span class="hint" id="saveMsg"></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Thông tin cá nhân</h2>
+      <div class="row">
+        <div><label>Họ tên (EN)</label><input type="text" id="nameEn"></div>
+        <div><label>Họ tên (VI)</label><input type="text" id="nameVi"></div>
+      </div>
+      <div class="row">
+        <div><label>Điện thoại</label><input type="text" id="phone"></div>
+        <div><label>Email</label><input type="email" id="email"></div>
+      </div>
+      <div class="row">
+        <div><label>GitHub</label><input type="text" id="github" placeholder="github.com/you"></div>
+        <div><label>LinkedIn</label><input type="text" id="linkedin" placeholder="linkedin.com/in/you"></div>
+      </div>
+      <div class="row">
+        <div><label>Nơi ở (EN)</label><input type="text" id="locEn"></div>
+        <div><label>Nơi ở (VI)</label><input type="text" id="locVi"></div>
+      </div>
+      <div class="row3">
+        <div><label>Chức danh công việc (EN)</label><input type="text" id="jobTitleEn"></div>
+        <div><label>Công ty (EN)</label><input type="text" id="jobOrgEn"></div>
+        <div><label>Thời gian (EN)</label><input type="text" id="jobMetaEn"></div>
+      </div>
+      <div class="row3">
+        <div><label>Chức danh (VI)</label><input type="text" id="jobTitleVi"></div>
+        <div><label>Công ty (VI)</label><input type="text" id="jobOrgVi"></div>
+        <div><label>Thời gian (VI)</label><input type="text" id="jobMetaVi"></div>
+      </div>
+      <div class="row3">
+        <div><label>Bằng cấp (EN)</label><input type="text" id="eduEn"></div>
+        <div><label>Trường (EN)</label><input type="text" id="schoolEn"></div>
+        <div><label>Năm (EN)</label><input type="text" id="yearsEn"></div>
+      </div>
+      <div class="row3">
+        <div><label>Bằng cấp (VI)</label><input type="text" id="eduVi"></div>
+        <div><label>Trường (VI)</label><input type="text" id="schoolVi"></div>
+        <div><label>Năm (VI)</label><input type="text" id="yearsVi"></div>
+      </div>
+      <label>Ảnh đại diện — đường dẫn file trên máy chủ (trống = không ảnh)</label>
+      <input type="text" id="avatar" placeholder="/data/avatar.jpg">
+    </section>
+
+    <section class="card">
+      <h2>Kinh nghiệm</h2>
+      <p class="hint">Mỗi dòng một ý, dạng <code>câu tiếng Anh | câu tiếng Việt</code> (tiếng Việt có thể bỏ trống).
+        Không ghi tên hệ thống nội bộ, khách hàng, số liệu tuyệt đối. Dùng động từ mạnh + kết quả %.</p>
+      <textarea id="exp" rows="8" placeholder="Cut CI test time by ~65% by sharding tests | Giảm ~65% thời gian test CI nhờ chia shard"></textarea>
+    </section>
+
+    <section class="card">
+      <h2>Dự án</h2>
+      <p class="hint">Mỗi dòng: <code>tên (EN) | công nghệ | mô tả EN | tên VI | mô tả VI</code>. Chỉ 2 trường đầu là bắt buộc.</p>
+      <textarea id="proj" rows="4"></textarea>
+    </section>
+
+    <section class="card">
+      <h2>Kỹ năng</h2>
+      <p class="hint">Mỗi dòng một nhóm: <code>Backend: C#, .NET, PostgreSQL</code></p>
+      <textarea id="skills" rows="5"></textarea>
+    </section>
+
+    <section class="card">
+      <h2>Từ cấm (chống lộ thông tin)</h2>
+      <p class="hint">Mỗi dòng một từ/cụm từ không được xuất hiện trong CV (tên hệ thống nội bộ, khách hàng,
+        dự án mật, chi nhánh…). CV sinh ra chứa từ này sẽ bị cảnh báo đỏ.</p>
+      <textarea id="deny" rows="4"></textarea>
+    </section>
+  </div>
+
+  <div>
+    <section class="card">
+      <h2>Tạo CV</h2>
+      <div class="row3">
+        <div><label>Role ứng tuyển</label><input type="text" id="role" placeholder="Backend .NET Developer"></div>
+        <div><label>Chức danh in trên CV</label><input type="text" id="title" placeholder="(trống = như role)"></div>
+        <div><label>Ngôn ngữ</label>
+          <div class="hint"><label style="display:inline"><input type="checkbox" id="lEn" checked> EN</label>
+          <label style="display:inline"><input type="checkbox" id="lVi" checked> VI</label></div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="primary" id="btnGen">Tạo 2 loại CV</button>
+        <span class="hint" id="genMsg"></span>
+      </div>
+      <div id="warnings"></div>
+      <div id="gaps"></div>
+      <div class="files" id="files"></div>
+    </section>
+
+    <section class="card">
+      <h2>Cải thiện CV có sẵn</h2>
+      <p class="hint">Tải lên .pdf, .docx, .txt hoặc .md. Hệ thống trích nội dung, chỉ ra chỗ yếu và chỗ có thể lộ
+        thông tin. Không gửi dữ liệu ra ngoài.</p>
+      <input type="file" id="cvFile" accept=".pdf,.docx,.txt,.md">
+      <div class="actions"><button class="ghost" id="btnImprove">Phân tích</button>
+        <span class="hint" id="impMsg"></span></div>
+      <div id="findings"></div>
+      <label>Nội dung trích được (sửa rồi dán vào form phía trên)</label>
+      <textarea id="impText" rows="10"></textarea>
+    </section>
+
+    <section class="card">
+      <h2>Nhắc nhanh</h2>
+      <p class="hint">Human = bản 2 cột có ảnh, gửi email/gặp trực tiếp. ATS = bản 1 cột chữ thuần, nộp qua cổng
+        tuyển dụng. Mỗi bản luôn cố định 1 trang A4, tự bỏ bớt ý ít liên quan nếu tràn. Kỹ năng JD đòi mà hồ sơ
+        chưa có sẽ được báo, không tự thêm.</p>
+    </section>
+  </div>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>

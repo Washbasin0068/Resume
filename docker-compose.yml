@@ -1,0 +1,18 @@
+services:
+  cvstudio:
+    build:
+      context: .
+      dockerfile: webapp/Dockerfile
+    image: cvstudio:latest
+    container_name: cvstudio
+    ports:
+      - "${CV_PORT:-8080}:8080"
+    volumes:
+      - ./data:/data          # hồ sơ + PDF sinh ra nằm ở đây (không commit)
+    environment:
+      DATA_DIR: /data
+      CHROME: /opt/chrome/chrome-headless-shell
+      # Hồ sơ/PDF ghi ra ./data thuộc UID/GID này -> khớp user host để xoá/sửa không cần sudo
+      PUID: "${PUID:-1000}"
+      PGID: "${PGID:-1000}"
+    restart: unless-stopped

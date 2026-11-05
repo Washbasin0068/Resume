@@ -4,6 +4,9 @@ build/
 # CV sinh bởi TUI (cvtui.py)
 out/
 
+# Web app: hồ sơ + PDF sinh ra (docker volume)
+data/
+
 # Python
 __pycache__/
 *.pyc
@@ -11,3 +14,12 @@ __pycache__/
 # Hệ điều hành
 .DS_Store
 Thumbs.db
+
+# Hồ sơ người dùng + từ cấm: dữ liệu cá nhân, không commit
+profiles/*
+!profiles/_template/
+profiles/*/denylist.txt
+
+# .NET
+bin/
+obj/
